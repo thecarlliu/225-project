@@ -1,9 +1,12 @@
 import React, { Component } from "react";
+import GameWindow from "../../containers/GameWindow";
 
 class Home extends Component {
     render () {
         return (
-            <h1>HELLO WORLD</h1>
+            <div>
+                <GameWindow />
+            </div>
         )
     }
 }
