@@ -16,12 +16,20 @@ class Cards extends Component {
             <div>
                 {
                     this.state.userHand.map((card)=>(
-                        <div style={}> {card} </div>
+                        <div style={{display:"flex",
+                            margin:"auto",
+                            borderStyle:"solid",
+                            borderColor:"blue",
+                            height:75,
+                            width:50}}>
+                            <p style={{margin:"auto", textAlign:"center"}}>{card}</p>
+                        </div>
                     ))
                 }
             </div>
         )
     }
 }
+
 
 export default Cards;
