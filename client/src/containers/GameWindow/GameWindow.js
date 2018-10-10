@@ -27,15 +27,21 @@ class GameWindow extends Component {
     //Handle Input
     //Update HighScore
 
+    constructor(props){
+        super(props);
+        this.state={
+            hand:getHand()
+        }
+    }
+
 
     render () {
-        let hand = getHand();
         return (
             <div>
                 <NavBar />
                 <PlayButton />
                 <Timer />
-                <Cards userHand={[hand[0], hand[1]]} flop={[hand[2], hand[3], hand[4]]}/>
+                <Cards userHand={[this.state.hand[0], this.state.hand[1]]} flop={[this.state.hand[2], this.state.hand[3], this.state.hand[4]]}/>
                 <Score />
                 <Input />
                 <HighScore />
@@ -47,16 +53,20 @@ class GameWindow extends Component {
 }
 
 function getHand(){
-    let result = new Array(5),
+    let hand = new Array(5),
+        used = new Array(5),
         len = deck.length,
-        n=5,
-        taken = new Array(len);
-    while (n--) {
+        n=0;
+    while (n < 5) {
         let x = Math.floor(Math.random() * len);
-        result[n] = deck[x in taken ? taken[x] : x];
-        taken[x] = --len in taken ? taken[len] : len;
+        hand[n] = deck[x in used ? used[x] : x];
+        used[x] = --len in used ? used[len] : len; //https://stackoverflow.com/questions/19269545/how-to-get-n-no-elements-randomly-from-an-array
+        n++;
     }
-    return result;
+    return hand;
 }
 
+function coverCard(){
+
+}
 export default GameWindow;
