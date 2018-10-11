@@ -69,7 +69,11 @@ class Cards extends Component {
             </div>
         )
     }
+
+
 }
+
+
 
 
 export default Cards;
