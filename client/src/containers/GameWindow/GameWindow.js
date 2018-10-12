@@ -4,7 +4,6 @@ import Cards from "../../components/Cards";
 import Score from "../../components/Score";
 import Input from "../../components/Input";
 import HighScore from "../../components/HighScore";
-// import Table from "../../images/Table";
 import NavBar from "../../components/NavBar";
 import PlayButton from "../../components/PlayButton";
 
@@ -34,9 +33,62 @@ class GameWindow extends Component {
     constructor(props){
         super(props);
         this.state={
-            hand:getHand()
+            userHand: [],
+            flop: [],
+            inputValue: "",
+            currentScore: 0,
+            highScore: 0,
+            outsValue: ""
         }
     }
+
+    componentWillMount() {
+        this.getHand();
+        this.outsCounter();
+    }
+
+    getHand(){
+        let hand = new Array(5),
+            used = new Array(5),
+            len = deck.length,
+            n=0;
+        while (n < 5) {
+            let x = Math.floor(Math.random() * len);
+            hand[n] = deck[x in used ? used[x] : x];
+            used[x] = --len in used ? used[len] : len; //https://stackoverflow.com/questions/19269545/how-to-get-n-no-elements-randomly-from-an-array
+            n++;
+        }
+        this.setState({userHand: [hand[0],hand[1]]});
+        this.setState({flop: [hand[2],hand[3],hand[4]]});
+    }
+
+    // function coverCard(){
+    //
+    // }
+
+    outsCounter() {
+        //get the values from the flop and user hand via this.state.flop and this.state.userHand
+        //computes outs after hand is dealt
+        this.setState({outsValue: "1"}); //replace 1 with the computed value (as a string)
+    }
+
+    handleInputSubmit = (event) => {
+        event.preventDefault();
+        alert("submit handler triggered, updated input value: "+this.state.inputValue); //temporary indicator
+        if (this.state.outsValue === this.state.inputValue) {
+            alert("Correct!");
+            //then increment current score and highscore if current score is equal to the highscore
+        }
+        else {
+            alert("Wrong! The correct answer is: "+this.state.outsValue);
+        }
+        this.setState({inputValue:""});
+    };
+
+    handleInputChange = (value) => {
+        this.setState({inputValue: value});
+        console.log(this.state.inputValue)
+    };
 
 
     render () {
@@ -45,11 +97,11 @@ class GameWindow extends Component {
                 <NavBar />
                 <PlayButton />
                 <Timer />
-                <Cards userHand={[this.state.hand[0], this.state.hand[1]]}
-                       flop={[this.state.hand[2], this.state.hand[3], this.state.hand[4]]}/>
-                <Score curScore = "0" incr="10"/>
-                <Input />
-                <HighScore highScore = "0" />
+                <Cards userHand={[this.state.userHand[0], this.state.userHand[1]]}
+                       flop={[this.state.flop[0], this.state.flop[1], this.state.flop[2]]}/>
+                <Score curScore={this.state.currentScore} incr="10"/>
+                <Input outsValue={this.state.outsValue} value={this.state.inputValue} changeHandler={this.handleInputChange} submitHandler={(e)=>{this.handleInputSubmit(e)}}/>
+                <HighScore highScore={this.state.highScore} />
             </div>
         )
     }
@@ -57,21 +109,4 @@ class GameWindow extends Component {
 
 }
 
-function getHand(){
-    let hand = new Array(5),
-        used = new Array(5),
-        len = deck.length,
-        n=0;
-    while (n < 5) {
-        let x = Math.floor(Math.random() * len);
-        hand[n] = deck[x in used ? used[x] : x];
-        used[x] = --len in used ? used[len] : len; //https://stackoverflow.com/questions/19269545/how-to-get-n-no-elements-randomly-from-an-array
-        n++;
-    }
-    return hand;
-}
-
-function coverCard(){
-
-}
 export default GameWindow;
