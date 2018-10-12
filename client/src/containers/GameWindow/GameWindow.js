@@ -47,9 +47,9 @@ class GameWindow extends Component {
                 <Timer />
                 <Cards userHand={[this.state.hand[0], this.state.hand[1]]}
                        flop={[this.state.hand[2], this.state.hand[3], this.state.hand[4]]}/>
-                <Score />
+                <Score curScore = "0" incr="10"/>
                 <Input />
-                <HighScore />
+                <HighScore highScore = "0" />
             </div>
         )
     }
