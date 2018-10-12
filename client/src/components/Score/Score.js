@@ -8,21 +8,8 @@ class Score extends Component {
     constructor(props){
         super(props);
         this.state = {
-            curScore: this.props.curScore,
-            incr: this.props.incr
+            curScore: this.props.curScore
         }
-    }
-
-    updateScore(){
-        let newState = this.state;
-        newState.curScore += newState.incr;
-        this.setState(newState);
-    }
-
-    resetScore(){
-        let newState = this.state;
-        newState.curScore = 0;
-        this.setState(newState);
     }
 
     render() {
