@@ -9,8 +9,8 @@ class Cards extends Component {
             userHand: this.props.userHand,
             flop: this.props.flop
         };
-    }
 
+    }
 
     render (){
         return (
@@ -20,12 +20,12 @@ class Cards extends Component {
                     borderStyle:"dashed",
                     borderColor:"blue",
                     backgroundColor:"grey",
-                    height:150,
-                    width:200,
                     position:"absolute",
-                    bottom: 10,
-                    right: "43%"
-                }}>
+                    height:120,
+                    width:180,
+                    bottom: 30,
+                    right: 0,
+                    left: 0}}>
                     {
                         this.state.userHand.map((card)=>(
                             <div style={{display:"flex",
@@ -33,8 +33,8 @@ class Cards extends Component {
                                 borderStyle:"solid",
                                 borderColor:"blue",
                                 backgroundColor:"white",
-                                height:120,
-                                width:80}}>
+                                height:90,
+                                width:60}}>
                                 <p style={{margin:"auto", textAlign:"center"}}>{card}</p>
                             </div>
                         ))
@@ -49,7 +49,8 @@ class Cards extends Component {
                     width:300,
                     position:"absolute",
                     bottom: "40%",
-                    right: "40%"
+                    right: 0,
+                    left: 0
                 }}>
                     {
                         this.state.flop.map((card)=>(
@@ -68,7 +69,11 @@ class Cards extends Component {
             </div>
         )
     }
+
+
 }
+
+
 
 
 export default Cards;
