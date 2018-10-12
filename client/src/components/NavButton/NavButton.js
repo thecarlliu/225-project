@@ -8,12 +8,15 @@ class NavButton extends Component {
             label: this.props.label
         }
     }
+
+    changePage(e, route) {
+        e.preventDefault();
+        window.location.href = route;
+    }
+
     render() {
         return(
-            <div onClick={(e)=>{
-                this.preventDefault(e);
-                this.props.history.push(this.state.route)
-            }}>
+            <div onClick={(e)=>{this.changePage(e, this.state.route)}}>
                 {this.state.label}
             </div>
         )
