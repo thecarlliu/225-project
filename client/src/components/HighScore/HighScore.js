@@ -10,11 +10,6 @@ class HighScore extends Component {
             highScore: this.props.highScore
         }
     }
-    // updateHighScore(){
-    //     let newScore = this.state;
-    //     newScore.highScore = curScore;
-    //     this.setState(newScore);
-    // }
     render() { // sets the position of the high score text
         return (
             <div>
