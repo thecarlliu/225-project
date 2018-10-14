@@ -1,5 +1,17 @@
 import React, { Component } from "react";
 
+
+const cardStyle = {
+    display:"flex",
+    margin:"auto",
+    borderStyle:"dashed",
+    borderColor:"blue",
+    backgroundColor:"grey",
+    position:"absolute",
+    right: 0,
+    left: 0
+};
+
 //The Cards class is responsible for rendering the community cards and the hole cards.
 class Cards extends Component {
 
@@ -15,17 +27,19 @@ class Cards extends Component {
     render (){
         return (
             <div>
-                <div style={{display:"flex",
+                <div style={{
+                    display:"flex",
                     margin:"auto",
                     borderStyle:"dashed",
                     borderColor:"blue",
                     backgroundColor:"grey",
                     position:"absolute",
-                    height:120,
-                    width:180,
-                    bottom: 30,
                     right: 0,
-                    left: 0}}>
+                    left: 0,
+                    height: 120,
+                    width: 180,
+                    bottom: 30
+                }}>
                     {
                         this.state.userHand.map((card)=>(
                             <div style={{display:"flex",
