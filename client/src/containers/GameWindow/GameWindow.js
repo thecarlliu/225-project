@@ -66,6 +66,28 @@ class GameWindow extends Component {
     //
     // }
 
+    //Increments the score by 10
+    updateScore(){
+        let newValue = this.state.currentScore + 10;
+        alert("new score: " + newValue)
+        // this.setState({currentScore: newValue});
+        this.state.currentScore = newValue;
+        alert("current score " + this.state.currentScore)
+    }
+
+    //Resets the score to 0
+    resetScore(){
+        this.setState({currentScore: 0});
+    }
+
+    //Sets the high score to the current score
+    updateHighScore(){
+        if(this.state.currentScore >= this.state.highScore) {
+            let newScore = this.state.currentScore;
+            this.setState({highScore: newScore});
+        }
+    }
+
     outsCounter() {
         //get the values from the flop and user hand via this.state.flop and this.state.userHand
         //computes outs after hand is dealt
@@ -77,7 +99,8 @@ class GameWindow extends Component {
         alert("submit handler triggered, updated input value: "+this.state.inputValue); //temporary indicator
         if (this.state.outsValue === this.state.inputValue) {
             alert("Correct!");
-            //then increment current score and highscore if current score is equal to the highscore
+            this.updateScore();
+            this.updateHighScore();
         }
         else {
             alert("Wrong! The correct answer is: "+this.state.outsValue);
@@ -99,7 +122,7 @@ class GameWindow extends Component {
                 <Timer />
                 <Cards userHand={[this.state.userHand[0], this.state.userHand[1]]}
                        flop={[this.state.flop[0], this.state.flop[1], this.state.flop[2]]}/>
-                <Score curScore={this.state.currentScore} incr="10"/>
+                <Score curScore={this.state.currentScore} />
                 <Input outsValue={this.state.outsValue} value={this.state.inputValue} changeHandler={this.handleInputChange} submitHandler={(e)=>{this.handleInputSubmit(e)}}/>
                 <HighScore highScore={this.state.highScore} />
             </div>
