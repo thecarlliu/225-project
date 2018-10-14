@@ -5,7 +5,7 @@ class PlayButton extends Component {
     constructor(props){
         super(props);
         this.state = {
-            toggle:"block"
+            toggle:"inline-block"
         }
     };
 
@@ -17,18 +17,19 @@ class PlayButton extends Component {
 
     render() {
         return (
-            <div>
-                <div onClick={(e) => {this.handlePlay(e)}} style={{
-                    height:'20px',
-                    width:'100px',
-                    borderRadius:'15%',
-                    backgroundColor:'blue',
-                    textAlign:'center',
-                    margin:'auto',
-                    top:100,
-                    display:this.state.toggle
-                }}>PLAY</div>
-            </div>
+            <div onClick={(e) => {this.handlePlay(e)}} style={{
+                height:'20px',
+                width:'100px',
+                borderRadius:'15%',
+                backgroundColor:'blue',
+                textAlign:'center',
+                position: 'fixed',
+                margin:'auto',
+                right: "0",
+                left: "0",
+                bottom:200,
+                display:this.state.toggle
+            }}>PLAY</div>
         )
     }
 }
