@@ -15,6 +15,7 @@ class Algorithm {
       if (maxCount >= 4) {
         return true;
       }
+      return false;
   }
 
   function isOutsideStraightDraw(cardVals) {
@@ -25,6 +26,7 @@ class Algorithm {
     if ((val1 === 3 || val2 === 3 || val3 === 3) || ((val1 === 4 && val2 === 4) || (val1 === 4 && val3 === 4) || (val2 === 4 && val3 === 4))) {
       return true;
     }
+    return false;
   }
 
   function isInsideStraightDraw(cardVals) {
@@ -35,6 +37,7 @@ class Algorithm {
     if (val1 === 4 || val2 === 4 || val3 === 4) {
       return true;
     }
+    return false;
   }
 
 }
