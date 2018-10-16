@@ -17,19 +17,6 @@ const deck = ["AH","2H","3H","4H","5H","6H","7H","8H","9H","10H","JH","QH","KH",
 
 class GameWindow extends Component {
 
-    //Functions that we will need:
-    //Reset timer
-    //Update Score
-    //Reset Score
-    //Reset Cards
-    //Advance stage
-    //Deal the community cards
-    //Deal the hole cards
-    //Handle Input
-    //Update HighScore
-
-
-
     constructor(props){
         super(props);
         this.state={
@@ -39,7 +26,7 @@ class GameWindow extends Component {
             currentScore: 0,
             highScore: 0,
             outsValue: ""
-        }
+        };
     }
 
     componentWillMount() {
@@ -62,30 +49,9 @@ class GameWindow extends Component {
         this.setState({flop: [hand[2],hand[3],hand[4]]});
     }
 
-    // function coverCard(){
-    //
-    // }
-
-    //Increments the score by 10
-    updateScore(){
-        let newValue = this.state.currentScore + 10;
-        alert("new score: " + newValue)
-        // this.setState({currentScore: newValue});
-        this.state.currentScore = newValue;
-        alert("current score " + this.state.currentScore)
-    }
-
     //Resets the score to 0
     resetScore(){
         this.setState({currentScore: 0});
-    }
-
-    //Sets the high score to the current score
-    updateHighScore(){
-        if(this.state.currentScore >= this.state.highScore) {
-            let newScore = this.state.currentScore;
-            this.setState({highScore: newScore});
-        }
     }
 
     outsCounter() {
@@ -94,23 +60,27 @@ class GameWindow extends Component {
         this.setState({outsValue: "1"}); //replace 1 with the computed value (as a string)
     }
 
-    handleInputSubmit = (event) => {
-        event.preventDefault();
-        alert("submit handler triggered, updated input value: "+this.state.inputValue); //temporary indicator
+    updateScores() {
         if (this.state.outsValue === this.state.inputValue) {
             alert("Correct!");
-            this.updateScore();
-            this.updateHighScore();
+            this.setState({currentScore: this.state.currentScore+10});
+            if (this.state.currentScore >= this.state.highScore) {
+                this.setState({highScore: this.state.highScore+10});
+            }
         }
         else {
             alert("Wrong! The correct answer is: "+this.state.outsValue);
         }
+    }
+
+    handleInputSubmit = (event) => {
+        event.preventDefault();
+        this.updateScores();
         this.setState({inputValue:""});
     };
 
     handleInputChange = (value) => {
         this.setState({inputValue: value});
-        console.log(this.state.inputValue)
     };
 
 
@@ -122,7 +92,7 @@ class GameWindow extends Component {
                 <Timer />
                 <Cards userHand={[this.state.userHand[0], this.state.userHand[1]]}
                        flop={[this.state.flop[0], this.state.flop[1], this.state.flop[2]]}/>
-                <Score curScore={this.state.currentScore} />
+                <Score currentScore={this.state.currentScore} />
                 <Input outsValue={this.state.outsValue} value={this.state.inputValue} changeHandler={this.handleInputChange} submitHandler={(e)=>{this.handleInputSubmit(e)}}/>
                 <HighScore highScore={this.state.highScore} />
             </div>

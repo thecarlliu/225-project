@@ -7,16 +7,13 @@ class Score extends Component {
 
     constructor(props){
         super(props);
-        this.state = {
-            curScore: this.props.curScore
-        }
     }
 
     render() {
         return(
             <div style = {{fontFamily: "Georgia", position: "fixed", bottom: 550, left: 150}}>
                 <h3>
-                    Score: {this.state.curScore}
+                    Score: {this.props.currentScore}
                 </h3>
             </div>
         )
