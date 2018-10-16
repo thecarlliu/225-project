@@ -1,4 +1,5 @@
 class Algorithm {
+
   function isFlushDraw(cardSuits) {
       var maxCount = 0;
       for (var i = 0; i < cardSuits.length; i++) {
@@ -19,7 +20,7 @@ class Algorithm {
   }
 
   function isOutsideStraightDraw(cardVals) {
-    cardVals.sort;
+    cardVals.sort(function(a, b){return a - b});
     var val1 = cardVals[4] - cardVals[0];
     var val2 = cardVals[3] - cardVals[0];
     var val3 = cardVals[4] - cardVals[1];
@@ -30,7 +31,7 @@ class Algorithm {
   }
 
   function isInsideStraightDraw(cardVals) {
-    cardVals.sort;
+    cardVals.sort(function(a, b){return a - b});
     var val1 = cardVals[4] - cardVals[0];
     var val2 = cardVals[3] - cardVals[0];
     var val3 = cardVals[4] - cardVals[1];
