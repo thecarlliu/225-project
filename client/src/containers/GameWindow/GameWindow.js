@@ -26,7 +26,8 @@ class GameWindow extends Component {
             currentScore: 0,
             highScore: 0,
             outsValue: "",
-            time: 15
+            time: 15,
+            isPressed:false
         };
     }
 
@@ -76,23 +77,25 @@ class GameWindow extends Component {
     }
 
     updateScores() {
-        if (this.state.outsValue === this.state.inputValue) {
-            alert("Correct!");
-            this.setState({currentScore: this.state.currentScore + 10});
-            if (this.state.currentScore >= this.state.highScore) {
-                this.setState({highScore: this.state.highScore + 10});
-            }
-            this.getHand();
-            this.outsCounter();
-            this.setState({time: 15});
+        if(this.state.isPressed) {
+            if (this.state.outsValue === this.state.inputValue) {
+                alert("Correct!");
+                this.setState({currentScore: this.state.currentScore + 10});
+                if (this.state.currentScore >= this.state.highScore) {
+                    this.setState({highScore: this.state.highScore + 10});
+                }
+                this.getHand();
+                this.outsCounter();
+                this.setState({time: 15});
 
-        }
-        else {
-            alert("Wrong! The correct answer is: " + this.state.outsValue);
-            this.resetScore();
-            this.getHand();
-            this.outsCounter();
-            this.setState({time: 15});
+            }
+            else {
+                alert("Wrong! The correct answer is: " + this.state.outsValue);
+                this.resetScore();
+                this.getHand();
+                this.outsCounter();
+                this.setState({time: 15});
+            }
         }
     }
 
@@ -107,6 +110,7 @@ class GameWindow extends Component {
     };
 
     buttonPressed = () => {
+        this.setState({isPressed:true});
         this.getHand();
         this.outsCounter();
         this.startTimer();
@@ -117,10 +121,10 @@ class GameWindow extends Component {
         return (
             <div>
                 <NavBar />
-                <PlayButton buttonPressed={this.buttonPressed}/>
                 <Timer time={this.state.time}/>
                 <Cards userHand={[this.state.userHand[0], this.state.userHand[1]]}
                        flop={[this.state.flop[0], this.state.flop[1], this.state.flop[2]]}/>
+                <PlayButton buttonPressed={this.buttonPressed}/>
                 <Score currentScore={this.state.currentScore} />
                 <Input outsValue={this.state.outsValue} value={this.state.inputValue} changeHandler={this.handleInputChange} submitHandler={(e)=>{this.handleInputSubmit(e)}}/>
                 <HighScore highScore={this.state.highScore} />
