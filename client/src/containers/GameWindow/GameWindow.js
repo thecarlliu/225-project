@@ -25,13 +25,16 @@ class GameWindow extends Component {
             inputValue: "",
             currentScore: 0,
             highScore: 0,
-            outsValue: ""
+            outsValue: "",
+            isPressed:false
         };
     }
 
     componentWillMount() {
-        this.getHand();
-        this.outsCounter();
+        if(this.state.isPressed) {
+            this.getHand();
+            this.outsCounter();
+        }
     }
 
     getHand(){
@@ -61,20 +64,22 @@ class GameWindow extends Component {
     }
 
     updateScores() {
-        if (this.state.outsValue === this.state.inputValue) {
-            alert("Correct!");
-            this.setState({currentScore: this.state.currentScore+10});
-            if (this.state.currentScore >= this.state.highScore) {
-                this.setState({highScore: this.state.highScore+10});
+        if(this.state.isPressed) {
+            if (this.state.outsValue === this.state.inputValue) {
+                alert("Correct!");
+                this.setState({currentScore: this.state.currentScore + 10});
+                if (this.state.currentScore >= this.state.highScore) {
+                    this.setState({highScore: this.state.highScore + 10});
+                }
+                this.getHand();
+                this.outsCounter();
             }
-            this.getHand();
-            this.outsCounter();
-        }
-        else {
-            alert("Wrong! The correct answer is: "+this.state.outsValue);
-            this.resetScore();
-            this.getHand();
-            this.outsCounter();
+            else {
+                alert("Wrong! The correct answer is: " + this.state.outsValue);
+                this.resetScore();
+                this.getHand();
+                this.outsCounter();
+            }
         }
     }
 
@@ -88,12 +93,18 @@ class GameWindow extends Component {
         this.setState({inputValue: value});
     };
 
+    buttonPressed = (value) => {
+        this.setState({isPressed:true});
+        this.getHand();
+        this.outsCounter();
+    };
+
 
     render () {
         return (
             <div>
                 <NavBar />
-                <PlayButton />
+                <PlayButton buttonPressed={this.buttonPressed}/>
                 <Timer />
                 <Cards userHand={[this.state.userHand[0], this.state.userHand[1]]}
                        flop={[this.state.flop[0], this.state.flop[1], this.state.flop[2]]}/>
