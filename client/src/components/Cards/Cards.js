@@ -17,10 +17,6 @@ class Cards extends Component {
 
     constructor(props){
         super(props);
-        this.state= {
-            userHand: this.props.userHand,
-            flop: this.props.flop
-        };
 
     }
 
@@ -41,7 +37,7 @@ class Cards extends Component {
                     bottom: 30
                 }}>
                     {
-                        this.state.userHand.map((card)=>(
+                        this.props.userHand.map((card)=>(
                             <div style={{display:"flex",
                                 margin:"auto",
                                 borderStyle:"solid",
@@ -67,7 +63,7 @@ class Cards extends Component {
                     left: 0
                 }}>
                     {
-                        this.state.flop.map((card)=>(
+                        this.props.flop.map((card)=>(
                             <div style={{display:"flex",
                                 margin:"auto",
                                 borderStyle:"solid",
