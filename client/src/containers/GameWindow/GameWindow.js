@@ -26,7 +26,8 @@ class GameWindow extends Component {
             currentScore: 0,
             highScore: 0,
             outsValue: "",
-            isPressed:false
+            isPressed:false,
+            time: 15
         };
     }
 
@@ -34,6 +35,7 @@ class GameWindow extends Component {
         if(this.state.isPressed) {
             this.getHand();
             this.outsCounter();
+            this.startTimer();
         }
     }
 
@@ -51,6 +53,21 @@ class GameWindow extends Component {
         this.setState({userHand: [hand[0],hand[1]]});
         this.setState({flop: [hand[2],hand[3],hand[4]]});
     }
+
+    startTimer() {
+        setInterval(this.tick, 1000);
+    }
+
+    tick = () => {
+        if (this.state.time <= 0) {
+            alert("You ran out of time! Try again");
+            this.setState({time: 15});
+            this.getHand();
+            this.outsCounter();
+        }
+        let currentTime = this.state.time;
+        this.setState({time: currentTime - 1});
+    };
 
     //Resets the score to 0
     resetScore(){
@@ -73,12 +90,15 @@ class GameWindow extends Component {
                 }
                 this.getHand();
                 this.outsCounter();
+                this.setState({time: 15});
+
             }
             else {
                 alert("Wrong! The correct answer is: " + this.state.outsValue);
                 this.resetScore();
                 this.getHand();
                 this.outsCounter();
+                this.setState({time: 15});
             }
         }
     }
@@ -105,7 +125,7 @@ class GameWindow extends Component {
             <div>
                 <NavBar />
                 <PlayButton buttonPressed={this.buttonPressed}/>
-                <Timer />
+                <Timer time={this.state.time}/>
                 <Cards userHand={[this.state.userHand[0], this.state.userHand[1]]}
                        flop={[this.state.flop[0], this.state.flop[1], this.state.flop[2]]}/>
                 <Score currentScore={this.state.currentScore} />
@@ -114,8 +134,6 @@ class GameWindow extends Component {
             </div>
         )
     }
-
-
 }
 
 export default GameWindow;
