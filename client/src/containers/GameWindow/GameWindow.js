@@ -67,9 +67,14 @@ class GameWindow extends Component {
             if (this.state.currentScore >= this.state.highScore) {
                 this.setState({highScore: this.state.highScore+10});
             }
+            this.getHand();
+            this.outsCounter();
         }
         else {
             alert("Wrong! The correct answer is: "+this.state.outsValue);
+            this.resetScore();
+            this.getHand();
+            this.outsCounter();
         }
     }
 
