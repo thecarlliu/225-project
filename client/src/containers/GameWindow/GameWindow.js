@@ -56,6 +56,7 @@ class GameWindow extends Component {
         if (this.state.time <= 0) {
             alert("You ran out of time! Try again");
             this.setState({time: 15});
+            this.resetScore();
             this.getHand();
             this.outsCounter();
         }
