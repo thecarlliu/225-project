@@ -5,13 +5,17 @@ class PlayButton extends Component {
     constructor(props){
         super(props);
         this.state = {
-            toggle:"inline-block"
+            toggle:"inline-block",
+            value:"",
+            isPressed:this.props.buttonPressed
         }
     };
 
     handlePlay=(e) =>{
         e.preventDefault();
+        this.setState({value: e.target.value});
         this.setState({toggle:'none'});
+        this.state.isPressed(e.target.value);
     };
 
 
