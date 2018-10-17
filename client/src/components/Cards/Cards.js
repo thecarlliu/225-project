@@ -52,15 +52,17 @@ class Cards extends Component {
                 </div>
                 <div style={{display:"flex",
                     margin:"auto",
-                    borderStyle:"dashed",
-                    borderColor:"blue",
-                    backgroundColor:"grey",
-                    height:150,
-                    width:300,
+                    borderStyle:"solid",
+                    borderColor:"black",
+                    backgroundColor:"green",
+                    height:275,
+                    width:400,
                     position:"absolute",
-                    bottom: "40%",
+                    bottom: 0,
+                    top: 50,
                     right: 0,
-                    left: 0
+                    left: 0,
+                    borderRadius: "100%"
                 }}>
                     {
                         this.props.flop.map((card)=>(
