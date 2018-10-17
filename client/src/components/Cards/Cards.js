@@ -29,16 +29,16 @@ class Cards extends Component {
                     borderStyle:"dashed",
                     borderColor:"blue",
                     backgroundColor:"grey",
-                    position:"absolute",
+                    position:"fixed",
                     right: 0,
                     left: 0,
                     height: 120,
                     width: 180,
-                    bottom: 30
+                    top: 550
                 }}>
                     {
                         this.props.userHand.map((card)=>(
-                            <div style={{display:"flex",
+                            <div style={{display:"block",
                                 margin:"auto",
                                 borderStyle:"solid",
                                 borderColor:"blue",
@@ -57,16 +57,15 @@ class Cards extends Component {
                     backgroundColor:"green",
                     height:275,
                     width:400,
-                    position:"absolute",
-                    bottom: 0,
-                    top: 50,
+                    position:"fixed",
+                    top: 250,
                     right: 0,
                     left: 0,
                     borderRadius: "100%"
                 }}>
                     {
                         this.props.flop.map((card)=>(
-                            <div style={{display:"flex",
+                            <div style={{display:"block",
                                 margin:"auto",
                                 borderStyle:"solid",
                                 borderColor:"blue",
