@@ -117,6 +117,7 @@ class GameWindow extends Component {
         this.setState({isPressed:true});
         this.getHand();
         this.outsCounter();
+        this.startTimer();
     };
 
 
