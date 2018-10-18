@@ -17,10 +17,6 @@ class Cards extends Component {
 
     constructor(props){
         super(props);
-        this.state= {
-            userHand: this.props.userHand,
-            flop: this.props.flop
-        };
 
     }
 
@@ -33,16 +29,16 @@ class Cards extends Component {
                     borderStyle:"dashed",
                     borderColor:"blue",
                     backgroundColor:"grey",
-                    position:"absolute",
+                    position:"fixed",
                     right: 0,
                     left: 0,
                     height: 120,
                     width: 180,
-                    bottom: 30
+                    top: 550
                 }}>
                     {
-                        this.state.userHand.map((card)=>(
-                            <div style={{display:"flex",
+                        this.props.userHand.map((card)=>(
+                            <div style={{display:"block",
                                 margin:"auto",
                                 borderStyle:"solid",
                                 borderColor:"blue",
@@ -56,19 +52,20 @@ class Cards extends Component {
                 </div>
                 <div style={{display:"flex",
                     margin:"auto",
-                    borderStyle:"dashed",
-                    borderColor:"blue",
-                    backgroundColor:"grey",
-                    height:150,
-                    width:300,
-                    position:"absolute",
-                    bottom: "40%",
+                    borderStyle:"solid",
+                    borderColor:"black",
+                    backgroundColor:"green",
+                    height:275,
+                    width:400,
+                    position:"fixed",
+                    top: 250,
                     right: 0,
-                    left: 0
+                    left: 0,
+                    borderRadius: "100%"
                 }}>
                     {
-                        this.state.flop.map((card)=>(
-                            <div style={{display:"flex",
+                        this.props.flop.map((card)=>(
+                            <div style={{display:"block",
                                 margin:"auto",
                                 borderStyle:"solid",
                                 borderColor:"blue",

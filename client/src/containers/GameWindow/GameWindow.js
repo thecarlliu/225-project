@@ -6,7 +6,7 @@ import Input from "../../components/Input";
 import HighScore from "../../components/HighScore";
 import NavBar from "../../components/NavBar";
 import PlayButton from "../../components/PlayButton";
-import algorithm from "../../algorithm"
+import Algorithm from "../../algorithm/algorithm.js";
 
 //The GameWindow keeps track of the state of the game.
 
@@ -26,13 +26,13 @@ class GameWindow extends Component {
             inputValue: "",
             currentScore: 0,
             highScore: 0,
-            outsValue: ""
+            outsValue: "",
+            time: 15,
+            isPressed:false
         };
     }
 
     componentWillMount() {
-        this.getHand();
-        this.outsCounter();
     }
 
     getHand(){
@@ -50,6 +50,22 @@ class GameWindow extends Component {
         this.setState({flop: [hand[2],hand[3],hand[4]]});
     }
 
+    startTimer() {
+        setInterval(this.tick, 1000);
+    }
+
+    tick = () => {
+        if (this.state.time <= 0) {
+            alert("You ran out of time! Try again");
+            this.setState({time: 15});
+            this.resetScore();
+            this.getHand();
+            this.outsCounter();
+        }
+        let currentTime = this.state.time;
+        this.setState({time: currentTime - 1});
+    };
+
     //Resets the score to 0
     resetScore(){
         this.setState({currentScore: 0});
@@ -59,19 +75,30 @@ class GameWindow extends Component {
         //get the values from the flop and user hand via this.state.flop and this.state.userHand
         //computes outs after hand is dealt
         var hand = this.state.userHand.concat(this.state.flop);
-        this.setState({outsValue: Algorithm.countOuts(hand).toString()}); //replace 1 with the computed value (as a string)
+        // this.setState({outsValue: Algorithm.countOuts(hand).toString()});
+        this.setState({outsValue: 1});
     }
 
     updateScores() {
-        if (this.state.outsValue === this.state.inputValue) {
-            alert("Correct!");
-            this.setState({currentScore: this.state.currentScore+10});
-            if (this.state.currentScore >= this.state.highScore) {
-                this.setState({highScore: this.state.highScore+10});
+        if(this.state.isPressed) {
+            if (this.state.outsValue === this.state.inputValue) {
+                alert("Correct!");
+                this.setState({currentScore: this.state.currentScore + 10});
+                if (this.state.currentScore >= this.state.highScore) {
+                    this.setState({highScore: this.state.highScore + 10});
+                }
+                this.getHand();
+                this.outsCounter();
+                this.setState({time: 15});
+
             }
-        }
-        else {
-            alert("Wrong! The correct answer is: "+this.state.outsValue);
+            else {
+                alert("Wrong! The correct answer is: " + this.state.outsValue);
+                this.resetScore();
+                this.getHand();
+                this.outsCounter();
+                this.setState({time: 15});
+            }
         }
     }
 
@@ -85,23 +112,28 @@ class GameWindow extends Component {
         this.setState({inputValue: value});
     };
 
+    buttonPressed = () => {
+        this.setState({isPressed:true});
+        this.getHand();
+        this.outsCounter();
+        this.startTimer();
+    };
+
 
     render () {
         return (
             <div>
                 <NavBar />
-                <PlayButton />
-                <Timer />
+                <Timer time={this.state.time}/>
                 <Cards userHand={[this.state.userHand[0], this.state.userHand[1]]}
                        flop={[this.state.flop[0], this.state.flop[1], this.state.flop[2]]}/>
+                <PlayButton buttonPressed={this.buttonPressed}/>
                 <Score currentScore={this.state.currentScore} />
                 <Input outsValue={this.state.outsValue} value={this.state.inputValue} changeHandler={this.handleInputChange} submitHandler={(e)=>{this.handleInputSubmit(e)}}/>
                 <HighScore highScore={this.state.highScore} />
             </div>
         )
     }
-
-
 }
 
 export default GameWindow;
