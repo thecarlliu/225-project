@@ -85,14 +85,18 @@ const Algorithm = {
     }
 
     var flushDraw = this.isFlushDraw(cardSuits);
-    if (this.isOutsideStraightDraw(cardVals) && flushDraw) {
+    var insideStraightDraw = this.isInsideStraightDraw(cardVals);
+    var outsideStraightDraw = this.isOutsideStraightDraw(cardVals);
+    if (outsideStraightDraw && flushDraw) {
       return 15;
-    } else if (this.isInsideStraightDraw(cardVals) && flushDraw) {
+    } else if (insideStraightDraw && flushDraw) {
       return 12;
-    } else if (this.isOutsideStraightDraw) {
-      return 9;
-    } else if (this.isInsideStraightDraw) {
+    } else if (outsideStraightDraw) {
+      return 8;
+    } else if (insideStraightDraw) {
       return 4;
+    } else if (flushDraw){
+      return 9;
     } else {
       return 0;
     }
