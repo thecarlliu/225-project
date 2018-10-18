@@ -42,8 +42,10 @@ class Algorithm {
   }
 
   isInsideStraightDraw(cardVals) {
+      var hasAce = false;
     cardVals.sort(function(a, b){return a - b});
     if (cardVals.includes(14)) {
+        hasAce = true;
       var cardVals2 = cardVals;
       cardVals2.unshift(1);
       cardVals2.splice(cardVals2.length - 1)
@@ -68,7 +70,7 @@ class Algorithm {
       var cardSuit = cards[i].slice(1);
       cardSuits.push(cardSuit);
       if (cardRank === "A") {
-        cardVals.push(14;
+        cardVals.push(14);
       } else if (cardRank === "K") {
         cardVals.push(13);
       } else if (cardRank === "Q") {
@@ -79,14 +81,14 @@ class Algorithm {
         cardVals.push(Number(cardRank));
       }
     }
-    var flushDraw = isFlushDraw(cardSuits);
-    if (isOutsideStraightDraw(cardVals) && flushDraw) {
+    var flushDraw = this.isFlushDraw(cardSuits);
+    if (this.isOutsideStraightDraw(cardVals) && flushDraw) {
       return 15;
-    } else if (isInsideStraightDraw(cardVals) && flushDraw) {
+    } else if (this.isInsideStraightDraw(cardVals) && flushDraw) {
       return 12;
-    } else if (isOutsideStraightDraw) {
+    } else if (this.isOutsideStraightDraw) {
       return 8;
-    } else if (isInsideStraightDraw) {
+    } else if (this.isInsideStraightDraw) {
       return 4;
     } else {
       return 0;
@@ -94,3 +96,5 @@ class Algorithm {
   }
 
 }
+
+export default Algorithm

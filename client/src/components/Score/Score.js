@@ -11,7 +11,7 @@ class Score extends Component {
 
     render() {
         return(
-            <div style = {{fontFamily: "Georgia", position: "fixed", bottom: 550, left: 150}}>
+            <div style = {{fontFamily: "Georgia", position: "fixed", top: 150, left: 150}}>
                 <h3>
                     Score: {this.props.currentScore}
                 </h3>
