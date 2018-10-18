@@ -1,6 +1,6 @@
-class Algorithm {
+const Algorithm = {
 
-  isFlushDraw(cardSuits) {
+  isFlushDraw: function isFlushDraw(cardSuits) {
       var maxCount = 0;
       for (var i = 0; i < cardSuits.length; i++) {
         var count = 0;
@@ -17,14 +17,15 @@ class Algorithm {
         return true;
       }
       return false;
-  }
+  },
 
-  isOutsideStraightDraw(cardVals) {
+  isOutsideStraightDraw: function isOutsideStraightDraw(cardVals) {
     var hasAce = false;
+    var cardVals2 = [];
     cardVals.sort(function(a, b){return a - b});
     if (cardVals.includes(14)) {
       hasAce = true;
-      var cardVals2 = cardVals;
+      cardVals2 = cardVals;
       cardVals2.unshift(1);
       cardVals2.splice(cardVals2.length - 1)
     }
@@ -39,14 +40,15 @@ class Algorithm {
       return true;
     }
     return false;
-  }
+  },
 
-  isInsideStraightDraw(cardVals) {
+  isInsideStraightDraw: function isInsideStraightDraw(cardVals) {
       var hasAce = false;
+      var cardVals2 = [];
     cardVals.sort(function(a, b){return a - b});
     if (cardVals.includes(14)) {
         hasAce = true;
-      var cardVals2 = cardVals;
+        cardVals2 = cardVals;
       cardVals2.unshift(1);
       cardVals2.splice(cardVals2.length - 1)
     }
@@ -60,9 +62,9 @@ class Algorithm {
       return true;
     }
     return false;
-  }
+  },
 
-  countOuts(cards) {
+  countOuts: function countOuts(cards) {
     var cardVals = [];
     var cardSuits = [];
     for (var i = 0; i < cards.length; i++) {
@@ -81,13 +83,14 @@ class Algorithm {
         cardVals.push(Number(cardRank));
       }
     }
+
     var flushDraw = this.isFlushDraw(cardSuits);
     if (this.isOutsideStraightDraw(cardVals) && flushDraw) {
       return 15;
     } else if (this.isInsideStraightDraw(cardVals) && flushDraw) {
       return 12;
     } else if (this.isOutsideStraightDraw) {
-      return 8;
+      return 9;
     } else if (this.isInsideStraightDraw) {
       return 4;
     } else {
@@ -95,6 +98,6 @@ class Algorithm {
     }
   }
 
-}
+};
 
 export default Algorithm
