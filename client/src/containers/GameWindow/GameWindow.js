@@ -75,7 +75,8 @@ class GameWindow extends Component {
         //get the values from the flop and user hand via this.state.flop and this.state.userHand
         //computes outs after hand is dealt
         var hand = this.state.userHand.concat(this.state.flop);
-        this.setState({outsValue: Algorithm.countOuts(hand).toString()}); //replace 1 with the computed value (as a string)
+        // this.setState({outsValue: Algorithm.countOuts(hand).toString()});
+        this.setState({outsValue: 1});
     }
 
     updateScores() {
