@@ -1,6 +1,6 @@
-class Algorithm {
+const Algorithm = {
 
-  isFlushDraw(cardSuits) {
+  isFlushDraw: function isFlushDraw(cardSuits) {
       var maxCount = 0;
       for (var i = 0; i < cardSuits.length; i++) {
         var count = 0;
@@ -17,14 +17,15 @@ class Algorithm {
         return true;
       }
       return false;
-  }
+  },
 
-  isOutsideStraightDraw(cardVals) {
+  isOutsideStraightDraw: function isOutsideStraightDraw(cardVals) {
     var hasAce = false;
+    var cardVals2 = [];
     cardVals.sort(function(a, b){return a - b});
     if (cardVals.includes(14)) {
       hasAce = true;
-      var cardVals2 = cardVals;
+      cardVals2 = cardVals;
       cardVals2.unshift(1);
       cardVals2.splice(cardVals2.length - 1)
     }
@@ -39,12 +40,15 @@ class Algorithm {
       return true;
     }
     return false;
-  }
+  },
 
-  isInsideStraightDraw(cardVals) {
+  isInsideStraightDraw: function isInsideStraightDraw(cardVals) {
+      var hasAce = false;
+      var cardVals2 = [];
     cardVals.sort(function(a, b){return a - b});
     if (cardVals.includes(14)) {
-      var cardVals2 = cardVals;
+        hasAce = true;
+        cardVals2 = cardVals;
       cardVals2.unshift(1);
       cardVals2.splice(cardVals2.length - 1)
     }
@@ -58,9 +62,9 @@ class Algorithm {
       return true;
     }
     return false;
-  }
+  },
 
-  countOuts(cards) {
+  countOuts: function countOuts(cards) {
     var cardVals = [];
     var cardSuits = [];
     for (var i = 0; i < cards.length; i++) {
@@ -68,7 +72,7 @@ class Algorithm {
       var cardSuit = cards[i].slice(1);
       cardSuits.push(cardSuit);
       if (cardRank === "A") {
-        cardVals.push(14;
+        cardVals.push(14);
       } else if (cardRank === "K") {
         cardVals.push(13);
       } else if (cardRank === "Q") {
@@ -79,18 +83,25 @@ class Algorithm {
         cardVals.push(Number(cardRank));
       }
     }
-    var flushDraw = isFlushDraw(cardSuits);
-    if (isOutsideStraightDraw(cardVals) && flushDraw) {
+
+    var flushDraw = this.isFlushDraw(cardSuits);
+    var insideStraightDraw = this.isInsideStraightDraw(cardVals);
+    var outsideStraightDraw = this.isOutsideStraightDraw(cardVals);
+    if (outsideStraightDraw && flushDraw) {
       return 15;
-    } else if (isInsideStraightDraw(cardVals) && flushDraw) {
+    } else if (insideStraightDraw && flushDraw) {
       return 12;
-    } else if (isOutsideStraightDraw) {
+    } else if (outsideStraightDraw) {
       return 8;
-    } else if (isInsideStraightDraw) {
+    } else if (insideStraightDraw) {
       return 4;
+    } else if (flushDraw){
+      return 9;
     } else {
       return 0;
     }
   }
 
-}
+};
+
+export default Algorithm
