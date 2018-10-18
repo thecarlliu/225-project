@@ -5,7 +5,7 @@ class PlayButton extends Component {
     constructor(props){
         super(props);
         this.state = {
-            toggle:"inline-block",
+            toggle:"block",
             value:"",
             isPressed:this.props.buttonPressed
         }
@@ -22,16 +22,16 @@ class PlayButton extends Component {
     render() {
         return (
             <div onClick={(e) => {this.handlePlay(e)}} style={{
-                height:'20px',
-                width:'100px',
+                height:'30px',
+                width:'150px',
                 borderRadius:'15%',
                 backgroundColor:'blue',
                 textAlign:'center',
-                position: 'fixed',
+                position: "fixed",
                 margin:'auto',
                 right: "0",
                 left: "0",
-                bottom:200,
+                top: 475,
                 display:this.state.toggle
             }}>PLAY</div>
         )
