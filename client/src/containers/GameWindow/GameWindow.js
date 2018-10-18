@@ -6,6 +6,7 @@ import Input from "../../components/Input";
 import HighScore from "../../components/HighScore";
 import NavBar from "../../components/NavBar";
 import PlayButton from "../../components/PlayButton";
+import algorithm from "../../algorithm"
 
 //The GameWindow keeps track of the state of the game.
 
@@ -57,7 +58,8 @@ class GameWindow extends Component {
     outsCounter() {
         //get the values from the flop and user hand via this.state.flop and this.state.userHand
         //computes outs after hand is dealt
-        this.setState({outsValue: "1"}); //replace 1 with the computed value (as a string)
+        var hand = this.state.userHand.concat(this.state.flop);
+        this.setState({outsValue: Algorithm.countOuts(hand).toString()}); //replace 1 with the computed value (as a string)
     }
 
     updateScores() {
