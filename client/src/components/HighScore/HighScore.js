@@ -9,12 +9,10 @@ class HighScore extends Component {
     }
     render() { // sets the position of the high score text
         return (
-            <div>
-                <div style = {{fontFamily: "Georgia", position: "fixed", bottom: 550, right: 150}}>
-                    <h3>
-                        High Score: {this.props.highScore}
-                    </h3>
-                </div>
+            <div style = {{fontFamily: "Georgia", position: "fixed", top: 150, right: 150}}>
+                <h3>
+                    High Score: {this.props.highScore}
+                </h3>
             </div>
         )
     }
