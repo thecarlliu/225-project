@@ -6,7 +6,7 @@ import Input from "../../components/Input";
 import HighScore from "../../components/HighScore";
 import NavBar from "../../components/NavBar";
 import PlayButton from "../../components/PlayButton";
-import algorithm from "../../algorithm"
+import Algorithm from "../../algorithm/algorithm.js";
 
 //The GameWindow keeps track of the state of the game.
 
