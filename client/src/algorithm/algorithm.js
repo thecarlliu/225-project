@@ -36,7 +36,7 @@
     var val4 = cardVals2[4] - cardVals2[0];
     var val5 = cardVals2[3] - cardVals2[0];
     var val6 = cardVals2[4] - cardVals2[1];
-    var outsideStraight = (val1 === 3 && (!hasAce)) || val2 === 3 || (val3 === 3 && !hasAce) || (val4 === 3 && !hasAce) || (val5 === 3 && !hasAce) || val6 === 3);
+    var outsideStraight = ((val1 === 3 && (!hasAce)) || val2 === 3 || (val3 === 3 && !hasAce) || (val4 === 3 && !hasAce) || (val5 === 3 && !hasAce) || val6 === 3);
     var doubleInside = ((val1 === 4 && val2 === 4) || (val1 === 4 && val3 === 4) || (val2 === 4 && val3 === 4)) || ((val4 === 4 && val5 === 4) || (val4 === 4 && val6 === 4) || (val5 === 4 && val6 === 4));
     return (outsideStraight || doubleInside);
   }
