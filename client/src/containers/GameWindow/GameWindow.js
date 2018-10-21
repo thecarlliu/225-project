@@ -6,7 +6,8 @@ import Input from "../../components/Input";
 import HighScore from "../../components/HighScore";
 import NavBar from "../../components/NavBar";
 import PlayButton from "../../components/PlayButton";
-import Algorithm from "../../algorithm/algorithm.js";
+import countOuts from "../../algorithm/algorithm.js";
+import testCount from "../../algorithm/algorithm.js";
 
 //The GameWindow keeps track of the state of the game.
 
@@ -35,7 +36,7 @@ class GameWindow extends Component {
     componentWillMount() {
     }
 
-    getHand(){
+    getHand() {
         let hand = new Array(5),
             used = new Array(5),
             len = deck.length,
@@ -46,8 +47,23 @@ class GameWindow extends Component {
             used[x] = --len in used ? used[len] : len; //https://stackoverflow.com/questions/19269545/how-to-get-n-no-elements-randomly-from-an-array
             n++;
         }
-        this.setState({userHand: [hand[0],hand[1]]});
-        this.setState({flop: [hand[2],hand[3],hand[4]]});
+        // this.setState({userHand: [hand[0],hand[1]], flop: [hand[2],hand[3],hand[4]]}, that.outsCounter());
+        this.state.userHand = [hand[0], hand[1]];
+        this.state.flop = [hand[2], hand[3], hand[4]];
+        this.outsCounter();
+    }
+
+    outsCounter() {
+        //get the values from the flop and user hand via this.state.flop and this.state.userHand
+        //computes outs after hand is dealt
+        var hand = [];
+        hand.push(this.state.userHand[0], this.state.userHand[1], this.state.flop[0], this.state.flop[1], this.state.flop[2]);
+        console.log(hand);
+        // this.state.outsValue = "1";
+        this.state.outsValue = countOuts(hand).toString();
+        // console.log(countOuts(hand));
+        // this.setState({outsValue: 1});
+        // this.state.outsValue = testCount(hand);
     }
 
     startTimer() {
@@ -60,7 +76,6 @@ class GameWindow extends Component {
             this.setState({time: 15});
             this.resetScore();
             this.getHand();
-            this.outsCounter();
         }
         let currentTime = this.state.time;
         this.setState({time: currentTime - 1});
@@ -69,14 +84,6 @@ class GameWindow extends Component {
     //Resets the score to 0
     resetScore(){
         this.setState({currentScore: 0});
-    }
-
-    outsCounter() {
-        //get the values from the flop and user hand via this.state.flop and this.state.userHand
-        //computes outs after hand is dealt
-        var hand = this.state.userHand.concat(this.state.flop);
-        // this.setState({outsValue: Algorithm.countOuts(hand).toString()});
-        this.setState({outsValue: 1});
     }
 
     updateScores() {
@@ -88,7 +95,6 @@ class GameWindow extends Component {
                     this.setState({highScore: this.state.highScore + 10});
                 }
                 this.getHand();
-                this.outsCounter();
                 this.setState({time: 15});
 
             }
@@ -96,7 +102,6 @@ class GameWindow extends Component {
                 alert("Wrong! The correct answer is: " + this.state.outsValue);
                 this.resetScore();
                 this.getHand();
-                this.outsCounter();
                 this.setState({time: 15});
             }
         }
@@ -115,7 +120,6 @@ class GameWindow extends Component {
     buttonPressed = () => {
         this.setState({isPressed:true});
         this.getHand();
-        this.outsCounter();
         this.startTimer();
     };
 

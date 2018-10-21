@@ -1,26 +1,28 @@
-const Algorithm = {
 
-  isFlushDraw: function isFlushDraw(cardSuits) {
-      var maxCount = 0;
-      for (var i = 0; i < cardSuits.length; i++) {
-        var count = 0;
-        for (var j = 0; j < cardSuits.length; i++) {
+
+ function isFlushDraw(cardSuits) {
+    console.log("flushdraw tirggered");
+      let maxCount = 0;
+      for (let i = 0; i < cardSuits.length; i++) {
+        let count = 0;
+        for (let j = 0; j < cardSuits.length; j++) {
           if (cardSuits[i] === cardSuits[j]) {
             count++;
           }
         }
-        if (count > maxCount){
+          console.log(count);
+          if (count > maxCount){
           maxCount = count;
         }
       }
-      if (maxCount >= 4) {
-        return true;
-      }
-      return false;
-  },
+      console.log(maxCount);
+      return (maxCount>=4);
+  }
 
-  isOutsideStraightDraw: function isOutsideStraightDraw(cardVals) {
-    var hasAce = false;
+  function isOutsideStraightDraw(cardVals) {
+      console.log("outside straight tirggered");
+
+      var hasAce = false;
     var cardVals2 = [];
     cardVals.sort(function(a, b){return a - b});
     if (cardVals.includes(14)) {
@@ -40,9 +42,11 @@ const Algorithm = {
       return true;
     }
     return false;
-  },
+  }
 
-  isInsideStraightDraw: function isInsideStraightDraw(cardVals) {
+  function isInsideStraightDraw(cardVals) {
+      console.log("inside straight tirggered");
+
       var hasAce = false;
       var cardVals2 = [];
     cardVals.sort(function(a, b){return a - b});
@@ -62,9 +66,10 @@ const Algorithm = {
       return true;
     }
     return false;
-  },
+  }
 
-  countOuts: function countOuts(cards) {
+  const countOuts = function(cards) {
+    console.log("countOUts called");
     var cardVals = [];
     var cardSuits = [];
     for (var i = 0; i < cards.length; i++) {
@@ -84,20 +89,30 @@ const Algorithm = {
       }
     }
 
-    var flushDraw = this.isFlushDraw(cardSuits);
-    if (this.isOutsideStraightDraw(cardVals) && flushDraw) {
+    console.log("before helper functions");
+    console.log(cardSuits);
+    console.log(cardVals);
+    var flushDraw = isFlushDraw(cardSuits);
+    var insideStraightDraw = isInsideStraightDraw(cardVals);
+    var outsideStraightDraw = isOutsideStraightDraw(cardVals);
+    console.log("other helper functions called");
+    if (outsideStraightDraw && flushDraw) {
       return 15;
-    } else if (this.isInsideStraightDraw(cardVals) && flushDraw) {
+    } else if (insideStraightDraw && flushDraw) {
       return 12;
-    } else if (this.isOutsideStraightDraw) {
-      return 9;
-    } else if (this.isInsideStraightDraw) {
+    } else if (outsideStraightDraw) {
+      return 8;
+    } else if (insideStraightDraw) {
       return 4;
+    } else if (flushDraw){
+      return 9;
     } else {
       return 0;
     }
-  }
+  };
 
+const testCount = function(nothig) {
+    return "1";
 };
 
-export default Algorithm
+export default countOuts;
