@@ -20,6 +20,7 @@
   }
 
   function isOutsideStraightDraw(cardVals) {
+    //TODO check for pairs
       console.log("outside straight tirggered");
 
       var hasAce = false;
@@ -42,6 +43,7 @@
   }
 
   function isInsideStraightDraw(cardVals) {
+    //TODO check for pairs
       console.log("inside straight tirggered");
 
       var hasAce = false;
