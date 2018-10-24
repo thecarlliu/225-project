@@ -72,10 +72,10 @@ class GameWindow extends Component {
 
     tick = () => {
         if (this.state.time <= 0) {
-            alert("You ran out of time! Try again");
-            this.setState({time: 15});
-            this.resetScore();
-            this.getHand();
+            let outOfTime = window.confirm("You ran out of time! Try again");
+            if(outOfTime === true){
+                this.resetCards();
+            }
         }
         let currentTime = this.state.time;
         this.setState({time: currentTime - 1});
@@ -89,20 +89,22 @@ class GameWindow extends Component {
     updateScores() {
         if(this.state.isPressed) {
             if (this.state.outsValue === this.state.inputValue) {
-                alert("Correct!");
+                let correctClick = window.confirm("Correct!");
+                if(correctClick === true){
+                    this.getHand();
+                    this.setState({time: 15});
+                }
                 this.setState({currentScore: this.state.currentScore + 10});
                 if (this.state.currentScore >= this.state.highScore) {
                     this.setState({highScore: this.state.highScore + 10});
                 }
-                this.getHand();
-                this.setState({time: 15});
 
             }
             else {
-                alert("Wrong! The correct answer is: " + this.state.outsValue);
-                this.resetScore();
-                this.getHand();
-                this.setState({time: 15});
+                let inCorrectClick = window.confirm("Wrong! The correct answer is: " + this.state.outsValue);
+                if(inCorrectClick === true){
+                    this.resetCards();
+                }
             }
         }
     }
@@ -122,6 +124,12 @@ class GameWindow extends Component {
         this.getHand();
         this.startTimer();
     };
+
+    resetCards(){
+        this.resetScore();
+        this.getHand();
+        this.setState({time: 15});
+    }
 
 
     render () {
