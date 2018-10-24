@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-
+import cardBack from "../../images/cardBack.png";
 
 const cardStyle = {
     display:"flex",
@@ -64,17 +64,33 @@ class Cards extends Component {
                     borderRadius: "100%"
                 }}>
                     {
-                        this.props.flop.map((card)=>(
-                            <div style={{display:"block",
-                                margin:"auto",
-                                borderStyle:"solid",
-                                borderColor:"blue",
-                                backgroundColor:"white",
-                                height:120,
-                                width:80}}>
-                                <p style={{margin:"auto", textAlign:"center"}}>{card}</p>
-                            </div>
-                        ))
+                        this.props.flop.map((card)=>{
+                            if (card === "") {
+                                return (
+                                    <div style={{display:"block",
+                                        margin:"auto",
+                                        backgroundColor:"white",
+                                        height:120,
+                                        width:80}}>
+                                        <img src={cardBack} width={80} height={120}/>
+                                    </div>
+                                )
+                            }
+                            else {
+                                return (
+                                    <div style={{display:"block",
+                                        margin:"auto",
+                                        borderStyle:"solid",
+                                        borderColor:"blue",
+                                        backgroundColor:"white",
+                                        height:120,
+                                        width:80}}>
+
+                                        <p style={{margin:"auto", textAlign:"center"}}>{card}</p>
+                                    </div>
+                                )
+                            }
+                        })
                     }
                 </div>
             </div>

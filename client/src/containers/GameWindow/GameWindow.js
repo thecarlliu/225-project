@@ -22,8 +22,8 @@ class GameWindow extends Component {
     constructor(props){
         super(props);
         this.state={
-            userHand: [],
-            flop: [],
+            userHand: ["",""],
+            flop: ["","",""],
             inputValue: "",
             currentScore: 0,
             highScore: 0,

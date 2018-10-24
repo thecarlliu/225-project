@@ -20,16 +20,16 @@
   }
 
   function isOutsideStraightDraw(cardVals) {
+    //TODO check for pairs
       console.log("outside straight tirggered");
 
       var hasAce = false;
-    var cardVals2 = [];
+    var cardVals2 = cardVals.slice();
     cardVals.sort(function(a, b){return a - b});
     if (cardVals.includes(14)) {
       hasAce = true;
-      cardVals2 = cardVals;
       cardVals2.unshift(1);
-      cardVals2.splice(cardVals2.length - 1)
+      cardVals2.splice(cardVals2.length - 1);
     }
     var val1 = cardVals[4] - cardVals[0];
     var val2 = cardVals[3] - cardVals[0];
@@ -37,24 +37,22 @@
     var val4 = cardVals2[4] - cardVals2[0];
     var val5 = cardVals2[3] - cardVals2[0];
     var val6 = cardVals2[4] - cardVals2[1];
-    if (((val1 === 3 && !hasAce) || (val2 === 3 && !hasAce) || val3 === 3 || (val4 === 3 && !hasAce) || (val5 === 3 && !hasAce) || val6 === 3) || ((val1 === 4 && val2 === 4) || (val1 === 4 && val3 === 4) || (val2 === 4 && val3 === 4)) ||
-  ((val4 === 4 && val5 === 4) || (val4 === 4 && val6 === 4) || (val5 === 4 && val6 === 4))) {
-      return true;
-    }
-    return false;
+    var outsideStraight = ((val1 === 3 && (!hasAce)) || val2 === 3 || (val3 === 3 && !hasAce) || (val4 === 3 && !hasAce) || (val5 === 3 && !hasAce) || val6 === 3);
+    var doubleInside = ((val1 === 4 && val2 === 4) || (val1 === 4 && val3 === 4) || (val2 === 4 && val3 === 4)) || ((val4 === 4 && val5 === 4) || (val4 === 4 && val6 === 4) || (val5 === 4 && val6 === 4));
+    return (outsideStraight || doubleInside);
   }
 
   function isInsideStraightDraw(cardVals) {
+    //TODO check for pairs
       console.log("inside straight tirggered");
 
       var hasAce = false;
-      var cardVals2 = [];
+      var cardVals2 = cardVals.slice();
     cardVals.sort(function(a, b){return a - b});
     if (cardVals.includes(14)) {
         hasAce = true;
-        cardVals2 = cardVals;
       cardVals2.unshift(1);
-      cardVals2.splice(cardVals2.length - 1)
+      cardVals2.splice(cardVals2.length - 1);
     }
     var val1 = cardVals[4] - cardVals[0];
     var val2 = cardVals[3] - cardVals[0];
@@ -62,7 +60,7 @@
     var val4 = cardVals2[4] - cardVals2[0];
     var val5 = cardVals2[3] - cardVals2[0];
     var val6 = cardVals2[4] - cardVals2[1];
-    if (val1 === 4 || val2 === 4 || val3 === 4 || val4 === 4 || val5 === 4 || val6 === 4 || (val1 === 3 && hasAce) || (val2 === 3 && hasAce) || (val4 === 3 && !hasAce) || (val5 === 3 && !hasAce)) {
+    if (val1 === 4 || val2 === 4 || val3 === 4 || val4 === 4 || val5 === 4 || val6 === 4 || (val1 === 3 && hasAce) || (val3 === 3 && hasAce)|| (val4 === 3 && !hasAce) || (val5 === 3 && !hasAce)) {
       return true;
     }
     return false;
