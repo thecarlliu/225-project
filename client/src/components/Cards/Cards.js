@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import cardBack from "../../images/cardBack.png";
+import table from "../../images/table.png";
 
 const cardStyle = {
     display:"flex",
@@ -34,7 +35,7 @@ class Cards extends Component {
                     left: 0,
                     height: 120,
                     width: 180,
-                    top: 550
+                    top: 700
                 }}>
                     {
                         this.props.userHand.map((card)=>(
@@ -52,46 +53,58 @@ class Cards extends Component {
                 </div>
                 <div style={{display:"flex",
                     margin:"auto",
-                    borderStyle:"solid",
-                    borderColor:"black",
-                    backgroundColor:"green",
-                    height:275,
-                    width:400,
+                    height:400,
+                    width:600,
                     position:"fixed",
                     top: 250,
                     right: 0,
                     left: 0,
                     borderRadius: "100%"
                 }}>
-                    {
-                        this.props.flop.map((card)=>{
-                            if (card === "") {
-                                return (
-                                    <div style={{display:"block",
-                                        margin:"auto",
-                                        backgroundColor:"white",
-                                        height:120,
-                                        width:80}}>
-                                        <img src={cardBack} width={80} height={120}/>
-                                    </div>
-                                )
-                            }
-                            else {
-                                return (
-                                    <div style={{display:"block",
-                                        margin:"auto",
-                                        borderStyle:"solid",
-                                        borderColor:"blue",
-                                        backgroundColor:"white",
-                                        height:120,
-                                        width:80}}>
-
-                                        <p style={{margin:"auto", textAlign:"center"}}>{card}</p>
-                                    </div>
-                                )
-                            }
-                        })
-                    }
+                    <img src={table} width={600} height={400}/>
+                    <div style={{display:"flex",
+                        margin:"auto",
+                        height:400,
+                        width:600,
+                        position:"fixed",
+                        top: 375,
+                        right: 0,
+                        left: 300,
+                        borderRadius: "100%"
+                    }}>
+                        {
+                            this.props.flop.map((card)=>{
+                                if (card === "") {
+                                    return (
+                                        <div style={{
+                                            display:"block",
+                                            margin:"10px",
+                                            backgroundColor:"white",
+                                            height:120,
+                                            width:80
+                                        }}>
+                                            <img src={cardBack} width={80} height={120}/>
+                                        </div>
+                                    )
+                                }
+                                else {
+                                    return (
+                                        <div style={{
+                                            display:"block",
+                                            margin:"10px",
+                                            borderStyle:"solid",
+                                            borderColor:"blue",
+                                            backgroundColor:"white",
+                                            height:120,
+                                            width:80
+                                        }}>
+                                            <p style={{margin:"auto", textAlign:"center"}}>{card}</p>
+                                        </div>
+                                    )
+                                }
+                            })
+                        }
+                    </div>
                 </div>
             </div>
         )
