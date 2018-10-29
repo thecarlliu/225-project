@@ -35,7 +35,7 @@ class Cards extends Component {
                     left: 0,
                     height: 120,
                     width: 180,
-                    top: 700
+                    top: 550
                 }}>
                     {
                         this.props.userHand.map((card)=>(
@@ -56,7 +56,7 @@ class Cards extends Component {
                     height:400,
                     width:600,
                     position:"fixed",
-                    top: 250,
+                    top: 100,
                     right: 0,
                     left: 0,
                     borderRadius: "100%"
@@ -67,7 +67,7 @@ class Cards extends Component {
                         height:400,
                         width:600,
                         position:"fixed",
-                        top: 375,
+                        top: 225,
                         right: 0,
                         left: 300,
                         borderRadius: "100%"

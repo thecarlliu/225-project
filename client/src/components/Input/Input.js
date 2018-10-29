@@ -31,7 +31,7 @@ class Input extends Component {
                 margin:"auto",
                 left:0,
                 right:0,
-                top:"650px"
+                top:"510px"
 
             }}>
                 <form onSubmit={(e)=>{this.handleSubmit(e)}}>
