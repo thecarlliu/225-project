@@ -105,8 +105,6 @@ class Cards extends Component {
                                         display: "block",
                                         margin: "auto",
                                         backgroundColor:"white",
-                                        borderStyle:"solid",
-                                        borderColor:"blue",
                                         height: 90,
                                         width: 60
                                     }}>
