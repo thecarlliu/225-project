@@ -4,7 +4,7 @@ const Algorithm = {
       var maxCount = 0;
       for (var i = 0; i < cardSuits.length; i++) {
         var count = 0;
-        for (var j = 0; j < cardSuits.length; i++) {
+        for (var j = 0; j < cardSuits.length; j++) {
           if (cardSuits[i] === cardSuits[j]) {
             count++;
           }
@@ -19,6 +19,18 @@ const Algorithm = {
       return false;
   },
 
+  hasPair: function hasPair(cards) {
+    var counts = [];
+    for (var i = 0; i <= cards.length; i++) {
+        if (counts[cards[i]] === undefined) {
+            counts[cards[i]] = 1;
+        } else {
+            return true;
+        }
+    }
+    return false;
+  },
+
   isOutsideStraightDraw: function isOutsideStraightDraw(cardVals) {
     var hasAce = false;
     var cardVals2 = [];
@@ -27,7 +39,7 @@ const Algorithm = {
       hasAce = true;
       cardVals2 = cardVals;
       cardVals2.unshift(1);
-      cardVals2.splice(cardVals2.length - 1)
+      cardVals2.splice(cardVals2.length - 1);
     }
     var val1 = cardVals[4] - cardVals[0];
     var val2 = cardVals[3] - cardVals[0];
@@ -50,7 +62,7 @@ const Algorithm = {
         hasAce = true;
         cardVals2 = cardVals;
       cardVals2.unshift(1);
-      cardVals2.splice(cardVals2.length - 1)
+      cardVals2.splice(cardVals2.length - 1);
     }
     var val1 = cardVals[4] - cardVals[0];
     var val2 = cardVals[3] - cardVals[0];
