@@ -38,19 +38,45 @@ class Cards extends Component {
                     top: 550
                 }}>
                     {
-                        this.props.userHand.map((card)=>(
-                            <div style={{display:"block",
-                                margin:"auto",
-                                borderStyle:"solid",
-                                borderColor:"blue",
-                                backgroundColor:"white",
-                                height:90,
-                                width:60}}>
-                                <p style={{margin:"auto", textAlign:"center"}}>{card}</p>
-                            </div>
-                        ))
+                        this.props.userHand.map((card) => {
+                            if (card === "") {
+                                return (
+                                    <div style={{
+                                        display: "block",
+                                        margin: "auto",
+                                        borderStyle: "solid",
+                                        borderColor: "blue",
+                                        backgroundColor: "white",
+                                        height: 90,
+                                        width: 60
+                                    }}>
+                                        <img src={cardBack} width={60} height={90}/>
+                                    </div>
+                                )
+                            }
+                            else {
+                                return (
+                                    <div style={{
+                                        display: "block",
+                                        margin: "auto",
+                                        borderStyle: "solid",
+                                        borderColor: "blue",
+                                        backgroundColor: "white",
+                                        height: 90,
+                                        width: 60
+                                    }}>
+                                        <p style={{margin: "auto", textAlign: "center"}}>{card}</p>
+                                    </div>
+                                )
+                            }
+                        })
                     }
-                </div>
+                    </div>
+
+
+
+
+
                 <div style={{display:"flex",
                     margin:"auto",
                     height:400,
@@ -108,6 +134,7 @@ class Cards extends Component {
                 </div>
             </div>
         )
+
     }
 
 
