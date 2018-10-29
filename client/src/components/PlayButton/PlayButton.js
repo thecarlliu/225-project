@@ -28,7 +28,7 @@ class PlayButton extends Component {
                 margin:'auto',
                 right: "0",
                 left: "0",
-                top: 375,
+                top: 340,
                 display:this.state.toggle
             }}>PLAY</div>
         )

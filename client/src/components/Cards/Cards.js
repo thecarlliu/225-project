@@ -24,54 +24,7 @@ class Cards extends Component {
     render (){
         return (
             <div>
-                <div style={{
-                    display:"flex",
-                    margin:"auto",
-                    borderStyle:"dashed",
-                    borderColor:"blue",
-                    backgroundColor:"grey",
-                    position:"fixed",
-                    right: 0,
-                    left: 0,
-                    height: 120,
-                    width: 180,
-                    top: 550
-                }}>
-                    {
-                        this.props.userHand.map((card) => {
-                            if (card === "") {
-                                return (
-                                    <div style={{
-                                        display: "block",
-                                        margin: "auto",
-                                        borderStyle: "solid",
-                                        borderColor: "blue",
-                                        backgroundColor: "white",
-                                        height: 90,
-                                        width: 60
-                                    }}>
-                                        <img src={cardBack} width={60} height={90}/>
-                                    </div>
-                                )
-                            }
-                            else {
-                                return (
-                                    <div style={{
-                                        display: "block",
-                                        margin: "auto",
-                                        borderStyle: "solid",
-                                        borderColor: "blue",
-                                        backgroundColor: "white",
-                                        height: 90,
-                                        width: 60
-                                    }}>
-                                        <p style={{margin: "auto", textAlign: "center"}}>{card}</p>
-                                    </div>
-                                )
-                            }
-                        })
-                    }
-                    </div>
+
 
 
 
@@ -93,7 +46,7 @@ class Cards extends Component {
                         height:400,
                         width:600,
                         position:"fixed",
-                        top: 225,
+                        top: 200,
                         right: 0,
                         left: 300,
                         borderRadius: "100%"
@@ -131,6 +84,53 @@ class Cards extends Component {
                             })
                         }
                     </div>
+                </div>
+
+
+                <div style={{
+                    display:"flex",
+                    margin:"auto",
+                    position:"fixed",
+                    right: 0,
+                    left: 0,
+                    height: 120,
+                    width: 180,
+                    top: 360
+                }}>
+                    {
+                        this.props.userHand.map((card) => {
+                            if (card === "") {
+                                return (
+                                    <div style={{
+                                        display: "block",
+                                        margin: "auto",
+                                        backgroundColor:"white",
+                                        borderStyle:"solid",
+                                        borderColor:"blue",
+                                        height: 90,
+                                        width: 60
+                                    }}>
+                                        <img src={cardBack} width={60} height={90}/>
+                                    </div>
+                                )
+                            }
+                            else {
+                                return (
+                                    <div style={{
+                                        display: "block",
+                                        margin: "auto",
+                                        backgroundColor:"white",
+                                        borderStyle:"solid",
+                                        borderColor:"blue",
+                                        height: 90,
+                                        width: 60
+                                    }}>
+                                        <p style={{margin: "auto", textAlign: "center"}}>{card}</p>
+                                    </div>
+                                )
+                            }
+                        })
+                    }
                 </div>
             </div>
         )
