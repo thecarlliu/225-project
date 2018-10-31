@@ -5,8 +5,8 @@ class NavBar extends Component {
     render() {
         return (
             <div>
-                <NavButton label={"About"} route={"/about"}/>
-                <NavButton label={"Rules"} route={"/rules"}/>
+                <NavButton left={"5%"} label={"About"} route={"/about"}/>
+                <NavButton left={"95%"} label={"Rules"} route={"/rules"}/>
             </div>
         )
     }

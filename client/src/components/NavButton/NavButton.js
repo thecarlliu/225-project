@@ -5,7 +5,8 @@ class NavButton extends Component {
         super(props);
         this.state = {
             route: this.props.route,
-            label: this.props.label
+            label: this.props.label,
+            left: this.props.left
         }
     }
 
@@ -16,7 +17,13 @@ class NavButton extends Component {
 
     render() {
         return(
-            <div onClick={(e)=>{this.changePage(e, this.state.route)}}>
+            <div style={{
+                width:"50px",
+                display:"inline-block",
+                position:"absolute",
+                left: this.state.left,
+                top: "15px"
+            }} onClick={(e)=>{this.changePage(e, this.state.route)}}>
                 {this.state.label}
             </div>
         )
