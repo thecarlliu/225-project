@@ -8,6 +8,7 @@ import NavBar from "../../components/NavBar";
 import PlayButton from "../../components/PlayButton";
 import countOuts from "../../algorithm/algorithm.js";
 import testCount from "../../algorithm/algorithm.js";
+import Lives from "../../components/Lives";
 
 //The GameWindow keeps track of the state of the game.
 
@@ -29,6 +30,7 @@ class GameWindow extends Component {
             highScore: 0,
             outsValue: "",
             time: 15,
+            lives: 3,
             isPressed:false
         };
     }
@@ -75,6 +77,7 @@ class GameWindow extends Component {
             let outOfTime = window.confirm("You ran out of time! Try again");
             if(outOfTime === true){
                 this.resetCards();
+                this.decrementLives();
             }
         }
         let currentTime = this.state.time;
@@ -84,6 +87,21 @@ class GameWindow extends Component {
     //Resets the score to 0
     resetScore(){
         this.setState({currentScore: 0});
+    }
+
+    //Resets the lives to 3
+    resetLives(){
+        this.setState({lives: 3});
+    }
+
+    // Decrements lives by 1
+    decrementLives(){
+        this.state.lives --;
+    }
+
+    // Checks if the user still has lives
+    stillLives(){
+        return(this.state.lives > 0);
     }
 
     updateScores() {
@@ -101,9 +119,21 @@ class GameWindow extends Component {
 
             }
             else {
+                this.decrementLives();
                 let inCorrectClick = window.confirm("Wrong! The correct answer is: " + this.state.outsValue);
-                if(inCorrectClick === true){
-                    this.resetCards();
+                if(inCorrectClick === true && this.stillLives()){
+                    this.getHand();
+                    this.setState({time: 15});
+                }
+                else if (inCorrectClick === true && !this.stillLives()){
+                    let lostClick = window.confirm("You lost! Do you want to try again?");
+                    if(lostClick === true){
+                        this.resetCards();
+                        this.resetLives();
+                    }
+                    else {
+                        this.resetScore();
+                    }
                 }
             }
         }
@@ -143,6 +173,7 @@ class GameWindow extends Component {
                 <Score currentScore={this.state.currentScore} />
                 <Input outsValue={this.state.outsValue} value={this.state.inputValue} changeHandler={this.handleInputChange} submitHandler={(e)=>{this.handleInputSubmit(e)}}/>
                 <HighScore highScore={this.state.highScore} />
+                <Lives lives = {this.state.lives}/>
             </div>
         )
     }
