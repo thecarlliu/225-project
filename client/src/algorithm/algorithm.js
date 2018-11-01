@@ -21,6 +21,8 @@ const Algorithm = {
     return false;
   },
 
+//TODO: streamline straight dectection by dealing with pairs/aces first instead
+//      of within functions
   isOutsideStraightDraw: function isOutsideStraightDraw(cardVals) {
     var hasAce = false;
     var cardVals2 = [];
