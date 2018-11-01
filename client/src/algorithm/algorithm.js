@@ -1,22 +1,12 @@
 const Algorithm = {
 
   isFlushDraw: function isFlushDraw(cardSuits) {
-      var maxCount = 0;
-      for (var i = 0; i < cardSuits.length; i++) {
-        var count = 0;
-        for (var j = 0; j < cardSuits.length; j++) {
-          if (cardSuits[i] === cardSuits[j]) {
-            count++;
-          }
-        }
-        if (count > maxCount){
-          maxCount = count;
-        }
-      }
-      if (maxCount >= 4) {
-        return true;
-      }
-      return false;
+    cardSuits.sort();
+    var maxCount = 1;
+    for (var i = 0; i < cardSuits.length; i++) {
+      cardSuits[i] === cardSuits[i - 1] ? maxCount++ : maxCount = 1;
+    }
+    return (maxCount >= 4 ? true : false);
   },
 
   hasPair: function hasPair(cards) {
