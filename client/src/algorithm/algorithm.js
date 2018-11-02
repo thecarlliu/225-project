@@ -47,10 +47,6 @@ const Algorithm = {
 
     if (cardVals.length < 4) {
       return false;
-    }
-
-    if (cardVals.length < 4) {
-      return false;
     } else if (cardVals.length === 4) {
       return ((!hasAce && cardVals[3] - cardVals[0] === 3) || (!hasAce && cardVals2[3] - cardVals2[0] === 4));
     }
