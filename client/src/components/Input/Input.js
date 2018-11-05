@@ -35,9 +35,9 @@ class Input extends Component {
 
             }}>
                 <form onSubmit={(e)=>{this.handleSubmit(e)}}>
-                    <label>
+                    <label style={{fontSize:"x-large"}}>
                         Outs:
-                        <input type="text" value={this.state.value} onChange={(e)=>{this.handleChange(e)}} />
+                        <input type="text" style={{height:"15px"}} value={this.state.value} onChange={(e)=>{this.handleChange(e)}} />
                     </label>
                     <input type="submit" value="Submit" />
                 </form>

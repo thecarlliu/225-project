@@ -11,12 +11,14 @@ class Timer extends Component {
             <div style = {{height: 20,
                 width: 160,
                 fontFamily: "Georgia",
-                position: "absolute",
+                fontSize:"xx-large",
+                position: "fixed",
+                textAlign:"center",
                 top: 50,
                 left: 0,
                 right: 0,
                 margin: "auto"}}>
-                Time Left: {this.props.time} Seconds
+                <b>00:{this.props.time}</b>
             </div>
         )
     }
