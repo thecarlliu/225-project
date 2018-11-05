@@ -7,8 +7,8 @@ class Lives extends Component{
     }
     render(){
         return(
-            <div style = {{fontFamily: "Georgia", position: "fixed", top: 200, right: 150, margin: "auto"}}>
-                Lives: {this.props.lives}
+            <div style = {{fontFamily: "Georgia", fontSize:"large", position: "absolute", top: 75, left: 150}}>
+                <b>Lives: {this.props.lives}</b>
             </div>
         )
     }
