@@ -1,11 +1,13 @@
 import React, { Component } from "react";
-import GameWindow from "../../containers/GameWindow";
+import NavBar from "../../components/NavBar";
+import Banner from "../../components/Banner";
 
 class Home extends Component {
     render () {
         return (
             <div>
-                <GameWindow />
+                <NavBar />
+                <Banner />
             </div>
         )
     }
