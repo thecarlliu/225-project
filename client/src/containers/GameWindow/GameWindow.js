@@ -7,17 +7,25 @@ import HighScore from "../../components/HighScore";
 import NavBar from "../../components/NavBar";
 import PlayButton from "../../components/PlayButton";
 import countOuts from "../../algorithm/algorithm.js";
-import testCount from "../../algorithm/algorithm.js";
+import firebase from "firebase";
 import Lives from "../../components/Lives";
 
-//The GameWindow keeps track of the state of the game.
-
+//Firebase Db stuff
+const config = {
+    apiKey: "AIzaSyD7UxJviUIXoSSfcmdUx-c13mEWbyEOXNY",
+    authDomain: "texas-goat-em.firebaseapp.com",
+    databaseURL: "https://texas-goat-em.firebaseio.com",
+    projectId: "texas-goat-em",
+    storageBucket: "texas-goat-em.appspot.com",
+    messagingSenderId: "1083809629945"
+};
 
 const deck = ["AH","2H","3H","4H","5H","6H","7H","8H","9H","10H","JH","QH","KH",
     "AS","2S","3S","4S","5S","6S","7S","8S","9S","10S","JS","QS","KS",
     "AD","2D","3D","4D","5D","6D","7D","8D","9D","10D","JD","QD","KD",
     "AC","2C","3C","4C","5C","6C","7C","8C","9C","10C","JC","QC","KC"];
 
+//The GameWindow keeps track of the state of the game.
 class GameWindow extends Component {
 
     constructor(props){
@@ -31,11 +39,15 @@ class GameWindow extends Component {
             outsValue: "",
             time: 15,
             lives: 3,
-            isPressed:false
+            isPressed:false,
+            highscores: []
         };
     }
 
     componentWillMount() {
+        const app = firebase.initializeApp(config);
+        const db = app.database();
+        this.setState({db: db});
     }
 
     getHand() {
@@ -61,11 +73,7 @@ class GameWindow extends Component {
         var hand = [];
         hand.push(this.state.userHand[0], this.state.userHand[1], this.state.flop[0], this.state.flop[1], this.state.flop[2]);
         console.log(hand);
-        // this.state.outsValue = "1";
         this.state.outsValue = countOuts(hand).toString();
-        // console.log(countOuts(hand));
-        // this.setState({outsValue: 1});
-        // this.state.outsValue = testCount(hand);
     }
 
     startTimer() {
@@ -127,16 +135,36 @@ class GameWindow extends Component {
                 }
                 else if (inCorrectClick === true && !this.stillLives()){
                     let lostClick = window.confirm("You lost! Do you want to try again?");
+                    this.saveHighscore(this.state.currentScore);
                     if(lostClick === true){
                         this.resetCards();
                         this.resetLives();
                     }
                     else {
+                        //show user a list of highscores and button to play again
                         this.resetScore();
                     }
                 }
             }
         }
+    }
+
+    saveHighscore  = (score) => {
+        const newScore = {
+            score: score,
+            player: "Billy"
+        };
+        this.state.db.ref("highscores").push(newScore);
+    };
+
+    showHighscores() {
+        const highscores = [];
+        this.state.db.ref("highscores").once("value").then(function(snapshot) {
+            snapshot.forEach((score) => {
+                highscores.push(score);
+            })
+            //sort highscores, set highscores state, show highscore board
+        })
     }
 
     handleInputSubmit = (event) => {
