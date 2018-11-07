@@ -24,11 +24,20 @@ class Input extends Component {
 
     render() {
         return (
-            <div>
+            <div style={{
+                width:"250px",
+                display:"flex",
+                position:"absolute",
+                margin:"auto",
+                left:0,
+                right:0,
+                top:"510px"
+
+            }}>
                 <form onSubmit={(e)=>{this.handleSubmit(e)}}>
-                    <label>
+                    <label style={{fontSize:"x-large"}}>
                         Outs:
-                        <input type="text" value={this.state.value} onChange={(e)=>{this.handleChange(e)}} />
+                        <input type="text" style={{height:"15px"}} value={this.state.value} onChange={(e)=>{this.handleChange(e)}} />
                     </label>
                     <input type="submit" value="Submit" />
                 </form>

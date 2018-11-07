@@ -1,4 +1,3 @@
-const Algorithm = {
 
   isFlushDraw: function isFlushDraw(cardSuits) {
     cardSuits.sort();
@@ -87,11 +86,11 @@ const Algorithm = {
     var val4 = cardVals2[4] - cardVals2[0];
     var val5 = cardVals2[3] - cardVals2[0];
     var val6 = cardVals2[4] - cardVals2[1];
-
     return (val1 === 4 || val2 === 4 || val3 === 4 || val4 === 4 || val5 === 4 || val6 === 4 || (val2 === 3 && hasAce) || (val3 === 3 && hasAce) || (val4 === 3 && hasAce) || (val5 === 3 && hasAce));
   },
 
-  countOuts: function countOuts(cards) {
+  const countOuts = function(cards) {
+    console.log("countOUts called");
     var cardVals = [];
     var cardSuits = [];
     for (var i = 0; i < cards.length; i++) {
@@ -112,9 +111,13 @@ const Algorithm = {
       }
     }
 
-    var flushDraw = this.isFlushDraw(cardSuits);
-    var insideStraightDraw = this.isInsideStraightDraw(cardVals);
-    var outsideStraightDraw = this.isOutsideStraightDraw(cardVals);
+    console.log("before helper functions");
+    console.log(cardSuits);
+    console.log(cardVals);
+    var flushDraw = isFlushDraw(cardSuits);
+    var insideStraightDraw = isInsideStraightDraw(cardVals);
+    var outsideStraightDraw = isOutsideStraightDraw(cardVals);
+    console.log("other helper functions called");
     if (outsideStraightDraw && flushDraw) {
       return 15;
     } else if (insideStraightDraw && flushDraw) {
@@ -128,7 +131,10 @@ const Algorithm = {
     } else {
       return 0;
     }
+  };
 
+const testCount = function(nothig) {
+    return "1";
 };
 
-export default Algorithm
+export default countOuts;
