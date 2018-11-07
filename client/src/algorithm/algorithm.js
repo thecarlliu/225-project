@@ -26,7 +26,7 @@ const Algorithm = {
     var cardVals2 = [];
     if (cardVals.includes(14)) {
       hasAce = true;
-      cardVals2 = cardVals;
+      cardVals2 = cardVals.slice(0);
       cardVals2.unshift(1);
       cardVals2.splice(cardVals2.length - 1);
     }
@@ -58,7 +58,7 @@ const Algorithm = {
     var val5 = cardVals2[3] - cardVals2[0];
     var val6 = cardVals2[4] - cardVals2[1];
 
-    return (((val1 === 3 && !hasAce) || (val2 === 3 && !hasAce) || val3 === 3 || (val4 === 3 && !hasAce) || (val5 === 3 && !hasAce) || val6 === 3) || ((val1 === 4 && val2 === 4) || (val1 === 4 && val3 === 4) || (val2 === 4 && val3 === 4)) ||
+    return (((val1 === 3 && !hasAce) || (val2 === 3) || (val3 === 3 && !hasAce) || (val4 === 3 && !hasAce) || (val5 === 3 && !hasAce) || val6 === 3) || ((val1 === 4 && val2 === 4) || (val1 === 4 && val3 === 4) || (val2 === 4 && val3 === 4)) ||
   ((val4 === 4 && val5 === 4) || (val4 === 4 && val6 === 4) || (val5 === 4 && val6 === 4)));
   },
 
@@ -77,7 +77,8 @@ const Algorithm = {
     if (cardVals.length < 4) {
       return false;
     } else if (cardVals.length === 4) {
-      return (cardVals[3] - cardVals[0] === 4 || cardVals2[3] - cardVals2[0] === 4);
+      return (cardVals[3] - cardVals[0] === 4 || cardVals2[3] - cardVals2[0] === 4 ||
+              hasAce && cardVals[3] - cardVals[0] === 3 || hasAce && cardVals2[3] - cardVals2[0] === 3);
     }
 
     var val1 = cardVals[4] - cardVals[0];
@@ -87,16 +88,15 @@ const Algorithm = {
     var val5 = cardVals2[3] - cardVals2[0];
     var val6 = cardVals2[4] - cardVals2[1];
 
-    return (val1 === 4 || val2 === 4 || val3 === 4 || val4 === 4 || val5 === 4 || val6 === 4 || (val1 === 3 && hasAce) || (val2 === 3 && hasAce) || (val4 === 3 && hasAce) || (val5 === 3 && hasAce));
+    return (val1 === 4 || val2 === 4 || val3 === 4 || val4 === 4 || val5 === 4 || val6 === 4 || (val2 === 3 && hasAce) || (val3 === 3 && hasAce) || (val4 === 3 && hasAce) || (val5 === 3 && hasAce));
   },
 
   countOuts: function countOuts(cards) {
     var cardVals = [];
     var cardSuits = [];
     for (var i = 0; i < cards.length; i++) {
-      var cardRank = cards[i].slice(0,1);
-      var cardSuit = cards[i].slice(1);
-      cardSuits.push(cardSuit);
+      var cardRank = cards[i].slice(0,cards[i].length - 1);
+      cardSuits.push(cards[i].slice(cards[i].length - 1, cards[i].length));
       if (cardRank === "A") {
         cardVals.push(14);
       } else if (cardRank === "K") {
@@ -105,6 +105,8 @@ const Algorithm = {
         cardVals.push(12);
       } else if (cardRank === "J") {
         cardVals.push(11);
+      } else if (cardRank === 1){
+        cardVals.push(10);
       } else {
         cardVals.push(Number(cardRank));
       }
@@ -126,7 +128,6 @@ const Algorithm = {
     } else {
       return 0;
     }
-  }
 
 };
 
