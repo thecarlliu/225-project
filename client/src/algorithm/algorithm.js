@@ -90,7 +90,6 @@
   }
 
   const countOuts = function(cards) {
-    console.log("countOUts called");
     var cardVals = [];
     var cardSuits = [];
     for (var i = 0; i < cards.length; i++) {
@@ -111,13 +110,9 @@
       }
     }
 
-    console.log("before helper functions");
-    console.log(cardSuits);
-    console.log(cardVals);
     var flushDraw = isFlushDraw(cardSuits);
     var insideStraightDraw = isInsideStraightDraw(cardVals);
     var outsideStraightDraw = isOutsideStraightDraw(cardVals);
-    console.log("other helper functions called");
     if (outsideStraightDraw && flushDraw) {
       return 15;
     } else if (insideStraightDraw && flushDraw) {
