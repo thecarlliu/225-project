@@ -4,8 +4,11 @@
     var maxCount = 1;
     for (var i = 0; i < cardSuits.length; i++) {
       cardSuits[i] === cardSuits[i - 1] ? maxCount++ : maxCount = 1;
+      if (maxCount === 4) {
+        return true;
+      }
     }
-    return (maxCount >= 4 ? true : false);
+    return false;
   }
 
 //thanks internet for this one (mostly)
