@@ -24,7 +24,6 @@ function removeDups(cardVals) {
 }
 
 function aceHandler(cardVals) {
-  var hasAce = false;
   var cardVals2 = [];
   if (cardVals.includes(14)) {
     hasAce = true;
