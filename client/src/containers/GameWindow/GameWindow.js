@@ -40,7 +40,11 @@ class GameWindow extends Component {
             time: 15,
             lives: 3,
             isPressed:false,
-            highscores: []
+            highscores: [],
+            popUpShowing: "none",
+            popUpOptionOne: "",
+            popUpOptionTwo: "",
+            popUpText: ""
         };
     }
 
@@ -92,6 +96,10 @@ class GameWindow extends Component {
         this.setState({time: currentTime - 1});
     };
 
+    pauseTimer(){
+        this.setState({time: 0});
+    }
+
     //Resets the score to 0
     resetScore(){
         this.setState({currentScore: 0});
@@ -115,6 +123,10 @@ class GameWindow extends Component {
     updateScores() {
         if(this.state.isPressed) {
             if (this.state.outsValue === this.state.inputValue) {
+                this.setState({popUpShowing: "block"});
+                this.setState({popUpText: "Correct!"});
+                this.setState({popUpOptionOne: "Continue"});
+                this.setState({popUpOptionTwo: "Quit"});
                 let correctClick = window.confirm("Correct!");
                 if(correctClick === true){
                     this.getHand();
@@ -135,8 +147,10 @@ class GameWindow extends Component {
                 }
                 else if (inCorrectClick === true && !this.stillLives()){
                     let lostClick = window.confirm("You lost! Do you want to try again?");
+                    this.setState({popUpShowing: "block"});
                     this.saveHighscore(this.state.currentScore);
                     if(lostClick === true){
+                        this.setState({popUpShowing:"none"});
                         this.resetCards();
                         this.resetLives();
                     }
@@ -202,6 +216,28 @@ class GameWindow extends Component {
                 <Input outsValue={this.state.outsValue} value={this.state.inputValue} changeHandler={this.handleInputChange} submitHandler={(e)=>{this.handleInputSubmit(e)}}/>
                 <HighScore highScore={this.state.highScore} />
                 <Lives lives = {this.state.lives}/>
+                {/*//popup*/}
+                <div style = {{
+                    position: "absolute",
+                    backgroundColor: "white",
+                    top: 200,
+                    left: 525,
+                    height: 75,
+                    width: 200,
+                    zIndex: 3,
+                    display: this.state.popUpShowing
+                }}>
+                    <div style={{textAlign: "left"}}>
+                        {this.state.popUpOptionOne}
+                    </div>
+                    <div style={{textAlign: "right"}}>
+                        {this.state.popUpOptionTwo}
+                    </div>
+                    <div style = {{top: 10, width: 200, height: 75, textAlign: "center",
+                        backgroundColor: "white", margin:'auto'}}>
+                        {this.state.popUpText}
+                    </div>
+                </div>
             </div>
         )
     }
