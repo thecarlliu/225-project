@@ -33,7 +33,7 @@ class Rules extends Component {
                 <div>
                     <h2 style={header}>Types of Outs:</h2>
                     <p style={para}>
-                        <i><b>Flush Draw:</b><i/> A flush draw
+                        <i><b>Flush Draw:</b></i> A flush draw
                         is a hand with four cards of the same suit that may improve
                         to a flush. There are 13 cards of a given suit in a deck of cards,
                         but to have a draw you are using 4 of the same suit, therefore you have
@@ -53,7 +53,7 @@ class Rules extends Component {
 
                 <div>
                     <p style={para}>
-                        <i><b>Outside Straight Draw:</b><i/> An outside straight draw
+                        <i><b>Outside Straight Draw:</b></i> An outside straight draw
                          is a hand with four of the five needed cards in sequence
                          (and could be completed on either end) that may improve to a straight.
                          Because you have two different numbers that could complete a straight,
