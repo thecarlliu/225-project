@@ -16,8 +16,7 @@ class Rules extends Component {
                       correctly, you will also have less time to answer.</p>
                 </div>
             <div>
-                <h1>What is an Out?<h1>
-                <p></p>
+                <h1>What is an Out?</h1>
             </div>
 
             </div>
