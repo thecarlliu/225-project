@@ -43,7 +43,7 @@ class Rules extends Component {
 
                 <div>
                     <p style={para}>
-                        <i><b>Inside Straight Draw:</b><i/> An inside straight draw inspect
+                        <i><b>Inside Straight Draw:</b></i> An inside straight draw inspect
                          a hand with four of the five cards needed for a straight,
                          but missing one in the middle. You are missing one possible card to give
                          you a straight, and this card appears in the deck four times, (one per suit)
