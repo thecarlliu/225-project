@@ -118,7 +118,7 @@ class GameWindow extends Component {
      * Resets the hand when popup option one is clicked
      * @param e
      */
-    handleOptionOneClick = (e) => {
+    handleOptionOne = (e) => {
         e.preventDefault();
         this.setState({popUpShowing: "none"});
         this.getHand();
@@ -128,7 +128,7 @@ class GameWindow extends Component {
      * Navigates back to the home page when popup option two is clicked
      * @param e
      */
-    handleOptionTwoClick = (e) => {
+    handleOptionTwo = (e) => {
         e.preventDefault();
         this.setState({popUpShowing: "none"});
         this.changePage(e, "/home");
@@ -147,9 +147,11 @@ class GameWindow extends Component {
                 <div style = {{
                     position: "absolute",
                     backgroundColor: "white",
+                    alignItems: "center",
                     // borderColor: "black",
-                    // borderWidth: 10,
-                    // outlineColor: "black",
+                    // borderWidth: 50,
+                    outline: "50px",
+                    outlineColor: "black",
                     top: 200,
                     left: 525,
                     height: 100,
@@ -157,15 +159,17 @@ class GameWindow extends Component {
                     zIndex: 3,
                     display: this.state.popUpShowing
                 }}>
-                    <div onClick = {(e) => {this.handleOptionOneClick(e)}} style={{textAlign: "left"}}>
-                        <button type="button">{this.state.popUpOptionOne}</button>
-                    </div>
-                    <div onClick = {(e) => {this.handleOptionTwoClick(e)}} style={{textAlign: "right"}}>
-                        <button type="button">{this.state.popUpOptionTwo}</button>
-                    </div>
-                    <div style = {{width: 200, height: 75, textAlign: "center",
-                        backgroundColor: "white", margin:'auto'}}>
+                    <div style = {{height: 75, textAlign: "center", paddingTop: "5px",
+                        backgroundColor: "white", margin:"auto"}}>
                         {this.state.popUpText}
+                    </div>
+                    <div style={{position: "relative"}}>
+                        <button type="button" style = {{position: "absolute"}}
+                                onClick={(e) => {this.handleOptionOne(e)}}>{this.state.popUpOptionOne}
+                        </button>
+                        <button type="button" style = {{position: "absolute", right: "0px"}}
+                                onClick={(e) => {this.handleOptionTwo(e)}}>{this.state.popUpOptionTwo}
+                        </button>
                     </div>
                 </div>
             </div>
