@@ -22,6 +22,7 @@ class Rules extends Component {
 
                 <div>
                     <h2 style={header}>What is an Out?</h2>
+                    <br>
                     <p style={para}>
                         In a poker game with more than one betting round,
                         an out is any unseen card that, if drawn, will improve
@@ -29,6 +30,8 @@ class Rules extends Component {
                         number of outs a player has is an important part of poker strategy.
                     </p>
                 </div>
+
+                <br><br>
 
                 <div>
                     <h2 style={header}>Types of Outs:</h2>
@@ -41,6 +44,8 @@ class Rules extends Component {
                     </p>
                 </div>
 
+                <br><br>
+
                 <div>
                     <p style={para}>
                         <i><b>Inside Straight Draw:</b></i> An inside straight draw inspect
@@ -51,6 +56,8 @@ class Rules extends Component {
                     </p>
                 </div>
 
+                <br><br>
+                
                 <div>
                     <p style={para}>
                         <i><b>Outside Straight Draw:</b></i> An outside straight draw
