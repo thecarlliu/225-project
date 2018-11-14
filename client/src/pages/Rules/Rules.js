@@ -42,6 +42,14 @@ class Rules extends Component {
                         but to have a draw you are using 4 of the same suit, therefore you have
                         9 outs.
                     </p>
+
+                    <div>
+                        <img src={"images/AH.png"} width={80} height={120} padding={10}/>
+                        <img src={"images/10H.png"} width={80} height={120} padding={10}/>
+                        <img src={"images/3C.png"} width={80} height={120} padding={10}/>
+                        <img src={"images/5H.png"} width={80} height={120} padding={10}/>
+                        <img src={"images/8H.png"} width={80} height={120} padding={10}/>
+                    </div>
                 </div>
 
                 <br><br>
@@ -54,10 +62,18 @@ class Rules extends Component {
                          you a straight, and this card appears in the deck four times, (one per suit)
                          so you have four outs
                     </p>
+
+                    <div>
+                        <img src={"images/3H.png"} width={80} height={120} padding={10}/>
+                        <img src={"images/4S.png"} width={80} height={120} padding={10}/>
+                        <img src={"images/5C.png"} width={80} height={120} padding={10}/>
+                        <img src={"images/7C.png"} width={80} height={120} padding={10}/>
+                        <img src={"images/JD.png"} width={80} height={120} padding={10}/>
+                    </div>
                 </div>
 
                 <br><br>
-                
+
                 <div>
                     <p style={para}>
                         <i><b>Outside Straight Draw:</b></i> An outside straight draw
@@ -67,6 +83,14 @@ class Rules extends Component {
                          and because there are four of each number in a deck, this gives you
                          eight outs.
                     </p>
+
+                    <div>
+                        <img src={"images/5H.png"} width={80} height={120} padding={10}/>
+                        <img src={"images/6C.png"} width={80} height={120} padding={10}/>
+                        <img src={"images/7C.png"} width={80} height={120} padding={10}/>
+                        <img src={"images/8H.png"} width={80} height={120} padding={10}/>
+                        <img src={"images/2D.png"} width={80} height={120} padding={10}/>
+                    </div>
                 </div>
             </div>
         )
