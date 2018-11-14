@@ -21,7 +21,7 @@ class Rules extends Component {
                 </div>
 
                 <div>
-                    <h2 style={header}>What is an Out?</h1>
+                    <h2 style={header}>What is an Out?</h2>
                     <p style={para}>
                         In a poker game with more than one betting round,
                         an out is any unseen card that, if drawn, will improve
@@ -58,7 +58,7 @@ class Rules extends Component {
                          (and could be completed on either end) that may improve to a straight.
                          Because you have two different numbers that could complete a straight,
                          and because there are four of each number in a deck, this gives you
-                         eight outs. 
+                         eight outs.
                     </p>
                 </div>
             </div>
