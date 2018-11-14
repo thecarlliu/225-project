@@ -31,7 +31,7 @@ class Rules extends Component {
                 </div>
 
                 <div>
-                    <h2 style={header}>Types of Outs:<h2>
+                    <h2 style={header}>Types of Outs:</h2>
                     <p style={para}>
                         <i><b>Flush Draw:</b><i/> A flush draw
                         is a hand with four cards of the same suit that may improve
