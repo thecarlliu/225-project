@@ -3,10 +3,6 @@ import React, { Component } from "react";
 class Popup extends Component {
     constructor(props){
         super(props);
-        // this.state = {
-        //     isOpen: false,
-        //     text: ""
-        // }
     };
 
     // style from https://www.sitepoint.com/community/t/creating-an-overlaying-floating-div/2827/2
@@ -18,8 +14,15 @@ class Popup extends Component {
                 left: 5,
                 height: 500,
                 width: 500,
-                zindex: 99
+                zIndex: 99
             }}>
+                you lost! try again?
+                <div style={{width: 100, height:80, backgroundColor: "red"}}>
+                    No
+                </div>
+                <div onClick={} style={{width: 100, height:80, backgroundColor: "red"}}>
+                    try again
+                </div>
             </div>
         )
     }
