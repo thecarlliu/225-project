@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import NavButton from "../../components/NavButton/NavButton";
 
 const header = {margin: "auto", textAlign:"center"};
-const para = {margin: "auto", textAlign:"left", width:"75%"}
+const para = {margin: "auto", textAlign:"left", width:"75%", lineHeight:"1.5"}
 
 
 class Rules extends Component {
@@ -31,7 +31,7 @@ class Rules extends Component {
                     </p>
                 </div>
 
-                <br><br>
+                <br></br>
 
                 <div>
                     <h2 style={header}>Types of Outs:</h2>
@@ -52,7 +52,7 @@ class Rules extends Component {
                     </div>
                 </div>
 
-                <br><br>
+                <br></br>
 
                 <div>
                     <p style={para}>
@@ -72,7 +72,7 @@ class Rules extends Component {
                     </div>
                 </div>
 
-                <br><br>
+                <br></br>
 
                 <div>
                     <p style={para}>
