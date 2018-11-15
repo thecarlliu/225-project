@@ -242,7 +242,7 @@ class GameWindow extends Component {
 
     render () {
         return (
-            <div style={{width:"100%", height:"100%"}}>
+            <div style={{width:"100%", height:"100%", color:"white"}}>
                 <NavBar />
                 <Timer time={this.state.time}/>
                 <Cards userHand={[this.state.userHand[0], this.state.userHand[1]]}

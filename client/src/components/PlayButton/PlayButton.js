@@ -18,19 +18,7 @@ class PlayButton extends Component {
 
     render() {
         return (
-            <div onClick={(e) => {this.handlePlay(e)}} style={{
-                height:'30px',
-                width:'150px',
-                borderRadius:'15%',
-                backgroundColor:'blue',
-                textAlign:'center',
-                position: "fixed",
-                margin:'auto',
-                right: "0",
-                left: "0",
-                top: 340,
-                display:this.state.toggle
-            }}>PLAY</div>
+            <div onClick={(e) => {this.handlePlay(e)}} className="primaryBg" style={{position: "fixed", top: "270px", width: "150px", height:"80px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", left: 0, right: 0, margin: "auto", display:this.state.toggle, zIndex: 99, textAlign: "center", lineHeight: "80px", fontSize: "large", fontFamily: "Georgia"}}><b>PLAY</b></div>
         )
     }
 }
