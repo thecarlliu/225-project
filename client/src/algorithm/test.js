@@ -5,8 +5,11 @@ function isFlushDraw(cardSuits) {
   var maxCount = 1;
   for (var i = 0; i < cardSuits.length; i++) {
     cardSuits[i] === cardSuits[i - 1] ? maxCount++ : maxCount = 1;
+    if (maxCount === 4) {
+      return true;
+    }
   }
-  return (maxCount >= 4 ? true : false);
+  return false;
 }
 
 function removeDups(cardVals) {
@@ -21,7 +24,6 @@ function removeDups(cardVals) {
 }
 
 function aceHandler(cardVals) {
-  var hasAce = false;
   var cardVals2 = [];
   if (cardVals.includes(14)) {
     hasAce = true;
@@ -131,8 +133,13 @@ function countOuts(cards) {
 
 describe('isFlushDraw()', function() {
   it('should return true if flush draw', function() {
-    assert.equal(isFlushDraw(['H','S','S','S','S']), true); //flush draw
     assert.equal(isFlushDraw(['H','C','S','S','S']), false); //not a flush draw
+    assert.equal(isFlushDraw(['H','S','S','S','S']), true); //flush draw
+    assert.equal(isFlushDraw(['S','H','H','H','H']), true);
+    assert.equal(isFlushDraw(['H','D','D','D','D']), true);
+    assert.equal(isFlushDraw(['H','C','C','C','C']), true);
+    assert.equal(isFlushDraw(['A','B','B','B','B']), true); //flush draw
+    assert.equal(isFlushDraw(['B','A','A','A','A']), true); //flush draw
   });
 });
 

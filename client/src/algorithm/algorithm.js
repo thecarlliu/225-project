@@ -4,8 +4,11 @@
     var maxCount = 1;
     for (var i = 0; i < cardSuits.length; i++) {
       cardSuits[i] === cardSuits[i - 1] ? maxCount++ : maxCount = 1;
+      if (maxCount === 4) {
+        return true;
+      }
     }
-    return (maxCount >= 4 ? true : false);
+    return false;
   }
 
 //thanks internet for this one (mostly)
@@ -21,10 +24,8 @@
   }
 
   function aceHandler(cardVals) {
-    var hasAce = false;
     var cardVals2 = [];
     if (cardVals.includes(14)) {
-      hasAce = true;
       cardVals2 = cardVals.slice(0);
       cardVals2.unshift(1);
       cardVals2.splice(cardVals2.length - 1);
@@ -90,7 +91,6 @@
   }
 
   const countOuts = function(cards) {
-    console.log("countOUts called");
     var cardVals = [];
     var cardSuits = [];
     for (var i = 0; i < cards.length; i++) {
@@ -111,13 +111,9 @@
       }
     }
 
-    console.log("before helper functions");
-    console.log(cardSuits);
-    console.log(cardVals);
     var flushDraw = isFlushDraw(cardSuits);
     var insideStraightDraw = isInsideStraightDraw(cardVals);
     var outsideStraightDraw = isOutsideStraightDraw(cardVals);
-    console.log("other helper functions called");
     if (outsideStraightDraw && flushDraw) {
       return 15;
     } else if (insideStraightDraw && flushDraw) {

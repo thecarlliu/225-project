@@ -23,6 +23,10 @@ class GameWindow extends Component {
             currentScore: 0,
             outsValue: "",
             isPressed:false,
+            popUpShowing: "none",
+            popUpOptionOne: "",
+            popUpOptionTwo: "",
+            popUpText: ""
         };
     }
 
@@ -60,18 +64,36 @@ class GameWindow extends Component {
         this.setState({currentScore: 0});
     }
 
+    /**
+     * Navigates back to a page
+     * @param e event triggering page change
+     * @param route page going to
+     */
+    changePage(e, route) {
+        e.preventDefault();
+        window.location.href = route;
+    }
+
+    /**
+     * Shows the popup with given text
+     * @param text to be shown
+     */
+    showPopUp(text){
+        this.setState({popUpShowing: "block"});
+        this.setState({popUpText: text});
+        this.setState({popUpOptionOne: "Continue"});
+        this.setState({popUpOptionTwo: "Quit"});
+    }
+
     updateScores() {
         if(this.state.isPressed) {
             if (this.state.outsValue === this.state.inputValue) {
-                let correctClick = window.confirm("Correct!");
-                if(correctClick === true){
-                    this.getHand();
-                }
+                this.showPopUp("Correct!");
                 this.setState({currentScore: this.state.currentScore + 10});
             }
             else {
-                alert("Wrong! The correct answer is: " + this.state.outsValue);
-                this.getHand();
+                this.showPopUp("Wrong! The correct answer is: " + this.state.outsValue);
+                // this.getHand();
                 this.resetScore();
             }
         }
@@ -92,6 +114,26 @@ class GameWindow extends Component {
         this.getHand();
     };
 
+    /**
+     * Resets the hand when popup option one is clicked
+     * @param e
+     */
+    handleOptionOne = (e) => {
+        e.preventDefault();
+        this.setState({popUpShowing: "none"});
+        this.getHand();
+    };
+
+    /**
+     * Navigates back to the home page when popup option two is clicked
+     * @param e
+     */
+    handleOptionTwo = (e) => {
+        e.preventDefault();
+        this.setState({popUpShowing: "none"});
+        this.changePage(e, "/home");
+    };
+
     render () {
         return (
             <div>
@@ -101,6 +143,35 @@ class GameWindow extends Component {
                 <PlayButton buttonPressed={this.buttonPressed}/>
                 <Score currentScore={this.state.currentScore} />
                 <Input outsValue={this.state.outsValue} value={this.state.inputValue} changeHandler={this.handleInputChange} submitHandler={(e)=>{this.handleInputSubmit(e)}}/>
+                {/*//popup*/}
+                <div style = {{
+                    position: "absolute",
+                    backgroundColor: "white",
+                    alignItems: "center",
+                    // borderColor: "black",
+                    // borderWidth: 50,
+                    outline: "50px",
+                    outlineColor: "black",
+                    top: 200,
+                    left: 525,
+                    height: 100,
+                    width: 250,
+                    zIndex: 3,
+                    display: this.state.popUpShowing
+                }}>
+                    <div style = {{height: 75, textAlign: "center", paddingTop: "5px",
+                        backgroundColor: "white", margin:"auto"}}>
+                        {this.state.popUpText}
+                    </div>
+                    <div style={{position: "relative"}}>
+                        <button type="button" style = {{position: "absolute"}}
+                                onClick={(e) => {this.handleOptionOne(e)}}>{this.state.popUpOptionOne}
+                        </button>
+                        <button type="button" style = {{position: "absolute", right: "0px"}}
+                                onClick={(e) => {this.handleOptionTwo(e)}}>{this.state.popUpOptionTwo}
+                        </button>
+                    </div>
+                </div>
             </div>
         )
     }
