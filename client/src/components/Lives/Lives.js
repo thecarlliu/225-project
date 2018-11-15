@@ -7,7 +7,7 @@ class Lives extends Component{
     }
     render(){
         return(
-            <div style = {{border:"5px solid black", fontFamily: "Georgia", fontSize:"large", position: "absolute", top: 50, left: 150, height:"40px", lineHeight:"40px"}}>
+            <div className="primaryBg" style={{position: "absolute", width: "120px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", top: 50, left: 160, height:"40px", lineHeight:"40px", fontFamily: "Georgia", fontSize: "large", textAlign: "center"}}>
                 <b>Lives: {this.props.lives}</b>
             </div>
         )
