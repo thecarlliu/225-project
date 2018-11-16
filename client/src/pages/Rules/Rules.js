@@ -3,6 +3,7 @@ import NavBar from "../../components/NavBar";
 
 const header = {margin: "auto", textAlign:"center"};
 const para = {margin: "auto", textAlign:"left", width:"75%"}
+const divvy = {padding: "10px", display: "block", position:"fixed"}
 
 
 class Rules extends Component {
@@ -10,8 +11,8 @@ class Rules extends Component {
         return (
             <div>
                 <NavBar />
-                <div style={{position: "fixed", top: "50px", color: "white"}}>
-                    <div>
+                <div style={{position: "fixed", top: "50px", color: "white", overflow:"hidden"}}>
+                    <div style={{padding:"10px"}}>
                         <h1 style={header}>Rules</h1>
                         <p style={para}> You are dealt two cards and shown the flop. Based on the cards in your hand, count the number of outs
                             you have. Enter the number of outs into the input box. If you answered correctly, your score will
@@ -34,7 +35,7 @@ class Rules extends Component {
 
                     <br/><br/>
 
-                    <div>
+                    <div  style={{position: "fixed", top: "250px", width:"100%"}}>
                         <h2 style={header}>Types of Outs:</h2>
                         <p style={para}>
                             <i><b>Flush Draw:</b></i> A flush draw
@@ -44,18 +45,18 @@ class Rules extends Component {
                             9 outs.
                         </p>
 
-                        <div>
-                            <img src={"images/AH.png"} width={80} height={120} padding={10}/>
-                            <img src={"images/10H.png"} width={80} height={120} padding={10}/>
-                            <img src={"images/3C.png"} width={80} height={120} padding={10}/>
-                            <img src={"images/5H.png"} width={80} height={120} padding={10}/>
-                            <img src={"images/8H.png"} width={80} height={120} padding={10}/>
+                        <div style={{position: "fixed", left: "50%", padding:"20px", marginLeft:"-200px"}}>
+                            <img src={"images/AH.png"} style={{width: "80px", height: "120px", padding:"5px"}}/>
+                            <img src={"images/10H.png"} style={{width: "80px", height: "120px", padding:"5px"}}/>
+                            <img src={"images/3C.png"} style={{width: "80px", height: "120px", padding:"5px"}}/>
+                            <img src={"images/5H.png"} style={{width: "80px", height: "120px", padding:"5px"}}/>
+                            <img src={"images/8H.png"} style={{width: "80px", height: "120px", padding:"5px"}}/>
                         </div>
                     </div>
 
                     <br/><br/>
 
-                    <div>
+                    <div style={{position: "fixed", top: "550px", width:"100%"}}>
                         <p style={para}>
                             <i><b>Inside Straight Draw:</b></i> An inside straight draw inspect
                             a hand with four of the five cards needed for a straight,
@@ -64,18 +65,18 @@ class Rules extends Component {
                             so you have four outs
                         </p>
 
-                        <div>
-                            <img src={"images/3H.png"} width={80} height={120} padding={10}/>
-                            <img src={"images/4S.png"} width={80} height={120} padding={10}/>
-                            <img src={"images/5C.png"} width={80} height={120} padding={10}/>
-                            <img src={"images/7C.png"} width={80} height={120} padding={10}/>
-                            <img src={"images/JD.png"} width={80} height={120} padding={10}/>
+                        <div style={{position: "fixed", left: "50%", padding:"20px", marginLeft:"-200px"}}>
+                            <img src={"images/3H.png"} style={{width: "80px", height: "120px", padding:"5px"}}/>
+                            <img src={"images/4S.png"} style={{width: "80px", height: "120px", padding:"5px"}}/>
+                            <img src={"images/5C.png"} style={{width: "80px", height: "120px", padding:"5px"}}/>
+                            <img src={"images/7C.png"} style={{width: "80px", height: "120px", padding:"5px"}}/>
+                            <img src={"images/JD.png"} style={{width: "80px", height: "120px", padding:"5px"}}/>
                         </div>
                     </div>
 
                     <br/><br/>
 
-                    <div>
+                    <div style={{position: "fixed", top: "850px", width: "100%"}}>
                         <p style={para}>
                             <i><b>Outside Straight Draw:</b></i> An outside straight draw
                             is a hand with four of the five needed cards in sequence
@@ -85,12 +86,12 @@ class Rules extends Component {
                             eight outs.
                         </p>
 
-                        <div>
-                            <img src={"images/5H.png"} width={80} height={120} padding={10}/>
-                            <img src={"images/6C.png"} width={80} height={120} padding={10}/>
-                            <img src={"images/7C.png"} width={80} height={120} padding={10}/>
-                            <img src={"images/8H.png"} width={80} height={120} padding={10}/>
-                            <img src={"images/2D.png"} width={80} height={120} padding={10}/>
+                        <div style={{position: "fixed", left: "50%", padding:"20px", marginLeft:"-200px"}}>
+                            <img src={"images/5H.png"} style={{width: "80px", height: "120px", padding:"5px"}}/>
+                            <img src={"images/6C.png"} style={{width: "80px", height: "120px", padding:"5px"}}/>
+                            <img src={"images/7C.png"} style={{width: "80px", height: "120px", padding:"5px"}}/>
+                            <img src={"images/8H.png"} style={{width: "80px", height: "120px", padding:"5px"}}/>
+                            <img src={"images/2D.png"} style={{width: "80px", height: "120px", padding:"5px"}}/>
                         </div>
                     </div>
                 </div>
