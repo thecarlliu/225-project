@@ -136,7 +136,7 @@ class GameWindow extends Component {
 
     render () {
         return (
-            <div>
+            <div style={{color: "white"}}>
                 <NavBar />
                 <Cards userHand={[this.state.userHand[0], this.state.userHand[1]]}
                        flop={[this.state.flop[0], this.state.flop[1], this.state.flop[2]]}/>
@@ -145,6 +145,7 @@ class GameWindow extends Component {
                 <Input outsValue={this.state.outsValue} value={this.state.inputValue} changeHandler={this.handleInputChange} submitHandler={(e)=>{this.handleInputSubmit(e)}}/>
                 {/*//popup*/}
                 <div style = {{
+                    color: "black",
                     position: "absolute",
                     backgroundColor: "white",
                     alignItems: "center",
