@@ -254,6 +254,7 @@ class GameWindow extends Component {
                 <Lives lives = {this.state.lives}/>
                 {/*//popup*/}
                 <div style = {{
+                    color: "black",
                     position: "absolute",
                     backgroundColor: "white",
                     alignItems: "center",
