@@ -24,10 +24,8 @@
   }
 
   function aceHandler(cardVals) {
-    var hasAce = false;
     var cardVals2 = [];
     if (cardVals.includes(14)) {
-      hasAce = true;
       cardVals2 = cardVals.slice(0);
       cardVals2.unshift(1);
       cardVals2.splice(cardVals2.length - 1);
