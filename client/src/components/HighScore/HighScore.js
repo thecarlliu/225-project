@@ -9,10 +9,8 @@ class HighScore extends Component {
     }
     render() { // sets the position of the high score text
         return (
-            <div style = {{border:"5px solid black", fontFamily: "Georgia", fontSize:"large",  position: "fixed", top: 95, right: 150, height:"40px", lineHeight:"0px"}}>
-                <h3>
-                    High Score: {this.props.highScore}
-                </h3>
+            <div className="primaryBg" style={{position: "absolute", width: "200px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", top: 95, right: 80, height:"40px", fontFamily: "Georgia", fontSize: "large", textAlign: "center", lineHeight:"40px"}}>
+                <b>High Score: {this.props.highScore}</b>
             </div>
         )
     }

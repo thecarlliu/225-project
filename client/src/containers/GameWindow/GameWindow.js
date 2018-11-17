@@ -242,7 +242,7 @@ class GameWindow extends Component {
 
     render () {
         return (
-            <div>
+            <div style={{width:"100%", height:"100%", color:"white"}}>
                 <NavBar />
                 <Timer time={this.state.time}/>
                 <Cards userHand={[this.state.userHand[0], this.state.userHand[1]]}
@@ -254,11 +254,13 @@ class GameWindow extends Component {
                 <Lives lives = {this.state.lives}/>
                 {/*//popup*/}
                 <div style = {{
+                    color: "black",
                     position: "absolute",
                     backgroundColor: "white",
                     alignItems: "center",
                     top: 200,
-                    left: 525,
+                    left: "50%",
+                    marginLeft: "-125px",
                     height: 100,
                     width: 250,
                     zIndex: 3,
