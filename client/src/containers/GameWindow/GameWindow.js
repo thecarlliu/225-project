@@ -44,7 +44,9 @@ class GameWindow extends Component {
             lives: 3,
             isPressed:false,
             highscores: [],
+            playerName: "",
             popUpShowing: "none",
+            popUpButtonsShowing: "none",
             popUpOptionOne: "",
             popUpOptionTwo: "",
             popUpText: ""
@@ -141,6 +143,7 @@ class GameWindow extends Component {
      */
     showPopUp(text, option1, option2){
         this.setState({popUpShowing: "block"});
+        this.setState({popUpButtonsShowing: "block"});
         clearInterval(tickingFunction);
         this.setState({popUpText: text});
         this.setState({popUpOptionOne: option1});
@@ -161,6 +164,8 @@ class GameWindow extends Component {
                 this.showPopUp("Wrong! The correct answer is: " + this.state.outsValue, "Continue", "Quit");
                 if(!this.stillLives()){
                     this.showPopUp("You lost! Do you want to try again?", "Yes", "No");
+                    console.log(this.state.highscores);
+                    this.showHighscores();
                 }
                         //show user a list of highscores and button to play again
                 this.resetScore();
@@ -171,7 +176,7 @@ class GameWindow extends Component {
     saveHighscore  = (score) => {
         const newScore = {
             score: score,
-            player: "Billy"
+            player: this.state.playerName
         };
         this.state.db.ref("highscores").push(newScore);
     };
@@ -183,7 +188,9 @@ class GameWindow extends Component {
                 highscores.push(score);
             })
             //sort highscores, set highscores state, show highscore board
-        })
+        });
+        highscores.sort(function(a, b){return a - b});
+        this.setState({highscores: highscores});
     }
 
     handleInputSubmit = (event) => {
@@ -267,10 +274,10 @@ class GameWindow extends Component {
                     display: this.state.popUpShowing
                 }}>
                     <div style = {{height: 75, textAlign: "center", paddingTop: "5px",
-                        backgroundColor: "white", margin:"auto"}}>
+                        backgroundColor: "white", margin:"auto", fontFamily: "Georgia"}}>
                         {this.state.popUpText}
                     </div>
-                    <div style={{position: "relative"}}>
+                    <div style={{position: "relative", display: this.state.popUpButtonsShowing}}>
                         <button type="button" style = {{position: "absolute"}}
                                 onClick={(e) => {this.handleOptionOne(e)}}>{this.state.popUpOptionOne}
                         </button>
