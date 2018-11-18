@@ -15,6 +15,9 @@ class Rules extends Component {
           flushShowing:"none",
           inStraightShowing:"none",
           outStraightShowing:"none",
+          flushFont: "#08415C",
+          inFont: "#08415C",
+          outFont: "#08415C",
       }
   };
 
@@ -39,6 +42,26 @@ class Rules extends Component {
       this.setState({outStraightShowing:'none'});
   };
 
+  setFlushFontWhite = () => {
+      this.setState({flushFont: "white"});
+  };
+  setFlushFontBlue = () => {
+      this.setState({flushFont: "#08415C"});
+  };
+
+  setInFontWhite = () => {
+      this.setState({inFont: "white"});
+  };
+  setInFontBlue = () => {
+      this.setState({inFont: "#08415C"});
+  };
+
+  setOutFontWhite = () => {
+      this.setState({outFont: "white"});
+  };
+  setOutFontBlue = () => {
+      this.setState({outFont: "#08415C"});
+  };
 
     render() {
         return (
@@ -126,23 +149,32 @@ class Rules extends Component {
                 </div>
 
 
-                    <div className="primaryBg" style={{position: "absolute", display:"inline-block", left:"40%", top:"350px", width: "150px", height:"80px", lineHeight:"25px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", marginLeft:"-75px"}}>
-                        <div  onClick={(e) => {this.flushButton(e)}} style={{fontFamily: "Georgia", fontSize: "xx-large", textAlign: "center"}}>
-                            <p className="secondaryFont" style={{textDecoration: "none"}}><b>Flush</b></p>
+                    <button className="primaryBg" style={{position: "absolute", display:"inline-block", left:"40%", top:"350px", width: "150px", height:"80px", lineHeight:"25px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", marginLeft:"-75px"}}>
+                        <div onClick={(e) => {this.flushButton(e)}}
+                            style={{fontFamily: "Georgia", fontSize: "xx-large", textAlign: "center"}}
+                            onMouseEnter={this.setFlushFontWhite}
+                            onMouseLeave={this.setFlushFontBlue}>
+                            <p style={{textDecoration: "none", color: this.state.flushFont}}><b>Flush</b></p>
                         </div>
-                    </div>
+                    </button>
 
-                    <div className="primaryBg" style={{position: "absolute", display:"inline-block", left:"50%", top:"350px", width: "150px", height:"80px", lineHeight:"40px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", marginLeft:"-75px"}}>
-                        <div  onClick={(e) => {this.insideButton(e)}} style={{fontFamily: "Georgia", fontSize: "large", textAlign: "center"}}>
-                            <p className="secondaryFont" style={{textDecoration: "none"}}><b>Inside Straight</b></p>
+                    <button className="primaryBg" style={{position: "absolute", display:"inline-block", left:"50%", top:"350px", width: "150px", height:"80px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", marginLeft:"-75px"}}>
+                          <div onClick={(e) => {this.insideButton(e)}}
+                              style={{fontFamily: "Georgia", fontSize: "large", textAlign: "center"}}
+                              onMouseEnter={this.setInFontWhite}
+                              onMouseLeave={this.setInFontBlue}>
+                            <p style={{color: this.state.inFont}}><b>Inside Straight</b></p>
                         </div>
-                    </div>
+                    </button>
 
-                    <div className="primaryBg" style={{position: "absolute", display:"inline-block", left:"60%", top:"350px", width: "150px", height:"80px", lineHeight:"25px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", marginLeft:"-75px"}}>
-                        <div  onClick={(e) => {this.outsideButton(e)}} style={{fontFamily: "Georgia", fontSize: "large", textAlign: "center"}}>
-                            <p className="secondaryFont" style={{textDecoration: "none"}}><b>Outside Straight</b></p>
+                    <button className="primaryBg" style={{position: "absolute", display:"inline-block", left:"60%", top:"350px", width: "150px", height:"80px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", marginLeft:"-75px"}}>
+                        <div onClick={(e) => {this.outsideButton(e)}}
+                            style={{fontFamily: "Georgia", fontSize: "large", textAlign: "center"}}
+                            onMouseEnter={this.setOutFontWhite}
+                            onMouseLeave={this.setOutFontBlue}>
+                            <p style={{textDecoration: "none", color: this.state.outFont}}><b>Outside Straight</b></p>
                         </div>
-                    </div>
+                    </button>
 
                 <NavBar />
             </div>
