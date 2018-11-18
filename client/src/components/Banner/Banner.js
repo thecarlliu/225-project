@@ -6,12 +6,12 @@ class Banner extends Component {
         return (
             <div style={{position: "fixed", top: 50, left: 0, right: 0, margin: "auto", width: 600, height:400}}>
                 <img src={"images/goatEmLogo.png"} height={400} width={600}/><br/>
-                <div className="primaryBg" style={{position: "absolute", top:400, left: 0, right: 0, margin: "auto", width: "300px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", height:"40px", fontFamily: "Georgia", fontSize: "large", textAlign: "center", lineHeight:"40px"}}>
+                <button className="primaryBg" style={{position: "absolute", top:400, left: 0, right: 0, margin: "auto", width: "300px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", height:"45px", fontFamily: "Georgia", fontSize: "large", textAlign: "center", lineHeight:"40px"}}>
                     <NavButton label={"Practice First!"} route={"/practice"}/>
-                </div>
-                <div className="primaryBg" style={{position: "absolute", top:450, left: 0, right: 0, margin: "auto", width: "300px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", height:"40px", fontFamily: "Georgia", fontSize: "large", textAlign: "center", lineHeight:"40px"}}>
+                </button>
+                <button className="primaryBg" style={{position: "absolute", top:450, left: 0, right: 0, margin: "auto", width: "300px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", height:"45px", fontFamily: "Georgia", fontSize: "large", textAlign: "center", lineHeight:"40px"}}>
                     <NavButton label={"Play Game"} route={"/game"}/>
-                </div>
+                </button>
             </div>
         )
     }
