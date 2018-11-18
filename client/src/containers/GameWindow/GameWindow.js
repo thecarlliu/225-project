@@ -254,29 +254,32 @@ class GameWindow extends Component {
                 <Lives lives = {this.state.lives}/>
                 {/*//popup*/}
                 <div style = {{
-                    color: "black",
                     position: "absolute",
-                    backgroundColor: "white",
                     alignItems: "center",
                     top: 200,
-                    left: 525,
-                    height: 100,
-                    width: 250,
+                    left: 0,
+                    right: 0,
+                    margin: "auto",
+                    height: 250,
+                    width: 300,
                     zIndex: 3,
-                    display: this.state.popUpShowing
-                }}>
-                    <div style = {{height: 75, textAlign: "center", paddingTop: "5px",
-                        backgroundColor: "white", margin:"auto"}}>
-                        {this.state.popUpText}
-                    </div>
-                    <div style={{position: "relative"}}>
-                        <button type="button" style = {{position: "absolute"}}
-                                onClick={(e) => {this.handleOptionOne(e)}}>{this.state.popUpOptionOne}
-                        </button>
-                        <button type="button" style = {{position: "absolute", right: "0px"}}
-                                onClick={(e) => {this.handleOptionTwo(e)}}>{this.state.popUpOptionTwo}
-                        </button>
-                    </div>
+                    display: this.state.popUpShowing,
+                    boxShadow: "1px 1px 1px 1px #08415C",
+                    borderRadius: "10px",
+                    textAlign: "center",
+                    fontSize: "large",
+                    fontFamily: "Georgia",
+                    color: "white",
+                    padding: 20
+                }}
+                     className="primaryBg">
+                    <b>{this.state.popUpText}</b>
+                    <button className="primaryBg" style = {{position: "absolute", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", width: 150, height: 40, fontSize: "large", fontFamily: "Georgia", color: "white", bottom: 60, left: 0, right: 0, margin: "auto"}}
+                            onClick={(e) => {this.handleOptionOne(e)}}>{this.state.popUpOptionOne}
+                    </button>
+                    <button className="primaryBg" style = {{position: "absolute", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", width: 150, height: 40, fontSize: "large", fontFamily: "Georgia", color: "white", bottom: 10, left: 0, right: 0, margin: "auto"}}
+                            onClick={(e) => {this.handleOptionTwo(e)}}>{this.state.popUpOptionTwo}
+                    </button>
                 </div>
             </div>
         )
