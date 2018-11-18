@@ -6,11 +6,45 @@ const para = {margin: "auto", textAlign:"left", width:"75%"};
 const divvy = {padding: "10px", display: "block", position:"absolute"};
 
 
+
 class Rules extends Component {
+
+  constructor(props){
+      super(props);
+      this.state = {
+          flushShowing:"block",
+          inStraightShowing:"none",
+          outStraightShowing:"none",
+      }
+  };
+
+  flushButton=(e) =>{
+      e.preventDefault();
+      this.setState({flushShowing:'block'});
+      this.setState({inStraightShowing:'none'});
+      this.setState({outStraightShowing:'none'});
+  };
+
+  outsideButton=(e) =>{
+      e.preventDefault();
+      this.setState({flushShowing:'none'});
+      this.setState({inStraightShowing:'none'});
+      this.setState({outStraightShowing:'block'});
+  };
+
+  insideButton=(e) =>{
+      e.preventDefault();
+      this.setState({flushShowing:'none'});
+      this.setState({inStraightShowing:'block'});
+      this.setState({outStraightShowing:'none'});
+  };
+
+
     render() {
         return (
-            <div style={{overflow:"scroll"}}>
-                <div style={{position: "absolute", top: "50px", color: "white", display:"block"}}>
+            <div>
+
+                <div style={{position: "absolute", top: "50px", color: "white"}}>
                     <div style={{padding:"15px"}}>
                         <h1 style={header}>RULES</h1>
                         <p style={para}> You are dealt two cards and shown the flop. Based on the cards in your hand, count the number of outs
@@ -29,13 +63,13 @@ class Rules extends Component {
                             number of outs a player has is an important part of poker strategy.
                         </p>
                         <br/>
+                        <h2 style={header}>Types of Outs:</h2>
                     </div>
 
                     <br/><br/>
 
-                    <div  style={{position: "absolute", top: "250px", width:"100%", display:"block"}}>
-                        <h2 style={header}>Types of Outs:</h2>
-                        <br/>
+
+                    <div  style={{position: "absolute", top: "300px", width:"100%", display:this.state.flushShowing}}>
                         <p style={para}>
                             <i><b>Flush Draw:</b></i> A flush draw
                             is a hand with four cards of the same suit that may improve
@@ -53,7 +87,7 @@ class Rules extends Component {
                         </div>
                     </div>
 
-                    <div style={{position: "absolute", top: "550px", width:"100%", display:"block"}}>
+                    <div style={{position: "absolute", top: "300px", width:"100%", display:this.state.inStraightShowing}}>
                         <p style={para}>
                             <i><b>Inside Straight Draw:</b></i> An inside straight draw inspect
                             a hand with four of the five cards needed for a straight,
@@ -71,7 +105,7 @@ class Rules extends Component {
                         </div>
                     </div>
 
-                    <div style={{position: "absolute", top: "800px", width: "100%", display:"block"}}>
+                    <div style={{position: "absolute", top: "300px", width: "100%", display:this.state.outStraightShowing}}>
                         <p style={para}>
                             <i><b>Outside Straight Draw:</b></i> An outside straight draw
                             is a hand with four of the five needed cards in sequence
@@ -91,7 +125,16 @@ class Rules extends Component {
                     </div>
                 </div>
 
-                    <NavBar />
+                <div className="primaryBg" style={{position: "absolute", top:"270px", width: "150px", height:"80px", lineHeight:"25px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px"}}>
+                    <div style={{fontFamily: "Georgia", fontSize: "xx-large", textAlign: "center"}} onClick={(e)=>{this.changePage(e, this.props.route)}}>
+                        <p className="secondaryFont" style={{textDecoration: "none"}}><b>Flush</b></p>
+                    </div>
+                </div>
+
+                <div onClick={(e) => {this.outsideButton(e)}} className="primaryBg" style={{position: "absolute", textAlign:"center", top: "370px", width: "150px", height:"80px", margin: "auto", lineHeight: "80px", fontSize: "large", fontFamily: "Georgia"}}><b>OutsideStraight</b></div>
+                <div onClick={(e) => {this.insideButton(e)}} className="primaryBg" style={{position: "absolute", textAlign:"center", top: "470px", width: "150px", height:"80px", margin: "auto", lineHeight: "80px", fontSize: "large", fontFamily: "Georgia"}}><b>Inside Straight</b></div>
+
+                <NavBar />
             </div>
         )
     }
