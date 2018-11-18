@@ -126,7 +126,7 @@ class Rules extends Component {
                 </div>
 
                 <div className="primaryBg" style={{position: "absolute", top:"270px", width: "150px", height:"80px", lineHeight:"25px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px"}}>
-                    <div style={{fontFamily: "Georgia", fontSize: "xx-large", textAlign: "center"}} onClick={(e)=>{this.changePage(e, this.props.route)}}>
+                    <div style={{fontFamily: "Georgia", fontSize: "xx-large", textAlign: "center"}} onClick={(e)=>{this.flushShowing(e)}}>
                         <p className="secondaryFont" style={{textDecoration: "none"}}><b>Flush</b></p>
                     </div>
                 </div>
