@@ -12,9 +12,12 @@ class Rules extends Component {
   constructor(props){
       super(props);
       this.state = {
-          flushShowing:"block",
+          flushShowing:"none",
           inStraightShowing:"none",
           outStraightShowing:"none",
+          flushFont: "#08415C",
+          inFont: "#08415C",
+          outFont: "#08415C",
       }
   };
 
@@ -39,6 +42,26 @@ class Rules extends Component {
       this.setState({outStraightShowing:'none'});
   };
 
+  setFlushFontWhite = () => {
+      this.setState({flushFont: "white"});
+  };
+  setFlushFontBlue = () => {
+      this.setState({flushFont: "#08415C"});
+  };
+
+  setInFontWhite = () => {
+      this.setState({inFont: "white"});
+  };
+  setInFontBlue = () => {
+      this.setState({inFont: "#08415C"});
+  };
+
+  setOutFontWhite = () => {
+      this.setState({outFont: "white"});
+  };
+  setOutFontBlue = () => {
+      this.setState({outFont: "#08415C"});
+  };
 
     render() {
         return (
@@ -69,9 +92,9 @@ class Rules extends Component {
                     <br/><br/>
 
 
-                    <div  style={{position: "absolute", top: "300px", width:"100%", display:this.state.flushShowing}}>
+                    <div  style={{position: "absolute", top: "350px", width:"100%", display:this.state.flushShowing}}>
                         <p style={para}>
-                            <i><b>Flush Draw:</b></i> A flush draw
+                            <h3><i><b>Flush Draw:</b></i></h3> A flush draw
                             is a hand with four cards of the same suit that may improve
                             to a flush. There are 13 cards of a given suit in a deck of cards,
                             but to have a draw you are using 4 of the same suit, therefore you have
@@ -87,9 +110,9 @@ class Rules extends Component {
                         </div>
                     </div>
 
-                    <div style={{position: "absolute", top: "300px", width:"100%", display:this.state.inStraightShowing}}>
+                    <div style={{position: "absolute", top: "350px", width:"100%", display:this.state.inStraightShowing}}>
                         <p style={para}>
-                            <i><b>Inside Straight Draw:</b></i> An inside straight draw inspect
+                          <h3><i><b>Inside Straight Draw:</b></i></h3> An inside straight draw inspect
                             a hand with four of the five cards needed for a straight,
                             but missing one in the middle. You are missing one possible card to give
                             you a straight, and this card appears in the deck four times, (one per suit)
@@ -105,9 +128,9 @@ class Rules extends Component {
                         </div>
                     </div>
 
-                    <div style={{position: "absolute", top: "300px", width: "100%", display:this.state.outStraightShowing}}>
+                    <div style={{position: "absolute", top: "350px", width: "100%", display:this.state.outStraightShowing}}>
                         <p style={para}>
-                            <i><b>Outside Straight Draw:</b></i> An outside straight draw
+                            <h3><i><b>Outside Straight Draw:</b></i></h3> An outside straight draw
                             is a hand with four of the five needed cards in sequence
                             (and could be completed on either end) that may improve to a straight.
                             Because you have two different numbers that could complete a straight,
@@ -125,14 +148,33 @@ class Rules extends Component {
                     </div>
                 </div>
 
-                <div className="primaryBg" style={{position: "absolute", top:"270px", width: "150px", height:"80px", lineHeight:"25px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px"}}>
-                    <div style={{fontFamily: "Georgia", fontSize: "xx-large", textAlign: "center"}} onClick={(e)=>{this.flushShowing(e)}}>
-                        <p className="secondaryFont" style={{textDecoration: "none"}}><b>Flush</b></p>
-                    </div>
-                </div>
 
-                <div onClick={(e) => {this.outsideButton(e)}} className="primaryBg" style={{position: "absolute", textAlign:"center", top: "370px", width: "150px", height:"80px", margin: "auto", lineHeight: "80px", fontSize: "large", fontFamily: "Georgia"}}><b>OutsideStraight</b></div>
-                <div onClick={(e) => {this.insideButton(e)}} className="primaryBg" style={{position: "absolute", textAlign:"center", top: "470px", width: "150px", height:"80px", margin: "auto", lineHeight: "80px", fontSize: "large", fontFamily: "Georgia"}}><b>Inside Straight</b></div>
+                    <button className="primaryBg" style={{position: "absolute", display:"inline-block", left:"40%", top:"350px", width: "150px", height:"80px", lineHeight:"25px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", marginLeft:"-75px"}}>
+                        <div onClick={(e) => {this.flushButton(e)}}
+                            style={{fontFamily: "Georgia", fontSize: "xx-large", textAlign: "center"}}
+                            onMouseEnter={this.setFlushFontWhite}
+                            onMouseLeave={this.setFlushFontBlue}>
+                            <p style={{textDecoration: "none", color: this.state.flushFont}}><b>Flush</b></p>
+                        </div>
+                    </button>
+
+                    <button className="primaryBg" style={{position: "absolute", display:"inline-block", left:"50%", top:"350px", width: "150px", height:"80px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", marginLeft:"-75px"}}>
+                          <div onClick={(e) => {this.insideButton(e)}}
+                              style={{fontFamily: "Georgia", fontSize: "large", textAlign: "center"}}
+                              onMouseEnter={this.setInFontWhite}
+                              onMouseLeave={this.setInFontBlue}>
+                            <p style={{color: this.state.inFont}}><b>Inside Straight</b></p>
+                        </div>
+                    </button>
+
+                    <button className="primaryBg" style={{position: "absolute", display:"inline-block", left:"60%", top:"350px", width: "150px", height:"80px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", marginLeft:"-75px"}}>
+                        <div onClick={(e) => {this.outsideButton(e)}}
+                            style={{fontFamily: "Georgia", fontSize: "large", textAlign: "center"}}
+                            onMouseEnter={this.setOutFontWhite}
+                            onMouseLeave={this.setOutFontBlue}>
+                            <p style={{textDecoration: "none", color: this.state.outFont}}><b>Outside Straight</b></p>
+                        </div>
+                    </button>
 
                 <NavBar />
             </div>
