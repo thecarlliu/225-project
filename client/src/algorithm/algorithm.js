@@ -1,15 +1,18 @@
 
-  isFlushDraw: function isFlushDraw(cardSuits) {
+  function isFlushDraw(cardSuits) {
     cardSuits.sort();
     var maxCount = 1;
     for (var i = 0; i < cardSuits.length; i++) {
       cardSuits[i] === cardSuits[i - 1] ? maxCount++ : maxCount = 1;
+      if (maxCount === 4) {
+        return true;
+      }
     }
-    return (maxCount >= 4 ? true : false);
-  },
+    return false;
+  }
 
 //thanks internet for this one (mostly)
-  removeDups: function removeDups(cardVals) {
+  function removeDups(cardVals) {
     cardVals.sort()
     var unique = {};
     cardVals.forEach(function(i) {
@@ -20,11 +23,9 @@
     return Object.keys(unique);
   }
 
-  aceHandler: function aceHandler(cardVals) {
-    var hasAce = false;
+  function aceHandler(cardVals) {
     var cardVals2 = [];
     if (cardVals.includes(14)) {
-      hasAce = true;
       cardVals2 = cardVals.slice(0);
       cardVals2.unshift(1);
       cardVals2.splice(cardVals2.length - 1);
@@ -32,12 +33,12 @@
     return cardVals2;
   }
 
-  isOutsideStraightDraw: function isOutsideStraightDraw(cardVals) {
+  function isOutsideStraightDraw(cardVals) {
     cardVals.sort(function(a, b){return a - b});
     var hasAce = false;
     var cardVals2 = aceHandler(cardVals);
 
-    if (cardVals2.length != 0) {
+    if (cardVals2.length !== 0) {
       hasAce = true;
     }
 
@@ -59,14 +60,14 @@
 
     return (((val1 === 3 && !hasAce) || (val2 === 3) || (val3 === 3 && !hasAce) || (val4 === 3 && !hasAce) || (val5 === 3 && !hasAce) || val6 === 3) || ((val1 === 4 && val2 === 4) || (val1 === 4 && val3 === 4) || (val2 === 4 && val3 === 4)) ||
   ((val4 === 4 && val5 === 4) || (val4 === 4 && val6 === 4) || (val5 === 4 && val6 === 4)));
-  },
+  }
 
-  isInsideStraightDraw: function isInsideStraightDraw(cardVals) {
+  function isInsideStraightDraw(cardVals) {
     cardVals.sort(function(a, b){return a - b});
     var hasAce = false;
     var cardVals2 = aceHandler(cardVals);
 
-    if (cardVals2.length != 0) {
+    if (cardVals2.length !== 0) {
       hasAce = true;
     }
 
@@ -87,10 +88,9 @@
     var val5 = cardVals2[3] - cardVals2[0];
     var val6 = cardVals2[4] - cardVals2[1];
     return (val1 === 4 || val2 === 4 || val3 === 4 || val4 === 4 || val5 === 4 || val6 === 4 || (val2 === 3 && hasAce) || (val3 === 3 && hasAce) || (val4 === 3 && hasAce) || (val5 === 3 && hasAce));
-  },
+  }
 
   const countOuts = function(cards) {
-    console.log("countOUts called");
     var cardVals = [];
     var cardSuits = [];
     for (var i = 0; i < cards.length; i++) {
@@ -111,25 +111,21 @@
       }
     }
 
-    console.log("before helper functions");
-    console.log(cardSuits);
-    console.log(cardVals);
     var flushDraw = isFlushDraw(cardSuits);
     var insideStraightDraw = isInsideStraightDraw(cardVals);
     var outsideStraightDraw = isOutsideStraightDraw(cardVals);
-    console.log("other helper functions called");
     if (outsideStraightDraw && flushDraw) {
-      return 15;
+      return [15, "outside straight draw and flush draw"];
     } else if (insideStraightDraw && flushDraw) {
-      return 12;
+      return [12, "inside straight draw and flush draw"];
     } else if (outsideStraightDraw) {
-      return 8;
+      return [8, "outside straight draw"];
     } else if (insideStraightDraw) {
-      return 4;
+      return [4, "inside straight draw"];
     } else if (flushDraw){
-      return 9;
+      return [9, "flush draw"];
     } else {
-      return 0;
+      return [0, ""];
     }
   };
 
