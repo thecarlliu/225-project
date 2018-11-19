@@ -161,7 +161,7 @@ class GameWindow extends Component {
             }
             else {
                 this.decrementLives();
-                this.showPopUp("Wrong! The correct answer is: " + this.state.outsValue + ". There was a(n) " + this.state.rightAnswerInfo + ".", "Continue", "Quit");
+                this.showPopUp("Wrong! The correct answer is: " + this.state.outsValue + ". There was " + this.state.rightAnswerInfo + ".", "Continue", "Quit");
                 if(!this.stillLives()){
                     this.showPopUp("You lost! Do you want to try again?", "Yes", "No");
                 }
