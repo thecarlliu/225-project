@@ -6,11 +6,68 @@ const para = {margin: "auto", textAlign:"left", width:"75%"};
 const divvy = {padding: "10px", display: "block", position:"absolute"};
 
 
+
 class Rules extends Component {
+
+  constructor(props){
+      super(props);
+      this.state = {
+          flushShowing:"none",
+          inStraightShowing:"none",
+          outStraightShowing:"none",
+          flushFont: "#08415C",
+          inFont: "#08415C",
+          outFont: "#08415C",
+      }
+  };
+
+  flushButton=(e) =>{
+      e.preventDefault();
+      this.setState({flushShowing:'block'});
+      this.setState({inStraightShowing:'none'});
+      this.setState({outStraightShowing:'none'});
+  };
+
+  outsideButton=(e) =>{
+      e.preventDefault();
+      this.setState({flushShowing:'none'});
+      this.setState({inStraightShowing:'none'});
+      this.setState({outStraightShowing:'block'});
+  };
+
+  insideButton=(e) =>{
+      e.preventDefault();
+      this.setState({flushShowing:'none'});
+      this.setState({inStraightShowing:'block'});
+      this.setState({outStraightShowing:'none'});
+  };
+
+  setFlushFontWhite = () => {
+      this.setState({flushFont: "white"});
+  };
+  setFlushFontBlue = () => {
+      this.setState({flushFont: "#08415C"});
+  };
+
+  setInFontWhite = () => {
+      this.setState({inFont: "white"});
+  };
+  setInFontBlue = () => {
+      this.setState({inFont: "#08415C"});
+  };
+
+  setOutFontWhite = () => {
+      this.setState({outFont: "white"});
+  };
+  setOutFontBlue = () => {
+      this.setState({outFont: "#08415C"});
+  };
+
     render() {
         return (
-            <div style={{overflow:"scroll"}}>
-                <div style={{position: "absolute", top: "50px", color: "white", display:"block"}}>
+            <div>
+
+                <div style={{position: "absolute", top: "50px", color: "white"}}>
                     <div style={{padding:"15px"}}>
                         <h1 style={header}>RULES</h1>
                         <p style={para}> You are dealt two cards and shown the flop. Based on the cards in your hand, count the number of outs
@@ -29,15 +86,15 @@ class Rules extends Component {
                             number of outs a player has is an important part of poker strategy.
                         </p>
                         <br/>
+                        <h2 style={header}>Types of Outs:</h2>
                     </div>
 
                     <br/><br/>
 
-                    <div  style={{position: "absolute", top: "250px", width:"100%", display:"block"}}>
-                        <h2 style={header}>Types of Outs:</h2>
-                        <br/>
+
+                    <div  style={{position: "absolute", top: "350px", width:"100%", display:this.state.flushShowing}}>
                         <p style={para}>
-                            <i><b>Flush Draw:</b></i> A flush draw
+                            <h3><i><b>Flush Draw:</b></i></h3> A flush draw
                             is a hand with four cards of the same suit that may improve
                             to a flush. There are 13 cards of a given suit in a deck of cards,
                             but to have a draw you are using 4 of the same suit, therefore you have
@@ -53,9 +110,9 @@ class Rules extends Component {
                         </div>
                     </div>
 
-                    <div style={{position: "absolute", top: "550px", width:"100%", display:"block"}}>
+                    <div style={{position: "absolute", top: "350px", width:"100%", display:this.state.inStraightShowing}}>
                         <p style={para}>
-                            <i><b>Inside Straight Draw:</b></i> An inside straight draw inspect
+                          <h3><i><b>Inside Straight Draw:</b></i></h3> An inside straight draw inspect
                             a hand with four of the five cards needed for a straight,
                             but missing one in the middle. You are missing one possible card to give
                             you a straight, and this card appears in the deck four times, (one per suit)
@@ -71,9 +128,9 @@ class Rules extends Component {
                         </div>
                     </div>
 
-                    <div style={{position: "absolute", top: "800px", width: "100%", display:"block"}}>
+                    <div style={{position: "absolute", top: "350px", width: "100%", display:this.state.outStraightShowing}}>
                         <p style={para}>
-                            <i><b>Outside Straight Draw:</b></i> An outside straight draw
+                            <h3><i><b>Outside Straight Draw:</b></i></h3> An outside straight draw
                             is a hand with four of the five needed cards in sequence
                             (and could be completed on either end) that may improve to a straight.
                             Because you have two different numbers that could complete a straight,
@@ -91,7 +148,35 @@ class Rules extends Component {
                     </div>
                 </div>
 
-                    <NavBar />
+
+                    <button className="primaryBg" style={{position: "absolute", display:"inline-block", left:"40%", top:"350px", width: "150px", height:"80px", lineHeight:"25px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", marginLeft:"-75px"}}>
+                        <div onClick={(e) => {this.flushButton(e)}}
+                            style={{fontFamily: "Georgia", fontSize: "xx-large", textAlign: "center"}}
+                            onMouseEnter={this.setFlushFontWhite}
+                            onMouseLeave={this.setFlushFontBlue}>
+                            <p style={{textDecoration: "none", color: this.state.flushFont}}><b>Flush</b></p>
+                        </div>
+                    </button>
+
+                    <button className="primaryBg" style={{position: "absolute", display:"inline-block", left:"50%", top:"350px", width: "150px", height:"80px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", marginLeft:"-75px"}}>
+                          <div onClick={(e) => {this.insideButton(e)}}
+                              style={{fontFamily: "Georgia", fontSize: "large", textAlign: "center"}}
+                              onMouseEnter={this.setInFontWhite}
+                              onMouseLeave={this.setInFontBlue}>
+                            <p style={{color: this.state.inFont}}><b>Inside Straight</b></p>
+                        </div>
+                    </button>
+
+                    <button className="primaryBg" style={{position: "absolute", display:"inline-block", left:"60%", top:"350px", width: "150px", height:"80px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", marginLeft:"-75px"}}>
+                        <div onClick={(e) => {this.outsideButton(e)}}
+                            style={{fontFamily: "Georgia", fontSize: "large", textAlign: "center"}}
+                            onMouseEnter={this.setOutFontWhite}
+                            onMouseLeave={this.setOutFontBlue}>
+                            <p style={{textDecoration: "none", color: this.state.outFont}}><b>Outside Straight</b></p>
+                        </div>
+                    </button>
+
+                <NavBar />
             </div>
         )
     }
