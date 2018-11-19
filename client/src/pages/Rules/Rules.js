@@ -5,6 +5,9 @@ const header = {margin: "auto", textAlign:"center"};
 const para = {margin: "auto", textAlign:"left", width:"75%"};
 const divvy = {padding: "10px", display: "block", position:"absolute"};
 
+const primary = "#207CA8";
+const secondary = "#08415C";
+
 
 
 class Rules extends Component {
@@ -15,9 +18,12 @@ class Rules extends Component {
           flushShowing:"none",
           inStraightShowing:"none",
           outStraightShowing:"none",
-          flushFont: "#08415C",
-          inFont: "#08415C",
-          outFont: "#08415C",
+          flushFont: secondary,
+          inFont: secondary,
+          outFont: secondary,
+          flushButCol: primary,
+          inButCol: primary,
+          outButCol: primary
       }
   };
 
@@ -26,6 +32,14 @@ class Rules extends Component {
       this.setState({flushShowing:'block'});
       this.setState({inStraightShowing:'none'});
       this.setState({outStraightShowing:'none'});
+
+      this.setState({flushButCol: secondary});
+      this.setState({inButCol: primary});
+      this.setState({ outButCol: primary});
+
+      this.setState({flushFont: primary});
+      this.setState({inFont: secondary});
+      this.setState({outFont: secondary});
   };
 
   outsideButton=(e) =>{
@@ -33,6 +47,14 @@ class Rules extends Component {
       this.setState({flushShowing:'none'});
       this.setState({inStraightShowing:'none'});
       this.setState({outStraightShowing:'block'});
+
+      this.setState({flushButCol: primary});
+      this.setState({inButCol: primary});
+      this.setState({ outButCol: secondary});
+
+      this.setState({flushFont: secondary});
+      this.setState({inFont: secondary});
+      this.setState({outFont: primary});
   };
 
   insideButton=(e) =>{
@@ -40,27 +62,57 @@ class Rules extends Component {
       this.setState({flushShowing:'none'});
       this.setState({inStraightShowing:'block'});
       this.setState({outStraightShowing:'none'});
+
+      this.setState({flushButCol: primary});
+      this.setState({inButCol: secondary});
+      this.setState({ outButCol: primary});
+
+      this.setState({flushFont: secondary});
+      this.setState({inFont: primary});
+      this.setState({outFont: secondary});
   };
 
   setFlushFontWhite = () => {
+    if(this.state.flushButCol === primary){
       this.setState({flushFont: "white"});
+    }
   };
   setFlushFontBlue = () => {
-      this.setState({flushFont: "#08415C"});
+    if(this.state.flushButCol === primary){
+      this.setState({flushFont: secondary});
+    }
+    else{
+        this.setState({flushFont: primary});
+    }
+
   };
 
   setInFontWhite = () => {
+    if(this.state.inButCol === primary){
       this.setState({inFont: "white"});
+    }
   };
   setInFontBlue = () => {
-      this.setState({inFont: "#08415C"});
+    if(this.state.inButCol === primary){
+      this.setState({inFont: secondary});
+    }
+    else{
+        this.setState({inFont: primary});
+    }
   };
 
   setOutFontWhite = () => {
+    if(this.state.outButCol === primary){
       this.setState({outFont: "white"});
+    }
   };
   setOutFontBlue = () => {
-      this.setState({outFont: "#08415C"});
+    if(this.state.outButCol === primary){
+      this.setState({outFont: secondary});
+    }
+    else{
+        this.setState({outFont: primary});
+    }
   };
 
     render() {
@@ -148,8 +200,8 @@ class Rules extends Component {
                     </div>
                 </div>
 
-
-                    <button className="primaryBg" style={{position: "absolute", display:"inline-block", left:"40%", top:"350px", width: "150px", height:"80px", lineHeight:"25px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", marginLeft:"-75px"}}>
+                <div style={{left:0, right:0, margin:"auto", position:"fixed", width:"75%", height:"50px"}}>
+                    <button style={{left:400, right:0, margin:"auto", position:"fixed", display:"block", top:"350px", width: "150px", height:"80px", lineHeight:"25px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", backgroundColor:this.state.flushButCol}}>
                         <div onClick={(e) => {this.flushButton(e)}}
                             style={{fontFamily: "Georgia", fontSize: "xx-large", textAlign: "center"}}
                             onMouseEnter={this.setFlushFontWhite}
@@ -158,7 +210,7 @@ class Rules extends Component {
                         </div>
                     </button>
 
-                    <button className="primaryBg" style={{position: "absolute", display:"inline-block", left:"50%", top:"350px", width: "150px", height:"80px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", marginLeft:"-75px"}}>
+                    <button style={{left:0, right:400, margin:"auto", position:"fixed", display:"block", top:"350px", width: "150px", height:"80px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", backgroundColor:this.state.inButCol}}>
                           <div onClick={(e) => {this.insideButton(e)}}
                               style={{fontFamily: "Georgia", fontSize: "large", textAlign: "center"}}
                               onMouseEnter={this.setInFontWhite}
@@ -167,7 +219,7 @@ class Rules extends Component {
                         </div>
                     </button>
 
-                    <button className="primaryBg" style={{position: "absolute", display:"inline-block", left:"60%", top:"350px", width: "150px", height:"80px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", marginLeft:"-75px"}}>
+                    <button style={{left:0, right:0, margin:"auto", position:"fixed", display:"block", top:"350px", width: "150px", height:"80px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", backgroundColor:this.state.outButCol}}>
                         <div onClick={(e) => {this.outsideButton(e)}}
                             style={{fontFamily: "Georgia", fontSize: "large", textAlign: "center"}}
                             onMouseEnter={this.setOutFontWhite}
@@ -175,7 +227,7 @@ class Rules extends Component {
                             <p style={{textDecoration: "none", color: this.state.outFont}}><b>Outside Straight</b></p>
                         </div>
                     </button>
-
+                </div>
                 <NavBar />
             </div>
         )
