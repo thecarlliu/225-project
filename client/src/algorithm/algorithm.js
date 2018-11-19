@@ -115,17 +115,17 @@
     var insideStraightDraw = isInsideStraightDraw(cardVals);
     var outsideStraightDraw = isOutsideStraightDraw(cardVals);
     if (outsideStraightDraw && flushDraw) {
-      return 15;
+      return [15, "an outside straight draw and flush draw"];
     } else if (insideStraightDraw && flushDraw) {
-      return 12;
+      return [12, "an inside straight draw and flush draw"];
     } else if (outsideStraightDraw) {
-      return 8;
+      return [8, "an outside straight draw"];
     } else if (insideStraightDraw) {
-      return 4;
+      return [4, "an inside straight draw"];
     } else if (flushDraw){
-      return 9;
+      return [9, "a flush draw"];
     } else {
-      return 0;
+      return [0, "nothing"];
     }
   };
 
