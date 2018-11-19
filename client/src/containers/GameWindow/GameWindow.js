@@ -49,7 +49,8 @@ class GameWindow extends Component {
             popUpButtonsShowing: "none",
             popUpOptionOne: "",
             popUpOptionTwo: "",
-            popUpText: ""
+            popUpText: "",
+            scoreboardShowing: "none"
         };
     }
 
@@ -164,6 +165,7 @@ class GameWindow extends Component {
                 this.showPopUp("Wrong! The correct answer is: " + this.state.outsValue, "Continue", "Quit");
                 if(!this.stillLives()){
                     this.showPopUp("You lost! Do you want to try again?", "Yes", "No");
+                    this.setState({popUpShowing: "none"});
                     console.log(this.state.highscores);
                     this.showHighscores();
                 }
@@ -176,7 +178,7 @@ class GameWindow extends Component {
     saveHighscore  = (score) => {
         const newScore = {
             score: score,
-            player: this.state.playerName
+            player: "Billy"
         };
         this.state.db.ref("highscores").push(newScore);
     };
@@ -185,12 +187,17 @@ class GameWindow extends Component {
         const highscores = [];
         this.state.db.ref("highscores").once("value").then(function(snapshot) {
             snapshot.forEach((score) => {
-                highscores.push(score);
+                const dbScore = {
+                    player: score.val().player,
+                    score: score.val().score
+                };
+                highscores.push(dbScore);
             })
             //sort highscores, set highscores state, show highscore board
         });
         highscores.sort(function(a, b){return a - b});
         this.setState({highscores: highscores});
+        this.setState({scoreboardShowing: "block"});
     }
 
     handleInputSubmit = (event) => {
@@ -270,12 +277,24 @@ class GameWindow extends Component {
                     height: 250,
                     width: 300,
                     zIndex: 3,
-                    display: this.state.popUpShowing
-                }}>
-                    <div style = {{height: 75, textAlign: "center", paddingTop: "5px",
-                        backgroundColor: "white", margin:"auto", fontFamily: "Georgia"}}>
-                        <b>{this.state.popUpText}</b>
-                    </div>
+                    display: this.state.popUpShowing,
+                    boxShadow: "1px 1px 1px 1px #08415C",
+                    borderRadius: "10px",
+                    textAlign: "center",
+                    fontSize: "large",
+                    fontFamily: "Georgia",
+                    color: "white",
+                    padding: 20
+                }}
+                     className="primaryBg">
+                    <b>{this.state.popUpText}</b>
+                    <button className="primaryBg" style = {{position: "absolute", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", width: 150, height: 40, fontSize: "large", fontFamily: "Georgia", color: "white", bottom: 60, left: 0, right: 0, margin: "auto"}}
+                            onClick={(e) => {this.handleOptionOne(e)}}>{this.state.popUpOptionOne}
+                    </button>
+                    <button className="primaryBg" style = {{position: "absolute", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", width: 150, height: 40, fontSize: "large", fontFamily: "Georgia", color: "white", bottom: 10, left: 0, right: 0, margin: "auto"}}
+                            onClick={(e) => {this.handleOptionTwo(e)}}>{this.state.popUpOptionTwo}
+                    </button>
+                </div>
                     <div style={{position: "relative", display: this.state.popUpButtonsShowing}}>
                         <button className="primaryBg" style = {{position: "absolute", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", width: 150, height: 40, fontSize: "large", fontFamily: "Georgia", color: "white", bottom: 60, left: 0, right: 0, margin: "auto"}}
                                 onClick={(e) => {this.handleOptionOne(e)}}>{this.state.popUpOptionOne}
@@ -285,7 +304,6 @@ class GameWindow extends Component {
                         </button>
                     </div>
                 </div>
-            </div>
         )
     }
 }
