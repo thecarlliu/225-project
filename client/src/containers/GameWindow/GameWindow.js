@@ -40,6 +40,7 @@ class GameWindow extends Component {
             currentScore: 0,
             highScore: 0,
             outsValue: "",
+            rightAnswerInfo: "",
             time: 15,
             lives: 3,
             isPressed:false,
@@ -80,7 +81,9 @@ class GameWindow extends Component {
         var hand = [];
         hand.push(this.state.userHand[0], this.state.userHand[1], this.state.flop[0], this.state.flop[1], this.state.flop[2]);
         console.log(hand);
-        this.state.outsValue = countOuts(hand).toString();
+        var result = countOuts(hand);
+        this.state.outsValue = result[0].toString();
+        this.state.rightAnswerInfo = result[1];
     }
 
     startTimer() {
@@ -158,7 +161,7 @@ class GameWindow extends Component {
             }
             else {
                 this.decrementLives();
-                this.showPopUp("Wrong! The correct answer is: " + this.state.outsValue, "Continue", "Quit");
+                this.showPopUp("Wrong! The correct answer is: " + this.state.outsValue + ". There was a(n) " + this.state.rightAnswerInfo + ".", "Continue", "Quit");
                 if(!this.stillLives()){
                     this.showPopUp("You lost! Do you want to try again?", "Yes", "No");
                 }
