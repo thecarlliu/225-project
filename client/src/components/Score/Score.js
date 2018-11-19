@@ -11,10 +11,8 @@ class Score extends Component {
 
     render() {
         return(
-            <div style = {{border:"5px solid black", fontFamily: "Georgia", fontSize:"large", position: "absolute", top: 50, right: 150, margin:"auto", height:"40px", lineHeight:"0px"}}>
-                <h3>
-                    <b>Score: {this.props.currentScore}</b>
-                </h3>
+            <div className="primaryBg" style={{position: "absolute", width: "200px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", top: 50, right: 110, height:"40px", fontFamily: "Georgia", fontSize: "large", textAlign: "center", lineHeight:"40px"}}>
+                <b>Score: {this.props.currentScore}</b>
             </div>
         )
     }

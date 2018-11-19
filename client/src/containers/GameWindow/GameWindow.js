@@ -20,6 +20,9 @@ const config = {
     messagingSenderId: "1083809629945"
 };
 
+// Variable so timer can be paused
+let tickingFunction = 0;
+
 const deck = ["AH","2H","3H","4H","5H","6H","7H","8H","9H","10H","JH","QH","KH",
     "AS","2S","3S","4S","5S","6S","7S","8S","9S","10S","JS","QS","KS",
     "AD","2D","3D","4D","5D","6D","7D","8D","9D","10D","JD","QD","KD",
@@ -41,7 +44,11 @@ class GameWindow extends Component {
             time: 15,
             lives: 3,
             isPressed:false,
-            highscores: []
+            highscores: [],
+            popUpShowing: "none",
+            popUpOptionOne: "",
+            popUpOptionTwo: "",
+            popUpText: ""
         };
     }
 
@@ -80,77 +87,89 @@ class GameWindow extends Component {
     }
 
     startTimer() {
-        setInterval(this.tick, 1000);
+        tickingFunction = setInterval(this.tick, 1000);
     }
 
     tick = () => {
         if (this.state.time <= 0) {
-            let outOfTime = window.confirm("You ran out of time! Try again");
-            if(outOfTime === true){
-                this.resetCards();
-                this.decrementLives();
-            }
+            this.showPopUp("You ran out of time!", "Try again", "Quit");
         }
         let currentTime = this.state.time;
         this.setState({time: currentTime - 1});
     };
 
-    //Resets the score to 0
+    /**
+     * Navigates back to a page
+     * @param e event triggering page change
+     * @param route page going to
+     */
+    changePage(e, route) {
+        e.preventDefault();
+        window.location.href = route;
+    }
+
+    /**
+     * Resets the score to 0
+     */
     resetScore(){
         this.setState({currentScore: 0});
     }
 
-    //Resets the lives to 3
+    /**
+     * Resets the lives to 3
+     */
     resetLives(){
         this.setState({lives: 3});
     }
 
-    // Decrements lives by 1
+    /**
+     * Decrements lives by 1
+     */
     decrementLives(){
         this.state.lives --;
     }
 
-    // Checks if the user still has lives
+    /**
+     * Checks if the user still has lives
+     */
     stillLives(){
         return(this.state.lives > 0);
+    }
+
+    /**
+     * Displays the popup and pauses the timer
+     * @param text feedback
+     * @param option1 button text
+     * @param option2 button text
+     */
+    showPopUp(text, option1, option2){
+        this.setState({popUpShowing: "block"});
+        clearInterval(tickingFunction);
+        this.setState({popUpText: text});
+        this.setState({popUpOptionOne: option1});
+        this.setState({popUpOptionTwo: option2});
     }
 
     updateScores() {
         if(this.state.isPressed) {
             if (this.state.outsValue === this.state.inputValue) {
-                let correctClick = window.confirm("Correct!");
-                if(correctClick === true){
-                    this.getHand();
-                    this.setState({time: 15});
-                }
+                this.showPopUp("Correct!", "Continue", "Quit");
                 this.setState({currentScore: this.state.currentScore + 10});
                 if (this.state.currentScore >= this.state.highScore) {
                     this.setState({highScore: this.state.highScore + 10});
                 }
-
             }
             else {
                 this.decrementLives();
-                let inCorrectClick = window.confirm("Wrong! The correct answer is " + this.state.outsValue + ". There was a(n) " + this.state.rightAnswerInfo + ".");
-                if(inCorrectClick === true && this.stillLives()){
-                    this.getHand();
-                    this.setState({time: 15});
+                this.showPopUp("Wrong! The correct answer is: " + this.state.outsValue + ". There was a(n) " + this.state.rightAnswerInfo + ".", "Continue", "Quit");
+                if(!this.stillLives()){
+                    this.showPopUp("You lost! Do you want to try again?", "Yes", "No");
                 }
-                else if (inCorrectClick === true && !this.stillLives()){
-                    let lostClick = window.confirm("You lost! Do you want to try again?");
-                    this.saveHighscore(this.state.currentScore);
-                    if(lostClick === true){
-                        this.resetCards();
-                        this.resetLives();
-                    }
-                    else {
                         //show user a list of highscores and button to play again
-                        this.resetScore();
-                    }
+                this.resetScore();
                 }
             }
         }
-    }
 
     saveHighscore  = (score) => {
         const newScore = {
@@ -186,16 +205,47 @@ class GameWindow extends Component {
         this.startTimer();
     };
 
-    resetCards(){
-        this.resetScore();
-        this.getHand();
+    /**
+     * Resets game state and  timer when popup option one is clicked
+     * If out of time, resets score and hand, decrements lives
+     * If the user has lost (out of lives), saves highscore and resets score, hand, and lives
+     * @param e
+     */
+    handleOptionOne = (e) => {
+        e.preventDefault();
+        this.setState({popUpShowing: "none"});
+        if(this.state.time <= 0){
+            this.resetScore();
+            this.getHand();
+            this.decrementLives();
+        }
+        if(this.stillLives()){
+            this.getHand();
+        }
+        if(!this.stillLives()) {
+            this.saveHighscore(this.state.currentScore);
+            this.resetScore();
+            this.getHand();
+            this.resetLives();
+        }
+        this.startTimer();
         this.setState({time: 15});
-    }
+    };
+
+    /**
+     * Navigates back to the home page when popup option two is clicked
+     * @param e
+     */
+    handleOptionTwo = (e) => {
+        e.preventDefault();
+        this.setState({popUpShowing: "none"});
+        this.changePage(e, "/home");
+    };
 
 
     render () {
         return (
-            <div>
+            <div style={{width:"100%", height:"100%", color:"white"}}>
                 <NavBar />
                 <Timer time={this.state.time}/>
                 <Cards userHand={[this.state.userHand[0], this.state.userHand[1]]}
@@ -205,6 +255,35 @@ class GameWindow extends Component {
                 <Input outsValue={this.state.outsValue} value={this.state.inputValue} changeHandler={this.handleInputChange} submitHandler={(e)=>{this.handleInputSubmit(e)}}/>
                 <HighScore highScore={this.state.highScore} />
                 <Lives lives = {this.state.lives}/>
+                {/*//popup*/}
+                <div style = {{
+                    position: "absolute",
+                    alignItems: "center",
+                    top: 200,
+                    left: 0,
+                    right: 0,
+                    margin: "auto",
+                    height: 250,
+                    width: 300,
+                    zIndex: 3,
+                    display: this.state.popUpShowing,
+                    boxShadow: "1px 1px 1px 1px #08415C",
+                    borderRadius: "10px",
+                    textAlign: "center",
+                    fontSize: "large",
+                    fontFamily: "Georgia",
+                    color: "white",
+                    padding: 20
+                }}
+                     className="primaryBg">
+                    <b>{this.state.popUpText}</b>
+                    <button className="primaryBg" style = {{position: "absolute", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", width: 150, height: 40, fontSize: "large", fontFamily: "Georgia", color: "white", bottom: 60, left: 0, right: 0, margin: "auto"}}
+                            onClick={(e) => {this.handleOptionOne(e)}}>{this.state.popUpOptionOne}
+                    </button>
+                    <button className="primaryBg" style = {{position: "absolute", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", width: 150, height: 40, fontSize: "large", fontFamily: "Georgia", color: "white", bottom: 10, left: 0, right: 0, margin: "auto"}}
+                            onClick={(e) => {this.handleOptionTwo(e)}}>{this.state.popUpOptionTwo}
+                    </button>
+                </div>
             </div>
         )
     }

@@ -4,27 +4,32 @@ class NavButton extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            route: this.props.route,
-            label: this.props.label,
-            left: this.props.left
+            fontColor: "#08415C"
         }
-    }
+    };
 
     changePage(e, route) {
         e.preventDefault();
         window.location.href = route;
     }
 
+    setFontWhite = () => {
+        this.setState({fontColor: "white"});
+    };
+    setFontBlue = () => {
+        this.setState({fontColor: "#08415C"});
+    };
+
     render() {
         return(
-            <div style={{
-                width:"50px",
-                display:"inline-block",
-                position:"absolute",
-                left: this.state.left,
-                top: "15px"
-            }} onClick={(e)=>{this.changePage(e, this.state.route)}}>
-                {this.state.label}
+            <div style={{fontFamily: "Georgia", fontSize: "xx-large", textAlign: "center"}}
+                 onClick={(e)=>{this.changePage(e, this.props.route)}}
+                 onMouseEnter={this.setFontWhite}
+                 onMouseLeave={this.setFontBlue}>
+                <a style={{textDecoration: "none", color: this.state.fontColor}}
+                   href={this.props.route}>
+                    <b>{this.props.label}</b>
+                </a>
             </div>
         )
     }
