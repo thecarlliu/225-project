@@ -10,6 +10,8 @@ import countOuts from "../../algorithm/algorithm.js";
 import firebase from "firebase";
 import Lives from "../../components/Lives";
 
+import hand from "../../handCreator/handCreator.js"
+
 //Firebase Db stuff
 const config = {
     apiKey: "AIzaSyD7UxJviUIXoSSfcmdUx-c13mEWbyEOXNY",
@@ -58,21 +60,14 @@ class GameWindow extends Component {
         this.setState({db: db});
     }
 
+
+
+
     getHand() {
-        let hand = new Array(5),
-            used = new Array(5),
-            len = deck.length,
-            n=0;
-        while (n < 5) {
-            let x = Math.floor(Math.random() * len);
-            hand[n] = deck[x in used ? used[x] : x];
-            used[x] = --len in used ? used[len] : len; //https://stackoverflow.com/questions/19269545/how-to-get-n-no-elements-randomly-from-an-array
-            n++;
-        }
-        // this.setState({userHand: [hand[0],hand[1]], flop: [hand[2],hand[3],hand[4]]}, that.outsCounter());
-        this.state.userHand = [hand[0], hand[1]];
-        this.state.flop = [hand[2], hand[3], hand[4]];
-        this.outsCounter();
+      let userHand = hand();
+      this.state.userHand = [userHand[0], userHand[1]];
+      this.state.flop = [userHand[2], userHand[3], userHand[4]];
+      this.outsCounter();
     }
 
     outsCounter() {
