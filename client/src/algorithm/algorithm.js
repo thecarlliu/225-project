@@ -129,8 +129,4 @@
     }
   };
 
-const testCount = function(nothig) {
-    return "1";
-};
-
 export default countOuts;
