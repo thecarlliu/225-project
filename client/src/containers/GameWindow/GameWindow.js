@@ -9,6 +9,7 @@ import PlayButton from "../../components/PlayButton";
 import countOuts from "../../algorithm/algorithm.js";
 import firebase from "firebase";
 import Lives from "../../components/Lives";
+import Scoreboard from "../../components/Scoreboard";
 
 import hand from "../../handCreator/handCreator.js"
 
@@ -53,7 +54,7 @@ class GameWindow extends Component {
             popUpOptionOne: "",
             popUpOptionTwo: "",
             popUpText: "",
-            scoreboardShowing: "none"
+            scoreboard: "none"
         };
     }
 
@@ -163,9 +164,7 @@ class GameWindow extends Component {
                 this.showPopUp("Wrong! The correct answer is: " + this.state.outsValue + ". There was " + this.state.rightAnswerInfo + ".", "Continue", "Quit");
                 if(!this.stillLives()){
                     this.showPopUp("You lost! Do you want to try again?", "Yes", "No");
-                    this.setState({popUpShowing: "none"});
                     console.log(this.state.highscores);
-                    this.showHighscores();
                 }
                         //show user a list of highscores and button to play again
                 this.resetScore();
@@ -195,7 +194,7 @@ class GameWindow extends Component {
         });
         highscores.sort(function(a, b){return a - b});
         this.setState({highscores: highscores});
-        this.setState({scoreboardShowing: "block"});
+        this.setState({scoreboard: "block"});
     }
 
     handleInputSubmit = (event) => {
@@ -248,6 +247,9 @@ class GameWindow extends Component {
     handleOptionTwo = (e) => {
         e.preventDefault();
         this.setState({popUpShowing: "none"});
+        if(!this.stillLives()){
+            this.showHighscores();
+        }
         this.changePage(e, "/home");
     };
 
@@ -264,11 +266,12 @@ class GameWindow extends Component {
                 <Input outsValue={this.state.outsValue} value={this.state.inputValue} changeHandler={this.handleInputChange} submitHandler={(e)=>{this.handleInputSubmit(e)}}/>
                 <HighScore highScore={this.state.highScore} />
                 <Lives lives = {this.state.lives}/>
+                <Scoreboard scoreboard = {this.state.scoreboard}/>
                 {/*//popup*/}
                 <div style = {{
                     position: "absolute",
                     alignItems: "center",
-                    top: 200,
+                    top: 155,
                     left: 0,
                     right: 0,
                     margin: "auto",
