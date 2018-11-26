@@ -48,7 +48,7 @@ import countOuts from "../algorithm/algorithm.js";
 
     handNums[4] = extraCard;
 
-    if(countOuts(hand)[0] === 8){
+    if(countOuts(handNums)[0] === 8){
       return handNums;
     }
     else{
@@ -81,7 +81,7 @@ import countOuts from "../algorithm/algorithm.js";
         }
       }
     }
-    if(countOuts(hand)[0] === 4){
+    if(countOuts(handNums)[0] === 4){
       return handNums;
     }
     else{
@@ -103,7 +103,7 @@ import countOuts from "../algorithm/algorithm.js";
       handNums[i] = nums[cardIndex + i] + getRandomItem(suits);
     }
 
-    if(countOuts(hand)[0] === 8){
+    if(countOuts(handNums)[0] === 8){
       return handNums;
     }
     else{
@@ -137,7 +137,7 @@ import countOuts from "../algorithm/algorithm.js";
     nums.splice(cardIndex, 5);
     handNums[cardRemovedIndex] = getRandomItem(nums) + suit;
 
-    if(countOuts(hand)[0] === 12){
+    if(countOuts(handNums)[0] === 12){
       return handNums;
     }
     else{
@@ -170,7 +170,7 @@ import countOuts from "../algorithm/algorithm.js";
     nums.splice(cardIndex - 1, 6);
     handNums[4] = getRandomItem(nums) + suit;
 
-    if(countOuts(hand)[0] === 15){
+    if(countOuts(handNums)[0] === 15){
       return handNums;
     }
     else{
@@ -247,7 +247,7 @@ import countOuts from "../algorithm/algorithm.js";
 
 
   const hand = function(){
-    let handTypeIndex = 6;//getRandomIndex(0, 6);
+    let handTypeIndex = 5;//getRandomIndex(0, 6);
     let userHand = [];
 
     if(handTypeIndex === 0){
