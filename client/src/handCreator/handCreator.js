@@ -3,7 +3,7 @@ import countOuts from "../algorithm/algorithm.js";
 
   function getFlushDraw(){
     let suits = ['S', 'H', 'D', 'C'],
-      nums = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'],
+      nums = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'],
       handNums = ['','','','',''];
 
     let suitIndex = getRandomIndex(0, suits.length);
@@ -19,7 +19,12 @@ import countOuts from "../algorithm/algorithm.js";
 
     handNums[4] = getRandomItem(nums) + getRandomItem(suits);
 
-    return handNums;
+    if(countOuts(handNums)[0] === 9){
+      return handNums;
+    }
+    else{
+      return getFlushDraw();
+    }
   }
 
   function getOutsideStraightDraw(){
@@ -42,7 +47,13 @@ import countOuts from "../algorithm/algorithm.js";
     }
 
     handNums[4] = extraCard;
-    return handNums
+
+    if(countOuts(hand)[0] === 8){
+      return handNums;
+    }
+    else{
+      return getOutsideStraightDraw();
+    }
   }
 
   function getInsideStraightDraw(){
@@ -70,7 +81,12 @@ import countOuts from "../algorithm/algorithm.js";
         }
       }
     }
-    return handNums
+    if(countOuts(hand)[0] === 4){
+      return handNums;
+    }
+    else{
+      return getInsideStraightDraw();
+    }
   }
 
   function getDoubleInsideStraightDraw(){
@@ -87,7 +103,12 @@ import countOuts from "../algorithm/algorithm.js";
       handNums[i] = nums[cardIndex + i] + getRandomItem(suits);
     }
 
-    return handNums;
+    if(countOuts(hand)[0] === 8){
+      return handNums;
+    }
+    else{
+      return getDoubleInsideStraightDraw();
+    }
 
   }
 
@@ -116,7 +137,12 @@ import countOuts from "../algorithm/algorithm.js";
     nums.splice(cardIndex, 5);
     handNums[cardRemovedIndex] = getRandomItem(nums) + suit;
 
-    return handNums;
+    if(countOuts(hand)[0] === 12){
+      return handNums;
+    }
+    else{
+      return getFlushAndInsideDraw();
+    }
   }
 
   function getFlushAndOutsideDraw(){
@@ -144,7 +170,12 @@ import countOuts from "../algorithm/algorithm.js";
     nums.splice(cardIndex - 1, 6);
     handNums[4] = getRandomItem(nums) + suit;
 
-    return handNums;
+    if(countOuts(hand)[0] === 15){
+      return handNums;
+    }
+    else{
+      return getFlushAndOutsideDraw();
+    }
   }
 
   function getRandomHand(){
@@ -165,7 +196,7 @@ import countOuts from "../algorithm/algorithm.js";
         handIndex++;
     }
 
-    if(countOuts(hand) === 0){
+    if(countOuts(hand)[0] === 0){
       return hand;
     }
     else{
@@ -216,7 +247,7 @@ import countOuts from "../algorithm/algorithm.js";
 
 
   const hand = function(){
-    let handTypeIndex = getRandomIndex(0, 6);
+    let handTypeIndex = 0;//getRandomIndex(0, 6);
     let userHand = [];
 
     if(handTypeIndex === 0){
