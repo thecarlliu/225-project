@@ -5,18 +5,18 @@ class Scoreboard extends Component {
         super(props);
     };
     render(){
-        return(
+        return (
         <div style = {{
             position: "absolute",
             alignItems: "center",
-            top: 200,
+            top: 125,
             left: 0,
             right: 0,
             margin: "auto",
-            height: 250,
+            height: 300,
             width: 300,
             zIndex: 3,
-            display: this.state.scoreboardShowing,
+            display: this.props.scoreboard,
             boxShadow: "1px 1px 1px 1px #08415C",
             borderRadius: "10px",
             textAlign: "center",
@@ -25,7 +25,8 @@ class Scoreboard extends Component {
             color: "white",
             padding: 20
         }} className="primaryBg">
-            <ul>{this.state.highscores}</ul>
+            <h3>High Scores</h3>
+            <list>{this.props.highscores}</list>
 
         </div>
         )
