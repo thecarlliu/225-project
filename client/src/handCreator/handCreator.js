@@ -276,7 +276,7 @@ import countOuts from "../algorithm/algorithm.js";
 
 
   const hand = function(){
-    let handTypeIndex = 6;//getRandomIndex(0, 6);
+    let handTypeIndex = getRandomIndex(0, 7);
     let userHand = [];
 
     if(handTypeIndex === 0){
