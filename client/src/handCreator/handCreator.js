@@ -3,7 +3,7 @@ import countOuts from "../algorithm/algorithm.js";
 
   function getFlushDraw(){
     let suits = ['S', 'H', 'D', 'C'],
-      nums = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'],
+      nums = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'],
       handNums = ['','','','',''];
 
     let suitIndex = getRandomIndex(0, suits.length);
@@ -19,8 +19,38 @@ import countOuts from "../algorithm/algorithm.js";
 
     handNums[4] = getRandomItem(nums) + getRandomItem(suits);
 
-    return handNums;
+    if(countOuts(handNums)[0] === 9){
+      return handNums;
+    }
+    else{
+      return getFlushDraw();
+    }
   }
+
+  function getSetDraw(){
+    let suits = ['S', 'H', 'D', 'C'],
+      nums = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'],
+      handNums = ['','','','',''];
+
+    let pairIndex = getRandomIndex(0, nums.length),
+        suitIndexOne = getRandomIndex(0, suits.length),
+        suitsIndexTwo = getDifferentIndex(suitIndexOne, 0, suits.length);
+
+    handNums[0] = nums[pairIndex] + suits[suitIndexOne];
+    handNums[1] = nums[pairIndex] + suits[suitsIndexTwo];
+
+    nums.splice(pairIndex, 1);
+
+    for(var i = 2; i < 5; i++){
+      let numIndex = getRandomIndex(0, nums.length);
+      handNums[i] = nums[numIndex] + getRandomItem(suits);
+      nums.splice(numIndex, 1);
+    }
+
+    return handNums;
+
+  }
+
 
   function getOutsideStraightDraw(){
     let suits = ['S', 'H', 'D', 'C'],
@@ -42,8 +72,15 @@ import countOuts from "../algorithm/algorithm.js";
     }
 
     handNums[4] = extraCard;
-    return handNums
+
+    if(countOuts(handNums)[0] === 8){
+      return handNums;
+    }
+    else{
+      return getOutsideStraightDraw();
+    }
   }
+
 
   function getInsideStraightDraw(){
     let suits = ['S', 'H', 'D', 'C'],
@@ -70,8 +107,14 @@ import countOuts from "../algorithm/algorithm.js";
         }
       }
     }
-    return handNums
+    if(countOuts(handNums)[0] === 4){
+      return handNums;
+    }
+    else{
+      return getInsideStraightDraw();
+    }
   }
+
 
   function getDoubleInsideStraightDraw(){
     let suits = ['S', 'H', 'D', 'C'],
@@ -87,7 +130,12 @@ import countOuts from "../algorithm/algorithm.js";
       handNums[i] = nums[cardIndex + i] + getRandomItem(suits);
     }
 
-    return handNums;
+    if(countOuts(handNums)[0] === 8){
+      return handNums;
+    }
+    else{
+      return getDoubleInsideStraightDraw();
+    }
 
   }
 
@@ -116,8 +164,14 @@ import countOuts from "../algorithm/algorithm.js";
     nums.splice(cardIndex, 5);
     handNums[cardRemovedIndex] = getRandomItem(nums) + suit;
 
-    return handNums;
+    if(countOuts(handNums)[0] === 12){
+      return handNums;
+    }
+    else{
+      return getFlushAndInsideDraw();
+    }
   }
+
 
   function getFlushAndOutsideDraw(){
     let suits = ['S', 'H', 'D', 'C'],
@@ -144,8 +198,14 @@ import countOuts from "../algorithm/algorithm.js";
     nums.splice(cardIndex - 1, 6);
     handNums[4] = getRandomItem(nums) + suit;
 
-    return handNums;
+    if(countOuts(handNums)[0] === 15){
+      return handNums;
+    }
+    else{
+      return getFlushAndOutsideDraw();
+    }
   }
+
 
   function getRandomHand(){
     const deck = ["AH","2H","3H","4H","5H","6H","7H","8H","9H","10H","JH","QH","KH",
@@ -165,7 +225,7 @@ import countOuts from "../algorithm/algorithm.js";
         handIndex++;
     }
 
-    if(countOuts(hand) === 0){
+    if(countOuts(hand)[0] === 0){
       return hand;
     }
     else{
@@ -216,7 +276,7 @@ import countOuts from "../algorithm/algorithm.js";
 
 
   const hand = function(){
-    let handTypeIndex = getRandomIndex(0, 6);
+    let handTypeIndex = getRandomIndex(0, 7);
     let userHand = [];
 
     if(handTypeIndex === 0){
@@ -236,6 +296,9 @@ import countOuts from "../algorithm/algorithm.js";
     }
     else if(handTypeIndex === 5){
       userHand = getFlushAndOutsideDraw();
+    }
+    else if(handTypeIndex === 6){
+      userHand = getSetDraw();
     }
     else{
       userHand = getRandomHand();

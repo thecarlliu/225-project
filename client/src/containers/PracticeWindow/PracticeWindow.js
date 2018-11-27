@@ -48,7 +48,9 @@ class GameWindow extends Component {
         var hand = [];
         hand.push(this.state.userHand[0], this.state.userHand[1], this.state.flop[0], this.state.flop[1], this.state.flop[2]);
         console.log(hand);
-        this.state.outsValue = countOuts(hand).toString();
+        var result = countOuts(hand);
+        this.state.outsValue = result[0].toString();
+        this.state.rightAnswerInfo = result[1];
     }
 
     //Resets the score to 0
@@ -84,7 +86,7 @@ class GameWindow extends Component {
                 this.setState({currentScore: this.state.currentScore + 10});
             }
             else {
-                this.showPopUp("Wrong! The correct answer is: " + this.state.outsValue);
+              this.showPopUp("Wrong! The correct answer is: " + this.state.outsValue + ". There was " + this.state.rightAnswerInfo + ".", "Continue", "Quit");
                 // this.getHand();
                 this.resetScore();
             }
