@@ -243,7 +243,7 @@ import countOuts from "../algorithm/algorithm.js";
   function getDifferentIndex(usedIndex, min, choices){
     let index = getRandomIndex(min, choices);
     if(index === usedIndex){
-      return getDifferentIndex();
+      return getDifferentIndex(usedIndex, min, choices);
     }
     else{
       return index;
@@ -276,34 +276,33 @@ import countOuts from "../algorithm/algorithm.js";
 
 
   const hand = function(){
-    let handTypeIndex = getRandomIndex(0, 7);
+    let handTypeIndex = 4;//getRandomIndex(0, 7);
     let userHand = [];
-
-    if(handTypeIndex === 0){
-      userHand = getFlushDraw();
-    }
-    else if(handTypeIndex === 1){
-      userHand = getOutsideStraightDraw();
-    }
-    else if(handTypeIndex === 2){
-      userHand = getInsideStraightDraw();
-    }
-    else if(handTypeIndex === 3){
-      userHand = getDoubleInsideStraightDraw();
-    }
-    else if(handTypeIndex === 4){
-      userHand = getFlushAndInsideDraw();
-    }
-    else if(handTypeIndex === 5){
-      userHand = getFlushAndOutsideDraw();
-    }
-    else if(handTypeIndex === 6){
-      userHand = getSetDraw();
-    }
-    else{
-      userHand = getRandomHand();
-    }
-
+    switch(handTypeIndex) {
+      case 0:
+          userHand = getFlushDraw();
+          break;
+      case 1:
+          userHand = getOutsideStraightDraw();
+          break;
+      case 2:
+          userHand = getInsideStraightDraw();
+          break;
+      case 3:
+          userHand = getDoubleInsideStraightDraw();
+          break;
+      case 4:
+          userHand = getFlushAndInsideDraw();
+          break;
+      case 5:
+          userHand = getFlushAndOutsideDraw();
+          break;
+      case 6:
+          userHand = getSetDraw();
+          break;
+      default:
+          userHand = getRandomHand();
+        };
 
     return randomizeCards(userHand);
   }
