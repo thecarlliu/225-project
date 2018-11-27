@@ -27,6 +27,31 @@ import countOuts from "../algorithm/algorithm.js";
     }
   }
 
+  function getSetDraw(){
+    let suits = ['S', 'H', 'D', 'C'],
+      nums = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'],
+      handNums = ['','','','',''];
+
+    let pairIndex = getRandomIndex(0, nums.length),
+        suitIndexOne = getRandomIndex(0, suits.length),
+        suitsIndexTwo = getDifferentIndex(suitIndexOne, 0, suits.length);
+
+    handNums[0] = nums[pairIndex] + suits[suitIndexOne];
+    handNums[1] = nums[pairIndex] + suits[suitsIndexTwo];
+
+    nums.splice(pairIndex, 1);
+
+    for(var i = 2; i < 5; i++){
+      let numIndex = getRandomIndex(0, nums.length);
+      handNums[i] = nums[numIndex] + getRandomItem(suits);
+      nums.splice(numIndex, 1);
+    }
+
+    return handNums;
+
+  }
+
+
   function getOutsideStraightDraw(){
     let suits = ['S', 'H', 'D', 'C'],
       nums = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'],
@@ -55,6 +80,7 @@ import countOuts from "../algorithm/algorithm.js";
       return getOutsideStraightDraw();
     }
   }
+
 
   function getInsideStraightDraw(){
     let suits = ['S', 'H', 'D', 'C'],
@@ -88,6 +114,7 @@ import countOuts from "../algorithm/algorithm.js";
       return getInsideStraightDraw();
     }
   }
+
 
   function getDoubleInsideStraightDraw(){
     let suits = ['S', 'H', 'D', 'C'],
@@ -145,6 +172,7 @@ import countOuts from "../algorithm/algorithm.js";
     }
   }
 
+
   function getFlushAndOutsideDraw(){
     let suits = ['S', 'H', 'D', 'C'],
         nums = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'],
@@ -177,6 +205,7 @@ import countOuts from "../algorithm/algorithm.js";
       return getFlushAndOutsideDraw();
     }
   }
+
 
   function getRandomHand(){
     const deck = ["AH","2H","3H","4H","5H","6H","7H","8H","9H","10H","JH","QH","KH",
@@ -247,7 +276,7 @@ import countOuts from "../algorithm/algorithm.js";
 
 
   const hand = function(){
-    let handTypeIndex = 5;//getRandomIndex(0, 6);
+    let handTypeIndex = 6;//getRandomIndex(0, 6);
     let userHand = [];
 
     if(handTypeIndex === 0){
@@ -267,6 +296,9 @@ import countOuts from "../algorithm/algorithm.js";
     }
     else if(handTypeIndex === 5){
       userHand = getFlushAndOutsideDraw();
+    }
+    else if(handTypeIndex === 6){
+      userHand = getSetDraw();
     }
     else{
       userHand = getRandomHand();
