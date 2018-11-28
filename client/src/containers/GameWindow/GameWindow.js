@@ -276,6 +276,12 @@ class GameWindow extends Component {
                 }}
                      className="primaryBg">
                     <b>{this.state.popUpText}</b>
+
+                    <div>
+                      <div class="trapezoidRight" style={{backgroundColor:this.state.borderColor}}></div>
+                      <div class="trapezoidLeft" style={{backgroundColor:this.state.borderColor}}></div>
+                    </div>
+                    
                     <div style={{
                       position: "absolute",
                       alignItems: "center",
