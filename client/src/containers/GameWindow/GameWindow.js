@@ -164,10 +164,9 @@ class GameWindow extends Component {
                 this.showPopUp("Wrong! The correct answer is: " + this.state.outsValue + ". There was " + this.state.rightAnswerInfo + ".", "Continue", "Quit");
                 if(!this.stillLives()){
                     this.showPopUp("You lost! Do you want to try again?", "Yes", "No");
-                    console.log(this.state.highscores);
+                    this.showHighscores();
                 }
                         //show user a list of highscores and button to play again
-                this.resetScore();
                 }
             }
         }
@@ -175,25 +174,43 @@ class GameWindow extends Component {
     saveHighscore  = (score) => {
         const newScore = {
             score: score,
-            player: "Billy"
+            player: this.state.playerName
         };
         this.state.db.ref("highscores").push(newScore);
     };
 
     showHighscores() {
-        const highscores = [];
+        let highscores = [];
         this.state.db.ref("highscores").once("value").then(function(snapshot) {
             snapshot.forEach((score) => {
                 const dbScore = {
                     player: score.val().player,
                     score: score.val().score
                 };
+                let i = 0;
+                let maxlen = 10;
+                while (i < Math.min(highscores.length, maxlen)) { // courtesy of Logan Caraco
+                    if (highscores[i].score <= dbScore.score) { // adapted from: https://stackoverflow.com/questions/45147420/insert-object-into-array-at-specific-index-in-react
+                        highscores = [
+                            ...highscores.slice(0, i),
+                            dbScore,
+                            ...highscores.slice(i)
+                        ];
+                        highscores = highscores.slice(0, maxlen);
+                        // console.log(highscores);
+                        return;
+                    }
+                    i++;
+                }
                 highscores.push(dbScore);
-            })
-            //sort highscores, set highscores state, show highscore board
-        });
-        highscores.sort(function(a, b){return a - b});
-        this.setState({highscores: highscores});
+                highscores = highscores.slice(0, maxlen);
+                // console.log(highscores);
+            });
+        }).then(function(snapshot){this.setState({highscores: highscores})});
+        //sort highscores, set highscores state, show highscore board
+        // console.log(highscores);
+        // console.log(highscores);
+        console.log(this.state.highscores);
         this.setState({scoreboard: "block"});
     }
 
@@ -223,7 +240,6 @@ class GameWindow extends Component {
         e.preventDefault();
         this.setState({popUpShowing: "none"});
         if(this.state.time <= 0){
-            this.resetScore();
             this.getHand();
             this.decrementLives();
         }
