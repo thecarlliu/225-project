@@ -9,6 +9,7 @@ import PlayButton from "../../components/PlayButton";
 import countOuts from "../../algorithm/algorithm.js";
 import firebase from "firebase";
 import Lives from "../../components/Lives";
+import Scoreboard from "../../components/Scoreboard";
 
 import hand from "../../handCreator/handCreator.js"
 
@@ -46,10 +47,13 @@ class GameWindow extends Component {
             lives: 3,
             isPressed:false,
             highscores: [],
+            playerName: "",
             popUpShowing: "none",
+            popUpButtonsShowing: "none",
             popUpOptionOne: "",
             popUpOptionTwo: "",
             popUpText: "",
+            scoreboard: "none",
             borderColor: "#0f0"
         };
     }
@@ -140,6 +144,7 @@ class GameWindow extends Component {
      */
     showPopUp(text, option1, option2){
         this.setState({popUpShowing: "block"});
+        this.setState({popUpButtonsShowing: "block"});
         clearInterval(tickingFunction);
         this.setState({popUpText: text});
         this.setState({popUpOptionOne: option1});
@@ -161,10 +166,10 @@ class GameWindow extends Component {
                 this.showPopUp("Wrong! The correct answer is: " + countOuts(this.state.userHand + this.state.flop).toString(), "Continue", "Quit");
                 if(!this.stillLives()){
                     this.showPopUp("You lost! Do you want to try again?", "Yes", "No");
+                    this.showHighscores();
                 }
                 this.setState({borderColor: "#f00"});
                         //show user a list of highscores and button to play again
-                this.resetScore();
                 }
             }
         }
@@ -172,19 +177,44 @@ class GameWindow extends Component {
     saveHighscore  = (score) => {
         const newScore = {
             score: score,
-            player: "Billy"
+            player: this.state.playerName
         };
         this.state.db.ref("highscores").push(newScore);
     };
 
     showHighscores() {
-        const highscores = [];
+        let highscores = [];
         this.state.db.ref("highscores").once("value").then(function(snapshot) {
             snapshot.forEach((score) => {
-                highscores.push(score);
-            })
-            //sort highscores, set highscores state, show highscore board
-        })
+                const dbScore = {
+                    player: score.val().player,
+                    score: score.val().score
+                };
+                let i = 0;
+                let maxlen = 10;
+                while (i < Math.min(highscores.length, maxlen)) { // courtesy of Logan Caraco
+                    if (highscores[i].score <= dbScore.score) { // adapted from: https://stackoverflow.com/questions/45147420/insert-object-into-array-at-specific-index-in-react
+                        highscores = [
+                            ...highscores.slice(0, i),
+                            dbScore,
+                            ...highscores.slice(i)
+                        ];
+                        highscores = highscores.slice(0, maxlen);
+                        // console.log(highscores);
+                        return;
+                    }
+                    i++;
+                }
+                highscores.push(dbScore);
+                highscores = highscores.slice(0, maxlen);
+                // console.log(highscores);
+            });
+        }).then(function(snapshot){this.setState({highscores: highscores})});
+        //sort highscores, set highscores state, show highscore board
+        // console.log(highscores);
+        // console.log(highscores);
+        console.log(this.state.highscores);
+        this.setState({scoreboard: "block"});
     }
 
     handleInputSubmit = (event) => {
@@ -213,7 +243,6 @@ class GameWindow extends Component {
         e.preventDefault();
         this.setState({popUpShowing: "none"});
         if(this.state.time <= 0){
-            this.resetScore();
             this.getHand();
             this.decrementLives();
         }
@@ -237,6 +266,9 @@ class GameWindow extends Component {
     handleOptionTwo = (e) => {
         e.preventDefault();
         this.setState({popUpShowing: "none"});
+        if(!this.stillLives()){
+            this.showHighscores();
+        }
         this.changePage(e, "/home");
     };
 
@@ -253,6 +285,7 @@ class GameWindow extends Component {
                 <Input outsValue={this.state.outsValue} value={this.state.inputValue} changeHandler={this.handleInputChange} submitHandler={(e)=>{this.handleInputSubmit(e)}}/>
                 <HighScore highScore={this.state.highScore} />
                 <Lives lives = {this.state.lives}/>
+                <Scoreboard scoreboard = {this.state.scoreboard}/>
                 {/*//popup*/}
                 <div style = {{
                     position: "absolute",
@@ -303,7 +336,15 @@ class GameWindow extends Component {
                             onClick={(e) => {this.handleOptionTwo(e)}}>{this.state.popUpOptionTwo}
                     </button>
                 </div>
-            </div>
+                    <div style={{position: "relative", display: this.state.popUpButtonsShowing}}>
+                        <button className="primaryBg" style = {{position: "absolute", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", width: 150, height: 40, fontSize: "large", fontFamily: "Georgia", color: "white", bottom: 60, left: 0, right: 0, margin: "auto"}}
+                                onClick={(e) => {this.handleOptionOne(e)}}>{this.state.popUpOptionOne}
+                        </button>
+                        <button className="primaryBg" style = {{position: "absolute", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", width: 150, height: 40, fontSize: "large", fontFamily: "Georgia", color: "white", bottom: 10, left: 0, right: 0, margin: "auto"}}
+                                onClick={(e) => {this.handleOptionTwo(e)}}>{this.state.popUpOptionTwo}
+                        </button>
+                    </div>
+                </div>
         )
     }
 }
