@@ -144,11 +144,11 @@ class GameWindow extends Component {
                 <div style = {{
                     position: "absolute",
                     alignItems: "center",
-                    top: 200,
+                    top: 135,
                     left: 0,
                     right: 0,
                     margin: "auto",
-                    height: 250,
+                    height: 280,
                     width: 300,
                     zIndex: 3,
                     display: this.state.popUpShowing,
