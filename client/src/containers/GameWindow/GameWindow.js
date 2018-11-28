@@ -291,10 +291,14 @@ class GameWindow extends Component {
                     position: "absolute",
                     alignItems: "center",
 <<<<<<< HEAD
+<<<<<<< HEAD
                     top: 135,
 =======
                     top: 155,
 >>>>>>> 5ae85b9afba0ad0926cf1d1842e6a9c72a74fda4
+=======
+                    top: 135,
+>>>>>>> 43b42fd706ecd2f9b919ef43d301d8ba7d375e6d
                     left: 0,
                     right: 0,
                     margin: "auto",
