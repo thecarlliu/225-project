@@ -28,7 +28,8 @@ class GameWindow extends Component {
             popUpShowing: "none",
             popUpOptionOne: "",
             popUpOptionTwo: "",
-            popUpText: ""
+            popUpText: "",
+            borderColor: "#0f0"
         };
     }
 
@@ -84,9 +85,11 @@ class GameWindow extends Component {
             if (this.state.outsValue === this.state.inputValue) {
                 this.showPopUp("Correct!");
                 this.setState({currentScore: this.state.currentScore + 10});
+                this.setState({borderColor: "#0f0"});
             }
             else {
               this.showPopUp("Wrong! The correct answer is: " + this.state.outsValue + ". There was " + this.state.rightAnswerInfo + ".", "Continue", "Quit");
+              this.setState({borderColor: "#f00"});
                 // this.getHand();
                 this.resetScore();
             }
@@ -155,10 +158,31 @@ class GameWindow extends Component {
                     fontSize: "large",
                     fontFamily: "Georgia",
                     color: "white",
-                    padding: 20
+                    padding: 20,
+                    border: "5px solid" + this.state.borderColor,
                 }}
                      className="primaryBg">
                     <b>{this.state.popUpText}</b>
+
+                    <div>
+                      <div class="trapezoidRight" style={{backgroundColor:this.state.borderColor}}></div>
+                      <div class="trapezoidLeft" style={{backgroundColor:this.state.borderColor}}></div>
+                    </div>
+
+                    <div style={{
+                      position: "absolute",
+                      alignItems: "center",
+                      top: 100,
+                      left: 0,
+                      right: 0,
+                      margin: "auto",
+                    }}>
+                        <img src={"images/"+this.state.userHand[0]+".png"} style={{width: "40px", height: "60px", padding:"5px"}}/>
+                        <img src={"images/"+this.state.userHand[1]+".png"} style={{width: "40px", height: "60px", padding:"5px"}}/>
+                        <img src={"images/"+this.state.flop[0]+".png"} style={{width: "40px", height: "60px", padding:"5px"}}/>
+                        <img src={"images/"+this.state.flop[1]+".png"} style={{width: "40px", height: "60px", padding:"5px"}}/>
+                        <img src={"images/"+this.state.flop[2]+".png"} style={{width: "40px", height: "60px", padding:"5px"}}/>
+                    </div>
                     <button className="primaryBg" style = {{position: "absolute", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", width: 150, height: 40, fontSize: "large", fontFamily: "Georgia", color: "white", bottom: 60, left: 0, right: 0, margin: "auto"}}
                             onClick={(e) => {this.handleOptionOne(e)}}>{this.state.popUpOptionOne}
                     </button>

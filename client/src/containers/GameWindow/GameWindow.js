@@ -43,7 +43,6 @@ class GameWindow extends Component {
             currentScore: 0,
             highScore: 0,
             outsValue: "",
-            rightAnswerInfo: "",
             time: 15,
             lives: 3,
             isPressed:false,
@@ -54,7 +53,8 @@ class GameWindow extends Component {
             popUpOptionOne: "",
             popUpOptionTwo: "",
             popUpText: "",
-            scoreboard: "none"
+            scoreboard: "none",
+            borderColor: "#0f0"
         };
     }
 
@@ -80,9 +80,7 @@ class GameWindow extends Component {
         var hand = [];
         hand.push(this.state.userHand[0], this.state.userHand[1], this.state.flop[0], this.state.flop[1], this.state.flop[2]);
         console.log(hand);
-        var result = countOuts(hand);
-        this.state.outsValue = result[0].toString();
-        this.state.rightAnswerInfo = result[1];
+        this.state.outsValue = countOuts(hand)[0].toString();
     }
 
     startTimer() {
@@ -91,10 +89,13 @@ class GameWindow extends Component {
 
     tick = () => {
         if (this.state.time <= 0) {
-            this.showPopUp("You ran out of time!", "Try again", "Quit");
+          this.showPopUp("You ran out of time!", "Try again", "Quit");
+          this.setState({borderColor: "#f00"})
         }
-        let currentTime = this.state.time;
-        this.setState({time: currentTime - 1});
+        else{
+          let currentTime = this.state.time;
+          this.setState({time: currentTime - 1});
+        }
     };
 
     /**
@@ -158,14 +159,16 @@ class GameWindow extends Component {
                 if (this.state.currentScore >= this.state.highScore) {
                     this.setState({highScore: this.state.highScore + 10});
                 }
+                this.setState({borderColor: "#0f0"});
             }
             else {
                 this.decrementLives();
-                this.showPopUp("Wrong! The correct answer is: " + this.state.outsValue + ". There was " + this.state.rightAnswerInfo + ".", "Continue", "Quit");
+                this.showPopUp("Wrong! The correct answer is: " + countOuts(this.state.userHand + this.state.flop).toString(), "Continue", "Quit");
                 if(!this.stillLives()){
                     this.showPopUp("You lost! Do you want to try again?", "Yes", "No");
                     this.showHighscores();
                 }
+                this.setState({borderColor: "#f00"});
                         //show user a list of highscores and button to play again
                 }
             }
@@ -301,10 +304,31 @@ class GameWindow extends Component {
                     fontSize: "large",
                     fontFamily: "Georgia",
                     color: "white",
-                    padding: 20
+                    padding: 20,
+                    border: "5px solid" + this.state.borderColor,
                 }}
                      className="primaryBg">
                     <b>{this.state.popUpText}</b>
+
+                    <div>
+                      <div class="trapezoidRight" style={{backgroundColor:this.state.borderColor}}></div>
+                      <div class="trapezoidLeft" style={{backgroundColor:this.state.borderColor}}></div>
+                    </div>
+                    
+                    <div style={{
+                      position: "absolute",
+                      alignItems: "center",
+                      top: 100,
+                      left: 0,
+                      right: 0,
+                      margin: "auto",
+                    }}>
+                        <img src={"images/"+this.state.userHand[0]+".png"} style={{width: "40px", height: "60px", padding:"5px"}}/>
+                        <img src={"images/"+this.state.userHand[1]+".png"} style={{width: "40px", height: "60px", padding:"5px"}}/>
+                        <img src={"images/"+this.state.flop[0]+".png"} style={{width: "40px", height: "60px", padding:"5px"}}/>
+                        <img src={"images/"+this.state.flop[1]+".png"} style={{width: "40px", height: "60px", padding:"5px"}}/>
+                        <img src={"images/"+this.state.flop[2]+".png"} style={{width: "40px", height: "60px", padding:"5px"}}/>
+                    </div>
                     <button className="primaryBg" style = {{position: "absolute", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", width: 150, height: 40, fontSize: "large", fontFamily: "Georgia", color: "white", bottom: 60, left: 0, right: 0, margin: "auto"}}
                             onClick={(e) => {this.handleOptionOne(e)}}>{this.state.popUpOptionOne}
                     </button>

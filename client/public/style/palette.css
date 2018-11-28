@@ -16,3 +16,23 @@
 .tertiaryFont {
     color: #29353B;
 }
+
+.trapezoidLeft {
+  position: absolute;
+  width: 20px;
+  height: 150px;
+  top: 70px;
+  transform: perspective(10px) rotateY(8deg);
+  right: 320px;
+  display: inline-block;
+}
+
+.trapezoidRight {
+  position: absolute;
+  width: 20px;
+  height: 150px;
+  top: 70px;
+  transform: perspective(10px) rotateY(-8deg);
+  display: inline-block;
+  left: 320px;
+}
