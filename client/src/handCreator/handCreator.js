@@ -256,7 +256,7 @@ import countOuts from "../algorithm/algorithm.js";
 
   function randomizeCards(cards){
     let indecies = [0, 1, 2, 3, 4],
-        hand = ['', '', '', '', ''];
+        hand = ['', '', null, '', ''];
 
     for(var i = 0; i < 5; i++){
       let index = getRandomIndex(0, indecies.length);

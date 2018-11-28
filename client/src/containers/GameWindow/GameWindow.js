@@ -49,7 +49,8 @@ class GameWindow extends Component {
             popUpShowing: "none",
             popUpOptionOne: "",
             popUpOptionTwo: "",
-            popUpText: ""
+            popUpText: "",
+            borderColor: "#0f0"
         };
     }
 
@@ -84,10 +85,13 @@ class GameWindow extends Component {
 
     tick = () => {
         if (this.state.time <= 0) {
-            this.showPopUp("You ran out of time!", "Try again", "Quit");
+          this.showPopUp("You ran out of time!", "Try again", "Quit");
+          this.setState({borderColor: "#f00"})
         }
-        let currentTime = this.state.time;
-        this.setState({time: currentTime - 1});
+        else{
+          let currentTime = this.state.time;
+          this.setState({time: currentTime - 1});
+        }
     };
 
     /**
@@ -150,6 +154,7 @@ class GameWindow extends Component {
                 if (this.state.currentScore >= this.state.highScore) {
                     this.setState({highScore: this.state.highScore + 10});
                 }
+                this.setState({borderColor: "#0f0"});
             }
             else {
                 this.decrementLives();
@@ -157,6 +162,7 @@ class GameWindow extends Component {
                 if(!this.stillLives()){
                     this.showPopUp("You lost! Do you want to try again?", "Yes", "No");
                 }
+                this.setState({borderColor: "#f00"});
                         //show user a list of highscores and button to play again
                 this.resetScore();
                 }
@@ -265,7 +271,8 @@ class GameWindow extends Component {
                     fontSize: "large",
                     fontFamily: "Georgia",
                     color: "white",
-                    padding: 20
+                    padding: 20,
+                    border: "5px solid" + this.state.borderColor,
                 }}
                      className="primaryBg">
                     <b>{this.state.popUpText}</b>
