@@ -159,6 +159,20 @@ class GameWindow extends Component {
                 }}
                      className="primaryBg">
                     <b>{this.state.popUpText}</b>
+                    <div style={{
+                      position: "absolute",
+                      alignItems: "center",
+                      top: 100,
+                      left: 0,
+                      right: 0,
+                      margin: "auto",
+                    }}>
+                        <img src={"images/"+this.state.userHand[0]+".png"} style={{width: "40px", height: "60px", padding:"5px"}}/>
+                        <img src={"images/"+this.state.userHand[1]+".png"} style={{width: "40px", height: "60px", padding:"5px"}}/>
+                        <img src={"images/"+this.state.flop[0]+".png"} style={{width: "40px", height: "60px", padding:"5px"}}/>
+                        <img src={"images/"+this.state.flop[1]+".png"} style={{width: "40px", height: "60px", padding:"5px"}}/>
+                        <img src={"images/"+this.state.flop[2]+".png"} style={{width: "40px", height: "60px", padding:"5px"}}/>
+                    </div>
                     <button className="primaryBg" style = {{position: "absolute", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", width: 150, height: 40, fontSize: "large", fontFamily: "Georgia", color: "white", bottom: 60, left: 0, right: 0, margin: "auto"}}
                             onClick={(e) => {this.handleOptionOne(e)}}>{this.state.popUpOptionOne}
                     </button>
