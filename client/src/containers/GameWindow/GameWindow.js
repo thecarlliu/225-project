@@ -48,6 +48,7 @@ class GameWindow extends Component {
             isPressed:false,
             highscores: [],
             playerName: "",
+            nameInput: "none",
             popUpShowing: "none",
             popUpButtonsShowing: "none",
             popUpOptionOne: "",
@@ -62,6 +63,10 @@ class GameWindow extends Component {
         const app = firebase.initializeApp(config);
         const db = app.database();
         this.setState({db: db});
+    }
+
+    componentDidMount() {
+        this.retrieveHighScores();
     }
 
 
@@ -167,6 +172,7 @@ class GameWindow extends Component {
                 if(!this.stillLives()){
                     this.showPopUp("You lost! Do you want to try again?", "Yes", "No");
                     this.showHighscores();
+                    console.log(this.state.highscores);
                 }
                 this.setState({borderColor: "#f00"});
                         //show user a list of highscores and button to play again
@@ -182,8 +188,13 @@ class GameWindow extends Component {
         this.state.db.ref("highscores").push(newScore);
     };
 
-    showHighscores() {
+    /**
+     * Adds highscores to an array and sorts in descending order
+     * Sets highscores state to array
+     */
+    retrieveHighScores(){
         let highscores = [];
+        let that = this;
         this.state.db.ref("highscores").once("value").then(function(snapshot) {
             snapshot.forEach((score) => {
                 const dbScore = {
@@ -192,7 +203,7 @@ class GameWindow extends Component {
                 };
                 let i = 0;
                 let maxlen = 10;
-                while (i < Math.min(highscores.length, maxlen)) { // courtesy of Logan Caraco
+                while (i < Math.min(highscores.length, maxlen)) { // with the help of Logan Caraco
                     if (highscores[i].score <= dbScore.score) { // adapted from: https://stackoverflow.com/questions/45147420/insert-object-into-array-at-specific-index-in-react
                         highscores = [
                             ...highscores.slice(0, i),
@@ -207,14 +218,22 @@ class GameWindow extends Component {
                 }
                 highscores.push(dbScore);
                 highscores = highscores.slice(0, maxlen);
+                // that.state.highscores = highscores;
                 // console.log(highscores);
             });
-        }).then(function(snapshot){this.setState({highscores: highscores})});
-        //sort highscores, set highscores state, show highscore board
-        // console.log(highscores);
-        // console.log(highscores);
-        console.log(this.state.highscores);
+            // console.log(highscores);
+            that.setState({highscores: highscores.slice()});
+        });
+    }
+
+    /**
+     * Shows highscores on scoreboard
+     */
+    showHighscores() {
+        // this.state.highscores = highscores;
         this.setState({scoreboard: "block"});
+        //sort highscores, set highscores state, show highscore board
+        // console.log(this.state.highscores);
     }
 
     handleInputSubmit = (event) => {
@@ -267,9 +286,12 @@ class GameWindow extends Component {
         e.preventDefault();
         this.setState({popUpShowing: "none"});
         if(!this.stillLives()){
+            this.showPopUp("Save highscore?", "Yes", "No");
             this.showHighscores();
         }
-        this.changePage(e, "/home");
+        else{
+            this.changePage(e, "/home");
+        }
     };
 
 
@@ -335,6 +357,14 @@ class GameWindow extends Component {
                     <button className="primaryBg" style = {{position: "absolute", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", width: 150, height: 40, fontSize: "large", fontFamily: "Georgia", color: "white", bottom: 10, left: 0, right: 0, margin: "auto"}}
                             onClick={(e) => {this.handleOptionTwo(e)}}>{this.state.popUpOptionTwo}
                     </button>
+                </div>
+                <div style = {{position: "relative", display: this.state.nameInput}}>
+                    <form onSubmit={(e)=>{this.handleSubmit(e)}}>
+                        <label>
+                            <b>Name: </b><input type="text" value={this.state.value} onChange={(e)=>{this.handleChange(e)}} />
+                        </label>
+                        <input type="submit" value="Submit" />
+                    </form>
                 </div>
                     <div style={{position: "relative", display: this.state.popUpButtonsShowing}}>
                         <button className="primaryBg" style = {{position: "absolute", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", width: 150, height: 40, fontSize: "large", fontFamily: "Georgia", color: "white", bottom: 60, left: 0, right: 0, margin: "auto"}}
