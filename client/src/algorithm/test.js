@@ -21,6 +21,16 @@ function cardFreqs(cardVals) {
   return counts;
 }
 
+function noPair(cardVals) {
+  freqs = cardFreqs(cardVals);
+  for (var key in freqs) {
+    if (freqs[key] != 1) {
+      return false;
+    }
+  }
+  return true;
+}
+
 function removeDups(cardVals) {
   cardVals.sort()
   var unique = {};
@@ -187,5 +197,13 @@ describe('countOuts()', function() {
     assert.equal(countOuts(['AH','2S','3S','4S','9S']), 12);
     assert.equal(countOuts(['9H','2S','3S','4S','5S']), 15);
     assert.equal(countOuts(['AH','2S','3D','7C','11S']), 0);
+  });
+});
+
+describe('noPair()', function() {
+  it('should return correct number of outs', function() {
+    assert.equal(noPair([1,2,3,4,5]), true);
+    assert.equal(noPair([1,2,3,3,5]), false);
+    assert.equal(noPair([3,3,3,4,5]), false);
   });
 });

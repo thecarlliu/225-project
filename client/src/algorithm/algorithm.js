@@ -20,6 +20,23 @@
     return counts;
   }
 
+  function noPair(cardVals) {
+    freqs = cardFreqs(cardVals);
+    for (var key in freqs) {
+      if (freqs[key] != 1) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  //4, 1
+  //3, 2
+  //3, 1, 1
+  //2, 2, 1
+  //2, 1, 1, 1
+  //1, 1, 1, 1, 1
+
 //thanks internet for this one (mostly)
   function removeDups(cardVals) {
     cardVals.sort()
@@ -123,6 +140,7 @@
     var flushDraw = isFlushDraw(cardSuits);
     var insideStraightDraw = isInsideStraightDraw(cardVals);
     var outsideStraightDraw = isOutsideStraightDraw(cardVals);
+    var noPair = noPair(cardVals);
     if (outsideStraightDraw && flushDraw) {
       return [15, "an outside straight draw and flush draw"];
     } else if (insideStraightDraw && flushDraw) {
@@ -133,6 +151,8 @@
       return [4, "an inside straight draw"];
     } else if (flushDraw){
       return [9, "a flush draw"];
+    } else if (noPair) {
+      return [6, "no pair"];
     } else {
       return [0, "nothing"];
     }
