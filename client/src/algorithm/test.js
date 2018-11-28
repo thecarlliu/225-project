@@ -12,6 +12,15 @@ function isFlushDraw(cardSuits) {
   return false;
 }
 
+function cardFreqs(cardVals) {
+  var counts = {};
+  for (var i = 0; i < cardVals.length; i++) {
+    var card = cardVals[i];
+    counts[card] = counts[card] ? counts[card] + 1 : 1; //isn't js great
+  }
+  return counts;
+}
+
 function removeDups(cardVals) {
   cardVals.sort()
   var unique = {};

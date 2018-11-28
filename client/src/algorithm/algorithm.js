@@ -11,6 +11,15 @@
     return false;
   }
 
+  function cardFreqs(cardVals) {
+    var counts = {};
+    for (var i = 0; i < cardVals.length; i++) {
+      var card = cardVals[i];
+      counts[card] = counts[card] ? counts[card] + 1 : 1; //isn't js great
+    }
+    return counts;
+  }
+
 //thanks internet for this one (mostly)
   function removeDups(cardVals) {
     cardVals.sort()
