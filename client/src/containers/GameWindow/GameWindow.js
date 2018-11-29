@@ -51,6 +51,7 @@ class GameWindow extends Component {
             nameInput: "none",
             popUpShowing: "none",
             popUpButtonsShowing: "none",
+            popUpCardsShowing: "none",
             popUpOptionOne: "",
             popUpOptionTwo: "",
             popUpText: "",
@@ -154,6 +155,7 @@ class GameWindow extends Component {
         this.setState({popUpText: text});
         this.setState({popUpOptionOne: option1});
         this.setState({popUpOptionTwo: option2});
+        this.setState({popUpCardsShowing: "block"});
     }
 
     updateScores() {
@@ -171,7 +173,6 @@ class GameWindow extends Component {
                 this.showPopUp("Wrong! The correct answer is: " + countOuts(this.state.userHand + this.state.flop).toString(), "Continue", "Quit");
                 if(!this.stillLives()){
                     this.showPopUp("You lost! Do you want to try again?", "Yes", "No");
-                    this.showHighscores();
                     console.log(this.state.highscores);
                 }
                 this.setState({borderColor: "#f00"});
@@ -211,18 +212,16 @@ class GameWindow extends Component {
                             ...highscores.slice(i)
                         ];
                         highscores = highscores.slice(0, maxlen);
-                        // console.log(highscores);
                         return;
                     }
                     i++;
                 }
                 highscores.push(dbScore);
                 highscores = highscores.slice(0, maxlen);
-                // that.state.highscores = highscores;
-                // console.log(highscores);
             });
             // console.log(highscores);
             that.setState({highscores: highscores.slice()});
+            // console.log(that.state.highscores);
         });
     }
 
@@ -230,7 +229,6 @@ class GameWindow extends Component {
      * Shows highscores on scoreboard
      */
     showHighscores() {
-        // this.state.highscores = highscores;
         this.setState({scoreboard: "block"});
         //sort highscores, set highscores state, show highscore board
         // console.log(this.state.highscores);
@@ -244,6 +242,16 @@ class GameWindow extends Component {
 
     handleInputChange = (value) => {
         this.setState({inputValue: value});
+    };
+
+    handleNameInputSubmit = (event) => {
+        event.preventDefault();
+        this.setState({playerName: ""});
+        console.log(this.state.playerName);
+    };
+
+    handleNameInputChange = (name) => {
+        this.setState({playerName: name.target.name});
     };
 
     buttonPressed = () => {
@@ -269,13 +277,20 @@ class GameWindow extends Component {
             this.getHand();
         }
         if(!this.stillLives()) {
-            this.saveHighscore(this.state.currentScore);
-            this.resetScore();
-            this.getHand();
-            this.resetLives();
+            if(this.state.scoreboard = "block"){
+                this.setState({nameInput: "none"});
+            }
+            else{
+                this.saveHighscore(this.state.currentScore);
+                this.resetScore();
+                this.getHand();
+                this.resetLives();
+            }
         }
-        this.startTimer();
-        this.setState({time: 15});
+        else{
+            this.startTimer();
+            this.setState({time: 15});
+        }
     };
 
     /**
@@ -287,6 +302,8 @@ class GameWindow extends Component {
         this.setState({popUpShowing: "none"});
         if(!this.stillLives()){
             this.showPopUp("Save highscore?", "Yes", "No");
+            this.setState({nameInput: "block"});
+            this.setState({popUpCardsShowing: "none"});
             this.showHighscores();
         }
         else{
@@ -344,6 +361,7 @@ class GameWindow extends Component {
                       left: 0,
                       right: 0,
                       margin: "auto",
+                      display: this.state.popUpCardsShowing
                     }}>
                         <img src={"images/"+this.state.userHand[0]+".png"} style={{width: "40px", height: "60px", padding:"5px"}}/>
                         <img src={"images/"+this.state.userHand[1]+".png"} style={{width: "40px", height: "60px", padding:"5px"}}/>
@@ -358,14 +376,14 @@ class GameWindow extends Component {
                             onClick={(e) => {this.handleOptionTwo(e)}}>{this.state.popUpOptionTwo}
                     </button>
                 </div>
-                <div style = {{position: "relative", display: this.state.nameInput}}>
-                    <form onSubmit={(e)=>{this.handleSubmit(e)}}>
-                        <label>
-                            <b>Name: </b><input type="text" value={this.state.value} onChange={(e)=>{this.handleChange(e)}} />
-                        </label>
-                        <input type="submit" value="Submit" />
-                    </form>
-                </div>
+                    <div style = {{position: "absolute", width: "250px", display: this.state.nameInput, left: 0, right: 0, margin: "auto", top: "220px", borderRadius: "10px", height:"80px", fontFamily: "Georgia", fontSize: "large", textAlign: "center", lineHeight: "40px", zIndex: 4}}>
+                        <form onSubmit={(e)=>{this.handleNameInputSubmit(e)}}>
+                            <label>
+                                <b>Name: </b><input type="text" value={this.state.value} onChange={(e)=>{this.handleNameInputChange(e)}} />
+                            </label>
+                            <input type="submit" value="Submit" />
+                        </form>
+                    </div>
                     <div style={{position: "relative", display: this.state.popUpButtonsShowing}}>
                         <button className="primaryBg" style = {{position: "absolute", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", width: 150, height: 40, fontSize: "large", fontFamily: "Georgia", color: "white", bottom: 60, left: 0, right: 0, margin: "auto"}}
                                 onClick={(e) => {this.handleOptionOne(e)}}>{this.state.popUpOptionOne}
