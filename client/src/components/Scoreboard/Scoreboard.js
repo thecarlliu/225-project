@@ -3,6 +3,10 @@ import React, { Component } from "react";
 class Scoreboard extends Component {
     constructor(props){
         super(props);
+        this.state = {
+            highscores: [],
+            scoreboard: "none"
+        }
     };
     render(){
         return (
@@ -19,14 +23,25 @@ class Scoreboard extends Component {
             display: this.props.scoreboard,
             boxShadow: "1px 1px 1px 1px #08415C",
             borderRadius: "10px",
-            textAlign: "center",
+            textAlign: "left",
             fontSize: "large",
             fontFamily: "Georgia",
             color: "white",
             padding: 20
         }} className="primaryBg">
-            <h3>High Scores</h3>
-            <list>{this.props.highscores}</list>
+            <h3 style = {{textAlign: "center"}}>High Scores</h3>
+           <ol>
+               <li>{this.state.highscores}</li>
+               <li>{this.props.highscores}</li>
+               <li>{this.props.highscores}</li>
+               <li>{this.props.highscores}</li>
+               <li>{this.props.highscores}</li>
+               <li>{this.props.highscores}</li>
+               <li>{this.props.highscores}</li>
+               <li>{this.props.highscores}</li>
+               <li>{this.props.highscores}</li>
+               <li>{this.props.highscores}</li>
+               </ol>
 
         </div>
         )
