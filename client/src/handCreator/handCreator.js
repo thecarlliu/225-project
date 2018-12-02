@@ -1,6 +1,33 @@
 import countOuts from "../algorithm/algorithm.js";
 
 
+  function getTopPairDraw(){
+    let suits = ['S', 'H', 'D', 'C'],
+      nums = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'],
+      handNums = ['','','','',''];
+
+    let suitIndex = getRandomIndex(0, suits.length);
+    let suit = suits[suitIndex];
+
+    suits.splice(suitIndex, 1);
+
+    for(var i=0; i < 5; i++){
+      let cardIndex = getRandomIndex(0, nums.length);
+      let suitIndex = getRandomIndex(0, suits.length);
+      handNums[i] = nums[cardIndex] + suits[suitIndex];
+      nums.splice(cardIndex, 1);
+    }
+
+    handNums[4] = getRandomItem(nums) + getRandomItem(suits);
+
+    if(countOuts(handNums)[0] === 6){
+      return handNums;
+    }
+    else{
+      return getTopPairDraw();
+    }
+  }
+
   function getFlushDraw(){
     let suits = ['S', 'H', 'D', 'C'],
       nums = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'],
