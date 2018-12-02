@@ -93,20 +93,20 @@ const listHands = [
       cards: ["7H", "9D", "8D", "2D", "6D"],
       importantCards: [0, 1, 2, 4, 5],
       drawName: "Flush and Outside Straight Draw",
-      outs: "12"
+      outs: "15"
     },
     {
       cards: ["9S", "QH", "4H", "10H", "JH"],
       importantCards: [0, 1, 2, 4, 5],
       drawName: "Flush and Outside Straight Draw",
-      outs: "12"
+      outs: "15"
     },
     {
-        cards: [],
-        importantCards: [],
-        drawName: "",
-        outs: ""
-    }
+      cards: ["9S", "QH", "4H", "10H", "JH"],
+      importantCards: [0, 1, 2, 4, 5],
+      drawName: "Flush and Outside Straight Draw",
+      outs: "15"
+    },
 ];
 
 export default listHands;
