@@ -200,7 +200,7 @@ class Rules extends Component {
                     </div>
                 </div>
 
-                <div style={{left:0, right:0, margin:"auto", position:"fixed", width:"75%", height:"50px"}}>
+                <div style={{left:0, right:0, margin:"auto", position:"absolute", width:"75%", height:"50px"}}>
                     <button style={{left:400, right:0, margin:"auto", position:"fixed", display:"block", top:"350px", width: "150px", height:"80px", lineHeight:"25px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", backgroundColor:this.state.flushButCol}}>
                         <div onClick={(e) => {this.flushButton(e)}}
                             style={{fontFamily: "Georgia", fontSize: "xx-large", textAlign: "center"}}
@@ -210,7 +210,7 @@ class Rules extends Component {
                         </div>
                     </button>
 
-                    <button style={{left:0, right:400, margin:"auto", position:"fixed", display:"block", top:"350px", width: "150px", height:"80px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", backgroundColor:this.state.inButCol}}>
+                    <button style={{left:0, right:400, margin:"auto", position:"absolute", display:"block", top:"350px", width: "150px", height:"80px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", backgroundColor:this.state.inButCol}}>
                           <div onClick={(e) => {this.insideButton(e)}}
                               style={{fontFamily: "Georgia", fontSize: "large", textAlign: "center"}}
                               onMouseEnter={this.setInFontWhite}
@@ -219,7 +219,7 @@ class Rules extends Component {
                         </div>
                     </button>
 
-                    <button style={{left:0, right:0, margin:"auto", position:"fixed", display:"block", top:"350px", width: "150px", height:"80px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", backgroundColor:this.state.outButCol}}>
+                    <button style={{left:0, right:0, margin:"auto", position:"absolute", display:"block", top:"350px", width: "150px", height:"80px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", backgroundColor:this.state.outButCol}}>
                         <div onClick={(e) => {this.outsideButton(e)}}
                             style={{fontFamily: "Georgia", fontSize: "large", textAlign: "center"}}
                             onMouseEnter={this.setOutFontWhite}

@@ -1,8 +1,5 @@
 import React, { Component } from "react";
 
-/**
- * Creates a scoreboard to display top ten high scores
- */
 class Scoreboard extends Component {
     constructor(props){
         super(props);
@@ -41,7 +38,7 @@ class Scoreboard extends Component {
             display: this.props.scoreboard,
             boxShadow: "1px 1px 1px 1px #08415C",
             borderRadius: "10px",
-            textAlign: "left",
+            textAlign: "center",
             fontSize: "large",
             fontFamily: "Georgia",
             color: "white",
