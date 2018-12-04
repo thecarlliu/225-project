@@ -7,6 +7,7 @@ import PlayButton from "../../components/PlayButton";
 import countOuts from "../../algorithm/algorithm.js";
 
 import hand from "../../handCreator/handCreator.js"
+import $ from "jquery";
 
 const deck = ["AH","2H","3H","4H","5H","6H","7H","8H","9H","10H","JH","QH","KH",
     "AS","2S","3S","4S","5S","6S","7S","8S","9S","10S","JS","QS","KS",
@@ -119,6 +120,8 @@ class GameWindow extends Component {
         e.preventDefault();
         this.setState({popUpShowing: "none"});
         this.getHand();
+        //cursor automatically brought to input
+        $("#input-box").focus();
     };
 
     /**

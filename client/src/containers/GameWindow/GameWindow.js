@@ -10,6 +10,7 @@ import countOuts from "../../algorithm/algorithm.js";
 import firebase from "firebase";
 import Lives from "../../components/Lives";
 import Scoreboard from "../../components/Scoreboard";
+import $ from "jquery";
 
 import hand from "../../handCreator/handCreator.js"
 
@@ -257,6 +258,8 @@ class GameWindow extends Component {
         }
         this.startTimer();
         this.setState({time: 15});
+        //cursor automatically brought to input
+        $("#input-box").focus();
     };
 
     /**
