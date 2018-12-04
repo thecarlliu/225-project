@@ -83,16 +83,20 @@ class GameWindow extends Component {
 
     updateScores() {
         if(this.state.isPressed) {
-            if (this.state.outsValue === this.state.inputValue) {
-                this.showPopUp("Correct!");
-                this.setState({currentScore: this.state.currentScore + 10});
-                this.setState({borderColor: "#0f0"});
-            }
-            else {
-              this.showPopUp("Wrong! The correct answer is: " + this.state.outsValue + ". There was " + this.state.rightAnswerInfo + ".", "Continue", "Quit");
-              this.setState({borderColor: "#f00"});
-                // this.getHand();
-                this.resetScore();
+            if (this.state.inputValue!=="") {
+                if (this.state.outsValue === this.state.inputValue) {
+                    this.showPopUp("Correct!");
+                    $("#input-box").attr("disabled", "true");
+                    this.setState({currentScore: this.state.currentScore + 10});
+                    this.setState({borderColor: "#0f0"});
+                }
+                else {
+                    this.showPopUp("Wrong! The correct answer is: " + this.state.outsValue + ". There was " + this.state.rightAnswerInfo + ".", "Continue", "Quit");
+                    $("#input-box").attr("disabled", "true");
+                    this.setState({borderColor: "#f00"});
+                    // this.getHand();
+                    this.resetScore();
+                }
             }
         }
     }
@@ -121,6 +125,7 @@ class GameWindow extends Component {
         this.setState({popUpShowing: "none"});
         this.getHand();
         //cursor automatically brought to input
+        $("#input-box").removeAttr("disabled");
         $("#input-box").focus();
     };
 
