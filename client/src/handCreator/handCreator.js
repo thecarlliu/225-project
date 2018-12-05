@@ -1,36 +1,10 @@
 import countOuts from "../algorithm/algorithm.js";
 
 
-  function getTopPairDraw(){
-    let suits = ['S', 'H', 'D', 'C'],
-      nums = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'],
-      handNums = ['','','','',''];
-
-    let suitIndex = getRandomIndex(0, suits.length);
-    let suit = suits[suitIndex];
-
-    suits.splice(suitIndex, 1);
-
-    for(var i=0; i < 5; i++){
-      let cardIndex = getRandomIndex(0, nums.length);
-      let suitIndex = getRandomIndex(0, suits.length);
-      handNums[i] = nums[cardIndex] + suits[suitIndex];
-      nums.splice(cardIndex, 1);
-    }
-
-    handNums[4] = getRandomItem(nums) + getRandomItem(suits);
-
-    if(countOuts(handNums)[0] === 6){
-      return handNums;
-    }
-    else{
-      return getTopPairDraw();
-    }
-  }
 
   function getFlushDraw(){
     let suits = ['S', 'H', 'D', 'C'],
-      nums = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'],
+      nums = ['C', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'],
       handNums = ['','','','',''];
 
     let suitIndex = getRandomIndex(0, suits.length);
@@ -56,7 +30,7 @@ import countOuts from "../algorithm/algorithm.js";
 
   function getSetDraw(){
     let suits = ['S', 'H', 'D', 'C'],
-      nums = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'],
+      nums = ['C', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'],
       handNums = ['','','','',''];
 
     let pairIndex = getRandomIndex(0, nums.length),
@@ -81,7 +55,7 @@ import countOuts from "../algorithm/algorithm.js";
 
   function getOutsideStraightDraw(){
     let suits = ['S', 'H', 'D', 'C'],
-      nums = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'],
+      nums = ['C', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'C'],
       handNums = ['','','','',''];
 
     let cardIndex = getRandomIndex(1, nums.length-6);
@@ -111,7 +85,7 @@ import countOuts from "../algorithm/algorithm.js";
 
   function getInsideStraightDraw(){
     let suits = ['S', 'H', 'D', 'C'],
-        nums = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'],
+        nums = ['C', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'C'],
         handNums = ['','','','',''];
 
     let cardIndex = getRandomIndex(0, nums.length-5),
@@ -145,7 +119,7 @@ import countOuts from "../algorithm/algorithm.js";
 
   function getDoubleInsideStraightDraw(){
     let suits = ['S', 'H', 'D', 'C'],
-        nums = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'],
+        nums = ['C', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'C'],
         handNums = ['','','','',''];
 
     let cardIndex = getRandomIndex(0, nums.length-7);
@@ -168,7 +142,7 @@ import countOuts from "../algorithm/algorithm.js";
 
   function getFlushAndInsideDraw(){
     let suits = ['S', 'H', 'D', 'C'],
-        nums = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'],
+        nums = ['C', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'C'],
         handNums = ['','','','',''];
 
     let suitIndex = getRandomIndex(0, suits.length),
@@ -202,7 +176,7 @@ import countOuts from "../algorithm/algorithm.js";
 
   function getFlushAndOutsideDraw(){
     let suits = ['S', 'H', 'D', 'C'],
-        nums = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'],
+        nums = ['C', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'C'],
         handNums = ['','','','',''];
 
     let suitIndex = getRandomIndex(0, suits.length),
@@ -235,10 +209,10 @@ import countOuts from "../algorithm/algorithm.js";
 
 
   function getRandomHand(){
-    const deck = ["AH","2H","3H","4H","5H","6H","7H","8H","9H","10H","JH","QH","KH",
-        "AS","2S","3S","4S","5S","6S","7S","8S","9S","10S","JS","QS","KS",
-        "AD","2D","3D","4D","5D","6D","7D","8D","9D","10D","JD","QD","KD",
-        "AC","2C","3C","4C","5C","6C","7C","8C","9C","10C","JC","QC","KC"];
+    const deck = ["CH","2H","3H","4H","5H","6H","7H","8H","9H","10H","JH","QH","KH",
+        "CS","2S","3S","4S","5S","6S","7S","8S","9S","10S","JS","QS","KS",
+        "CD","2D","3D","4D","5D","6D","7D","8D","9D","10D","JD","QD","KD",
+        "CC","2C","3C","4C","5C","6C","7C","8C","9C","10C","JC","QC","KC"];
 
     let hand = new Array(5),
         used = new Array(5),

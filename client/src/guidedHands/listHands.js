@@ -1,6 +1,6 @@
 const listHands = [
     {//flush draws
-        cards: ["AH", "4H", "3C", "QH", "8H"],
+        cards: ["CH", "4H", "3C", "QH", "8H"],
         importantCards: [0,1,3,4],
         drawName: "Flush Draw",
         outs: "9"
@@ -12,7 +12,7 @@ const listHands = [
         outs: "9"
     },
     {
-        cards: ["6H", "7C", "10C", "2C", "AC"],
+        cards: ["6H", "7C", "10C", "2C", "CC"],
         importantCards: [1, 2, 3, 4],
         drawName: "Flush Draw",
         outs: "9"
@@ -36,7 +36,7 @@ const listHands = [
         outs: "8"
     },
     {//inside straight draws
-        cards: ["AS", "2D", "3C", "10C", "4D"],
+        cards: ["CS", "2D", "3C", "10C", "4D"],
         importantCards: [0, 1, 2, 4],
         drawName: "Inside Straight Draw",
         outs: "4"
@@ -54,7 +54,7 @@ const listHands = [
         outs: "4"
     },
     {//double inside straight draws
-      cards: ["AH", "5S", "3D", "6D", "4S"],
+      cards: ["CH", "5S", "3D", "6D", "4S"],
       importantCards: [0, 1, 2, 4, 5],
       drawName: "Double Inside Straight Draw",
       outs: "8"
