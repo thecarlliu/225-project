@@ -212,20 +212,18 @@ class GameWindow extends Component {
             this.getHand();
         }
         if(!this.stillLives()) {
-            if(this.state.scoreboard = "block"){
-                this.setState({nameInput: "none"});
-            }
-            else{
+            if(this.state.currentScore >= this.state.highscores.score){
+                // this.showPopUp("Congrats! You're in the top 10! Save highscore?", "Yes", "No");
+                // this.setState({nameInput: "block"});
                 this.saveHighscore(this.state.currentScore);
-                this.resetScore();
-                this.getHand();
-                this.resetLives();
             }
+            this.resetScore();
+            this.getHand();
+            this.resetLives();
         }
-        else{
-            this.startTimer();
-            this.setState({time: 15});
-        }
+        this.startTimer();
+        this.setState({time: 15});
+
         $("#input-box").removeAttr("disabled");
         //cursor automatically brought to input
         $("#input-box").focus();
