@@ -4,6 +4,7 @@ import Score from "../../components/Score";
 import Input from "../../components/Input";
 import NavBar from "../../components/NavBar";
 import PlayButton from "../../components/PlayButton";
+import {changePage} from "../../components/NavButton/NavButton";
 import countOuts from "../../algorithm/algorithm.js";
 
 import hand from "../../handCreator/handCreator.js"
@@ -57,16 +58,6 @@ class GameWindow extends Component {
     //Resets the score to 0
     resetScore(){
         this.setState({currentScore: 0});
-    }
-
-    /**
-     * Navigates back to a page
-     * @param e event triggering page change
-     * @param route page going to
-     */
-    changePage(e, route) {
-        e.preventDefault();
-        window.location.href = route;
     }
 
     /**
@@ -128,7 +119,7 @@ class GameWindow extends Component {
     handleOptionTwo = (e) => {
         e.preventDefault();
         this.setState({popUpShowing: "none"});
-        this.changePage(e, "/home");
+        changePage(e, "/home");
     };
 
     render () {
