@@ -96,7 +96,7 @@
     for (var i = 0; i < cards.length; i++) {
       var cardRank = cards[i].slice(0,cards[i].length - 1);
       cardSuits.push(cards[i].slice(cards[i].length - 1, cards[i].length));
-      if (cardRank === "A") {
+      if (cardRank === "C") {
         cardVals.push(14);
       } else if (cardRank === "K") {
         cardVals.push(13);

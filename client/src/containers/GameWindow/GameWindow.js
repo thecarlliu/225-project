@@ -69,6 +69,7 @@ class GameWindow extends Component {
         hand.push(this.state.userHand[0], this.state.userHand[1], this.state.flop[0], this.state.flop[1], this.state.flop[2]);
         console.log(hand);
         this.state.outsValue = countOuts(hand)[0].toString();
+        this.state.rightAnswerInfo = countOuts(hand);
     }
 
     startTimer() {
@@ -147,7 +148,7 @@ class GameWindow extends Component {
                         }
                         else {
                             this.decrementLives();
-                            this.showPopUp("Wrong! The correct answer is: " + countOuts(this.state.userHand + this.state.flop).toString(), "Continue", "Quit");
+                            this.showPopUp("Wrong! The correct answer is: " + this.state.rightAnswerInfo.toString(), "Continue", "Quit");
                             $("#input-box").attr("disabled", "true");
                             if (!this.stillLives()) {
                                 this.showPopUp("You lost! Do you want to try again?", "Yes", "No");
