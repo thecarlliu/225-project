@@ -20,8 +20,18 @@
     return counts;
   }
 
-  function noPair(cardVals) {
-    freqs = cardFreqs(cardVals);
+  function onePair(cardFreqs) {
+    var count = 0;
+    for (var key in freqs) {
+      count++;
+      if (freqs[key] === 1 || freqs[key] === 4) {
+        return false;
+      }
+    }
+    return count === 2;
+  }
+
+  function noPair(cardFreqs) {
     for (var key in freqs) {
       if (freqs[key] != 1) {
         return false;
@@ -136,11 +146,13 @@
         cardVals.push(Number(cardRank));
       }
     }
+    freqs = cardFreqs(cardVals);
 
     var flushDraw = isFlushDraw(cardSuits);
     var insideStraightDraw = isInsideStraightDraw(cardVals);
     var outsideStraightDraw = isOutsideStraightDraw(cardVals);
-    var noPair = noPair(cardVals);
+    var onePair = onePair(cardFreqs);
+    var noPair = noPair(cardFreqs);
     if (outsideStraightDraw && flushDraw) {
       return [15, "an outside straight draw and flush draw"];
     } else if (insideStraightDraw && flushDraw) {
@@ -151,6 +163,8 @@
       return [4, "an inside straight draw"];
     } else if (flushDraw){
       return [9, "a flush draw"];
+    } else if (onePair) {
+      return [5, "one pair"];
     } else if (noPair) {
       return [6, "no pair"];
     } else {

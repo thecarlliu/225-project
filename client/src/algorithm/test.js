@@ -21,8 +21,18 @@ function cardFreqs(cardVals) {
   return counts;
 }
 
-function noPair(cardVals) {
-  freqs = cardFreqs(cardVals);
+function onePair(cardFreqs) {
+  var count = 0;
+  for (var key in freqs) {
+    count++;
+    if (freqs[key] === 1 || freqs[key] === 4) {
+      return false;
+    }
+  }
+  return count === 2;
+}
+
+function noPair(cardFreqs) {
   for (var key in freqs) {
     if (freqs[key] != 1) {
       return false;
