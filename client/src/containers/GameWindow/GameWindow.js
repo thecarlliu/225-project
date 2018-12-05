@@ -226,8 +226,6 @@ class GameWindow extends Component {
             this.startTimer();
             this.setState({time: 15});
         }
-        this.startTimer();
-        this.setState({time: 15});
         $("#input-box").removeAttr("disabled");
         //cursor automatically brought to input
         $("#input-box").focus();
