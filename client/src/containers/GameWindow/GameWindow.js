@@ -10,6 +10,7 @@ import countOuts from "../../algorithm/algorithm.js";
 import { getDatabase } from "../../database/database";
 import { changePage } from "../../components/NavButton/NavButton";
 import Lives from "../../components/Lives";
+import $ from "jquery";
 
 import hand from "../../handCreator/handCreator.js"
 
@@ -142,18 +143,38 @@ class GameWindow extends Component {
                 }
                 this.setState({borderColor: "#0f0"});
             }
+        }
             else {
                 this.decrementLives();
                 this.showPopUp("Wrong! The correct answer is: " + countOuts(this.state.userHand + this.state.flop).toString(), "Continue", "Quit");
-                if(!this.stillLives()){
+                if(!this.stillLives()) {
                     this.showPopUp("You lost! Do you want to try again?", "Yes", "No");
                     console.log(this.state.highscores);
+                    if (this.state.inputValue !== "") {
+                        if (this.state.outsValue === this.state.inputValue) {
+                            this.showPopUp("Correct!", "Continue", "Quit");
+                            $("#input-box").attr("disabled", "true");
+                            this.setState({currentScore: this.state.currentScore + 10});
+                            if (this.state.currentScore >= this.state.highScore) {
+                                this.setState({highScore: this.state.highScore + 10});
+                            }
+                            this.setState({borderColor: "#0f0"});
+                        }
+                        else {
+                            this.decrementLives();
+                            this.showPopUp("Wrong! The correct answer is: " + countOuts(this.state.userHand + this.state.flop).toString(), "Continue", "Quit");
+                            $("#input-box").attr("disabled", "true");
+                            if (!this.stillLives()) {
+                                this.showPopUp("You lost! Do you want to try again?", "Yes", "No");
+                                // this.showHighscores();
+                            }
+                            this.setState({borderColor: "#f00"});
+                            //show user a list of highscores and button to play again
+                        }
+                    }
                 }
-                this.setState({borderColor: "#f00"});
-                        //show user a list of highscores and button to play again
-                }
-            }
         }
+    }
 
     saveHighscore  = (score) => {
         const newScore = {
@@ -221,6 +242,11 @@ class GameWindow extends Component {
             this.startTimer();
             this.setState({time: 15});
         }
+        this.startTimer();
+        this.setState({time: 15});
+        $("#input-box").removeAttr("disabled");
+        //cursor automatically brought to input
+        $("#input-box").focus();
     };
 
     /**

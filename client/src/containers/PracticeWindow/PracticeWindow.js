@@ -8,6 +8,7 @@ import {changePage} from "../../components/NavButton/NavButton";
 import countOuts from "../../algorithm/algorithm.js";
 
 import hand from "../../handCreator/handCreator.js"
+import $ from "jquery";
 
 const deck = ["AH","2H","3H","4H","5H","6H","7H","8H","9H","10H","JH","QH","KH",
     "AS","2S","3S","4S","5S","6S","7S","8S","9S","10S","JS","QS","KS",
@@ -73,16 +74,20 @@ class GameWindow extends Component {
 
     updateScores() {
         if(this.state.isPressed) {
-            if (this.state.outsValue === this.state.inputValue) {
-                this.showPopUp("Correct!");
-                this.setState({currentScore: this.state.currentScore + 10});
-                this.setState({borderColor: "#0f0"});
-            }
-            else {
-              this.showPopUp("Wrong! The correct answer is: " + this.state.outsValue + ". There was " + this.state.rightAnswerInfo + ".", "Continue", "Quit");
-              this.setState({borderColor: "#f00"});
-                // this.getHand();
-                this.resetScore();
+            if (this.state.inputValue!=="") {
+                if (this.state.outsValue === this.state.inputValue) {
+                    this.showPopUp("Correct!");
+                    $("#input-box").attr("disabled", "true");
+                    this.setState({currentScore: this.state.currentScore + 10});
+                    this.setState({borderColor: "#0f0"});
+                }
+                else {
+                    this.showPopUp("Wrong! The correct answer is: " + this.state.outsValue + ". There was " + this.state.rightAnswerInfo + ".", "Continue", "Quit");
+                    $("#input-box").attr("disabled", "true");
+                    this.setState({borderColor: "#f00"});
+                    // this.getHand();
+                    this.resetScore();
+                }
             }
         }
     }
@@ -110,6 +115,9 @@ class GameWindow extends Component {
         e.preventDefault();
         this.setState({popUpShowing: "none"});
         this.getHand();
+        //cursor automatically brought to input
+        $("#input-box").removeAttr("disabled");
+        $("#input-box").focus();
     };
 
     /**
