@@ -135,21 +135,6 @@ class GameWindow extends Component {
      */
     updateScores() {
         if(this.state.isPressed) {
-            if (this.state.outsValue === this.state.inputValue) {
-                this.showPopUp("Correct!", "Continue", "Quit");
-                this.setState({currentScore: this.state.currentScore + 10});
-                if (this.state.currentScore >= this.state.highScore) {
-                    this.setState({highScore: this.state.highScore + 10});
-                }
-                this.setState({borderColor: "#0f0"});
-            }
-        }
-            else {
-                this.decrementLives();
-                this.showPopUp("Wrong! The correct answer is: " + countOuts(this.state.userHand + this.state.flop).toString(), "Continue", "Quit");
-                if(!this.stillLives()) {
-                    this.showPopUp("You lost! Do you want to try again?", "Yes", "No");
-                    console.log(this.state.highscores);
                     if (this.state.inputValue !== "") {
                         if (this.state.outsValue === this.state.inputValue) {
                             this.showPopUp("Correct!", "Continue", "Quit");
@@ -172,7 +157,6 @@ class GameWindow extends Component {
                             //show user a list of highscores and button to play again
                         }
                     }
-                }
         }
     }
 
