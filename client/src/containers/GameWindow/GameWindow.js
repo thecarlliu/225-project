@@ -151,7 +151,7 @@ class GameWindow extends Component {
                             this.showPopUp("Wrong! The correct answer is: " + this.state.rightAnswerInfo.toString(), "Continue", "Quit");
                             $("#input-box").attr("disabled", "true");
                             if (!this.stillLives()) {
-                                this.showPopUp("You lost! Do you want to try again?", "Yes", "No");
+                                this.showPopUp("Wrong! The correct answer is: " + this.state.rightAnswerInfo.toString()+". You lost! Do you want to try again?", "Yes", "No");
                                 // this.showHighscores();
                             }
                             this.setState({borderColor: "#f00"});
