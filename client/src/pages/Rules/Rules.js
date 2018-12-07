@@ -16,13 +16,15 @@ class Rules extends Component {
       super(props);
       this.state = {
           flushShowing:"none",
-          inStraightShowing:"none",
-          outStraightShowing:"none",
           flushFont: secondary,
-          inFont: secondary,
-          outFont: secondary,
           flushButCol: primary,
+
+          inStraightShowing:"none",
+          inFont: secondary,
           inButCol: primary,
+
+          outStraightShowing:"none",
+          outFont: secondary,
           outButCol: primary
       }
   };
