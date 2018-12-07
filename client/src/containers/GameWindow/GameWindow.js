@@ -17,10 +17,6 @@ import hand from "../../handCreator/handCreator.js"
 // Variable so timer can be paused
 let tickingFunction = 0;
 
-const deck = ["AH","2H","3H","4H","5H","6H","7H","8H","9H","10H","JH","QH","KH",
-    "AS","2S","3S","4S","5S","6S","7S","8S","9S","10S","JS","QS","KS",
-    "AD","2D","3D","4D","5D","6D","7D","8D","9D","10D","JD","QD","KD",
-    "AC","2C","3C","4C","5C","6C","7C","8C","9C","10C","JC","QC","KC"];
 
 //The GameWindow keeps track of the state of the game.
 class GameWindow extends Component {
@@ -56,9 +52,9 @@ class GameWindow extends Component {
     }
 
     getHand() {
-      let userHand = hand();
-      this.state.userHand = [userHand[0], userHand[1]];
-      this.state.flop = [userHand[2], userHand[3], userHand[4]];
+      let thisHand = hand();
+      this.setState({userHand:[thisHand[0], thisHand[1]]});
+      this.setState({flop:[thisHand[2], thisHand[3], thisHand[4]]});
       this.outsCounter();
     }
 
@@ -68,8 +64,10 @@ class GameWindow extends Component {
         var hand = [];
         hand.push(this.state.userHand[0], this.state.userHand[1], this.state.flop[0], this.state.flop[1], this.state.flop[2]);
         console.log(hand);
-        this.state.outsValue = countOuts(hand)[0].toString();
-        this.state.rightAnswerInfo = countOuts(hand);
+
+        this.setState({outsValue:countOuts(hand)[0].toString()});
+        this.setState({rightAnswerInfo:countOuts(hand)});
+
     }
 
     startTimer() {
