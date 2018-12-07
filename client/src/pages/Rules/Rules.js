@@ -154,7 +154,7 @@ class Rules extends Component {
                         </p>
 
                         <div style={{position: "absolute", left: "50%", padding:"20px", marginLeft:"-230px"}}>
-                            <img src={"images/AH.png"} style={{width: "80px", height: "120px", padding:"5px"}}/>
+                            <img src={"images/CH.png"} style={{width: "80px", height: "120px", padding:"5px"}}/>
                             <img src={"images/10H.png"} style={{width: "80px", height: "120px", padding:"5px"}}/>
                             <img src={"images/3C.png"} style={{width: "80px", height: "120px", padding:"5px"}}/>
                             <img src={"images/5H.png"} style={{width: "80px", height: "120px", padding:"5px"}}/>
