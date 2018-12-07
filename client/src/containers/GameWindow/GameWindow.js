@@ -225,7 +225,11 @@ class GameWindow extends Component {
         }
         else{
             this.startTimer();
-            this.setState({time: 15});
+            let currTime = 3;
+            if(15-(Math.floor(this.state.currentScore/100)) > 3){
+              currTime = 15-(Math.floor(this.state.currentScore/100));
+            }
+            this.setState({time: currTime});
         }
         $("#input-box").removeAttr("disabled");
         //cursor automatically brought to input
