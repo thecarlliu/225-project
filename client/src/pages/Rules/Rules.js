@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import NavBar from "../../components/NavBar";
 
-const header = {margin: "auto", textAlign:"center"};
-const para = {margin: "auto", textAlign:"left", width:"75%"};
+const header = {margin: "auto", textAlign:"center", fontFamily: "Georgia"};
+const para = {margin: "auto", textAlign:"left", width:"75%",fontFamily: "Georgia"};
 const divvy = {padding: "10px", display: "block", position:"absolute"};
 
 const primary = "#207CA8";
@@ -126,7 +126,7 @@ class Rules extends Component {
 
                 <div style={{position: "absolute", top: "50px", color: "white"}}>
                     <div style={{padding:"15px"}}>
-                        <h1 style={header}>RULES</h1>
+                        <h1 style={header}>Rules</h1>
                         <p style={para}> You are dealt two cards and shown the flop. Based on the cards in your hand, count the number of outs
                             you have. Enter the number of outs into the input box. If you answered correctly, your score will
                             increase and you will be dealt another hand and shown a different flop. If not, the game ends. The
