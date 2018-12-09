@@ -138,7 +138,7 @@ class GameWindow extends Component {
                        flop={[this.state.flop[0], this.state.flop[1], this.state.flop[2]]}/>
                 <PlayButton buttonPressed={this.buttonPressed}/>
                 <Score currentScore={this.state.currentScore} />
-                <Input outsValue={this.state.outsValue} value={this.state.inputValue} changeHandler={this.handleInputChange} submitHandler={(e)=>{this.handleInputSubmit(e)}}/>
+                <Input label = {this.state.label = "Outs: "} outsValue={this.state.outsValue} value={this.state.inputValue} changeHandler={this.handleInputChange} submitHandler={(e)=>{this.handleInputSubmit(e)}} width = {this.state.width = "250px"} topPos = {this.state.topPos = "520px"} shadow = {this.state.shadow = "1px 1px 1px 1px #08415C"}/>
                 {/*//popup*/}
                 <div style = {{
                     position: "absolute",

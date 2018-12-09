@@ -1,14 +1,25 @@
 import React, { Component } from "react";
 import { getDatabase } from "../../database/database";
+import Input from "../../components/Input";
 
+/**
+ * Sets up and displays the high score list
+ * Allows the player to add their own high score
+ */
 class Scoreboard extends Component {
     constructor(props){
         super(props);
         this.state = {
-            highscores: []
+            highscores: [],
+            player: "",
+            popUpShowing: "block",
+            currentScore: sessionStorage.getItem("currentScore")
         };
     };
 
+    /**
+     * Loads the sorted highscores
+     */
     componentDidMount() {
         this.retrieveHighScores();
     }
@@ -48,6 +59,37 @@ class Scoreboard extends Component {
         });
     }
 
+    /**
+     * Adds the current highscore to the database with the input name
+     */
+    saveHighscore  = (score) => {
+        const newScore = {
+            score: score,
+            player: this.state.player
+        };
+        getDatabase().ref("highscores").push(newScore);
+        console.log(newScore);
+    };
+
+    /**
+     * Saves the highscore once the user inputs their name
+     * Hides the popup and clears the stored score
+     */
+    handleNameInputSubmit = (event) => {
+        event.preventDefault();
+        this.saveHighscore(this.state.currentScore);
+        this.setState({player: ""});
+        this.setState({popUpShowing: "none"});
+        sessionStorage.clear();
+    };
+
+    /**
+     * Sets the player state to the name the user inputs
+     */
+    handleNameInputChange = (player) => {
+        this.setState({player: player});
+    };
+
     render(){
         return (
         <div style = {{
@@ -60,7 +102,6 @@ class Scoreboard extends Component {
             height: 300,
             width: 300,
             zIndex: 3,
-            display: this.props.scoreboard,
             boxShadow: "1px 1px 1px 1px #08415C",
             borderRadius: "10px",
             textAlign: "center",
@@ -78,6 +119,32 @@ class Scoreboard extends Component {
 
                ))}
                </ol>
+            <div style = {{
+                position: "absolute",
+                alignItems: "center",
+                top: 50,
+                left: 0,
+                right: 0,
+                margin: "auto",
+                height: 150,
+                width: 200,
+                zIndex: 3,
+                display: this.state.popUpShowing,
+                boxShadow: "1px 1px 1px 1px #08415C",
+                borderRadius: "10px",
+                textAlign: "center",
+                fontSize: "large",
+                fontFamily: "Georgia",
+                color: "white",
+                padding: 20,
+                border: "5px solid"
+            }}
+                 className="primaryBg">
+                <b>Highscore: {this.state.currentScore}<br/>
+                    Save?
+                </b>
+                <Input label = {this.state.label = "Name: "} value={this.state.player} changeHandler={this.handleNameInputChange} submitHandler={(e)=>{this.handleNameInputSubmit(e)}} width = {this.state.width = "205px"} topPos = {this.state.topPos = "65px"}/>
+            </div>
 
         </div>
         )

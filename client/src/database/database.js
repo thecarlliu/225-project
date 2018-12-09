@@ -11,8 +11,17 @@ const config = {
     messagingSenderId: "1083809629945"
 };
 
+// Makes sure database is only initialized once
+var goatemDb = null;
+/**
+ * Initializes firebase database
+ * @returns {*}
+ */
 export const getDatabase = () => {
-    const app = firebase.initializeApp(config);
-    console.log("get database", app.database());
-    return app.database();
+    if (goatemDb == null) {
+        const app = firebase.initializeApp(config);
+        console.log("get database", app.database());
+        goatemDb = app.database();
+    }
+    return goatemDb;
 };

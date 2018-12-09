@@ -35,14 +35,12 @@ class GameWindow extends Component {
             isPressed:false,
             highscores: [],
             playerName: "",
-            nameInput: "none",
             popUpShowing: "none",
             popUpButtonsShowing: "none",
             popUpCardsShowing: "none",
             popUpOptionOne: "",
             popUpOptionTwo: "",
             popUpText: "",
-            scoreboard: "none",
             borderColor: "#0f0"
         };
     }
@@ -130,7 +128,8 @@ class GameWindow extends Component {
     }
 
     /**
-     *
+     * Gives feedback on the user input (displays popup)
+     * Increments score by 10 if user inputs correct answer and updates highscore accordingly
      */
     updateScores() {
         if(this.state.isPressed) {
@@ -150,22 +149,12 @@ class GameWindow extends Component {
                             $("#input-box").attr("disabled", "true");
                             if (!this.stillLives()) {
                                 this.showPopUp("Wrong! The correct answer is: " + this.state.rightAnswerInfo.toString()+". You lost! Do you want to try again?", "Yes", "No");
-                                // this.showHighscores();
                             }
                             this.setState({borderColor: "#f00"});
-                            //show user a list of highscores and button to play again
                         }
                     }
         }
     }
-
-    saveHighscore  = (score) => {
-        const newScore = {
-            score: score,
-            player: this.state.playerName
-        };
-        getDatabase().ref("highscores").push(newScore);
-    };
 
     handleInputSubmit = (event) => {
         event.preventDefault();
@@ -175,17 +164,6 @@ class GameWindow extends Component {
 
     handleInputChange = (value) => {
         this.setState({inputValue: value});
-    };
-
-    handleNameInputSubmit = (event) => {
-        event.preventDefault();
-        this.setState({playerName: ""});
-        changePage(event, "/scoreboard");
-        console.log(this.state.playerName);
-    };
-
-    handleNameInputChange = (name) => {
-        this.setState({playerName: name.target.name});
     };
 
     buttonPressed = () => {
@@ -203,35 +181,30 @@ class GameWindow extends Component {
     handleOptionOne = (e) => {
         e.preventDefault();
         this.setState({popUpShowing: "none"});
-        if(this.state.time <= 0){
+        if (this.state.time <= 0) {
             this.getHand();
             this.decrementLives();
         }
-        if(this.stillLives()){
+        if (this.stillLives()) {
             this.getHand();
         }
-        if(!this.stillLives()) {
-            if(this.state.scoreboard = "block"){
-                this.setState({nameInput: "none"});
-            }
-            else{
-                this.saveHighscore(this.state.currentScore);
-                this.resetScore();
-                this.getHand();
-                this.resetLives();
-            }
+        if (!this.stillLives()) {
+            this.resetScore();
+            this.getHand();
+            this.resetLives();
         }
-        else{
+        else {
             this.startTimer();
             let currTime = 3;
-            if(15-(Math.floor(this.state.currentScore/100)) > 3){
-              currTime = 15-(Math.floor(this.state.currentScore/100));
+            if (15 - (Math.floor(this.state.currentScore / 100)) > 3) {
+                currTime = 15 - (Math.floor(this.state.currentScore / 100));
             }
             this.setState({time: currTime});
+
+            $("#input-box").removeAttr("disabled");
+            //cursor automatically brought to input
+            $("#input-box").focus();
         }
-        $("#input-box").removeAttr("disabled");
-        //cursor automatically brought to input
-        $("#input-box").focus();
     };
 
     /**
@@ -242,9 +215,8 @@ class GameWindow extends Component {
         e.preventDefault();
         this.setState({popUpShowing: "none"});
         if(!this.stillLives()){
-            this.showPopUp("Save highscore?", "Yes", "No");
-            this.setState({nameInput: "block"});
-            this.setState({popUpCardsShowing: "none"});
+            sessionStorage.setItem("currentScore", this.state.currentScore.toString());
+            changePage(e, "/scoreboard");
         }
         else{
             changePage(e, "/home");
@@ -261,7 +233,7 @@ class GameWindow extends Component {
                        flop={[this.state.flop[0], this.state.flop[1], this.state.flop[2]]}/>
                 <PlayButton buttonPressed={this.buttonPressed}/>
                 <Score currentScore={this.state.currentScore} />
-                <Input outsValue={this.state.outsValue} value={this.state.inputValue} changeHandler={this.handleInputChange} submitHandler={(e)=>{this.handleInputSubmit(e)}}/>
+                <Input label = {this.state.label = "Outs: "} outsValue={this.state.outsValue} value={this.state.inputValue} changeHandler={this.handleInputChange} submitHandler={(e)=>{this.handleInputSubmit(e)}} width = {this.state.width = "250px"} topPos = {this.state.topPos = "520px"} shadow = {this.state.shadow = "1px 1px 1px 1px #08415C"}/>
                 <HighScore highScore={this.state.highScore} />
                 <Lives lives = {this.state.lives}/>
                 {/*//popup*/}
@@ -315,14 +287,6 @@ class GameWindow extends Component {
                             onClick={(e) => {this.handleOptionTwo(e)}}>{this.state.popUpOptionTwo}
                     </button>
                 </div>
-                    <div style = {{position: "absolute", width: "250px", display: this.state.nameInput, left: 0, right: 0, margin: "auto", top: "220px", borderRadius: "10px", height:"80px", fontFamily: "Georgia", fontSize: "large", textAlign: "center", lineHeight: "40px", zIndex: 4}}>
-                        <form onSubmit={(e)=>{this.handleNameInputSubmit(e)}}>
-                            <label>
-                                <b>Name: </b><input type="text" value={this.state.value} onChange={(e)=>{this.handleNameInputChange(e)}} />
-                            </label>
-                            <input type="submit" value="Submit" />
-                        </form>
-                    </div>
                     <div style={{position: "relative", display: this.state.popUpButtonsShowing}}>
                         <button className="primaryBg" style = {{position: "absolute", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", width: 150, height: 40, fontSize: "large", fontFamily: "Georgia", color: "white", bottom: 60, left: 0, right: 0, margin: "auto"}}
                                 onClick={(e) => {this.handleOptionOne(e)}}>{this.state.popUpOptionOne}
