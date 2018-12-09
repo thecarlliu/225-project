@@ -53,11 +53,12 @@ class GameWindow extends Component {
       let thisHand = hand();
       this.setState({userHand:[thisHand[0], thisHand[1]]});
       this.setState({flop:[thisHand[2], thisHand[3], thisHand[4]]});
-      this.outsCounter();
+      this.setState({outsValue:countOuts(thisHand)[0].toString()});
+      this.setState({rightAnswerInfo:countOuts(thisHand)});
     }
 
-    outsCounter() {
-        //get the values from the flop and user hand via this.state.flop and this.state.userHand
+    //Obsolete function now
+    /*    //get the values from the flop and user hand via this.state.flop and this.state.userHand
         //computes outs after hand is dealt
         var hand = [];
         hand.push(this.state.userHand[0], this.state.userHand[1], this.state.flop[0], this.state.flop[1], this.state.flop[2]);
@@ -66,7 +67,7 @@ class GameWindow extends Component {
         this.setState({outsValue:countOuts(hand)[0].toString()});
         this.setState({rightAnswerInfo:countOuts(hand)});
 
-    }
+    }*/
 
     startTimer() {
         tickingFunction = setInterval(this.tick, 1000);
