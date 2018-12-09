@@ -183,18 +183,14 @@ class GameWindow extends Component {
         e.preventDefault();
         this.setState({popUpShowing: "none"});
         if (this.state.time <= 0) {
-            this.getHand();
             this.decrementLives();
-        }
-        if (this.stillLives()) {
-            this.getHand();
         }
         if (!this.stillLives()) {
             this.resetScore();
-            this.getHand();
             this.resetLives();
-            
         }
+
+        this.getHand();
         this.startTimer();
         let currTime = 3;
         if (15 - (Math.floor(this.state.currentScore / 100)) > 3) {
