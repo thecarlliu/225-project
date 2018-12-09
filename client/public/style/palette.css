@@ -36,3 +36,11 @@
   display: inline-block;
   left: 320px;
 }
+
+.vl {
+    border-left: 3px solid white;
+    position: absolute;
+    height: 50px;
+    top: 10px;
+    left: 142px;
+}
