@@ -193,19 +193,19 @@ class GameWindow extends Component {
             this.resetScore();
             this.getHand();
             this.resetLives();
+            
         }
-        else {
-            this.startTimer();
-            let currTime = 3;
-            if (15 - (Math.floor(this.state.currentScore / 100)) > 3) {
-                currTime = 15 - (Math.floor(this.state.currentScore / 100));
-            }
-            this.setState({time: currTime});
+        this.startTimer();
+        let currTime = 3;
+        if (15 - (Math.floor(this.state.currentScore / 100)) > 3) {
+            currTime = 15 - (Math.floor(this.state.currentScore / 100));
+        }
+        this.setState({time: currTime});
 
-            $("#input-box").removeAttr("disabled");
-            //cursor automatically brought to input
-            $("#input-box").focus();
-        }
+        $("#input-box").removeAttr("disabled");
+        //cursor automatically brought to input
+        $("#input-box").focus();
+
     };
 
     /**
