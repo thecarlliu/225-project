@@ -189,13 +189,13 @@
     } else if (flushDraw){
       return [9, "a flush draw"];
     } else if (set) {
-      return [7, "a set"];
+      return [7, "a set"]; //set to full house of 4 of a kind
     } else if (hasTwoPair) {
-      return [4, "two pair"];
+      return [4, "two pair"]; //two pair to full house
     } else if (hasOnePair) {
-      return [5, "one pair"];
+      return [5, "one pair"]; //one pair to top two pair or set
     } else if (hasNoPair) {
-      return [6, "no pair"];
+      return [6, "no pair"];//no pair to pair (for top 2 cards)
     } else {
       return [0, " nothing"];
     }
