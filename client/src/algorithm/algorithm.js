@@ -11,6 +11,64 @@
     return false;
   }
 
+  function cardFreqs(cardVals) {
+    var counts = {};
+    for (var i = 0; i < cardVals.length; i++) {
+      var card = cardVals[i];
+      counts[card] = counts[card] ? counts[card] + 1 : 1; //isn't js great
+    }
+    return counts;
+  }
+
+  function onePair(cardFreqs) {
+    var count = 0;
+    for (var key in cardFreqs) {
+      count++;
+      if (cardFreqs[key] === 1 || cardFreqs[key] === 4) {
+        return false;
+      }
+    }
+    return count === 2;
+  }
+
+  function noPair(cardFreqs) {
+    for (var key in cardFreqs) {
+      if (cardFreqs[key] != 1) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function twoPair(cardFreqs) {
+    var firstPair = false;
+    for (var key in cardFreqs) {
+      if (cardFreqs[key] == 2 && !firstPair) {
+        firstPair = true;
+      }
+      else if (cardFreqs[key] == 2 && firstPair) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  function hasSet(cardFreqs) {
+    for (var key in cardFreqs) {
+      if (cardFreqs[key] != 3 || cardFreqs[key] != 1) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  //4, 1
+  //3, 2
+  //3, 1, 1
+  //2, 2, 1
+  //2, 1, 1, 1
+  //1, 1, 1, 1, 1
+
 //thanks internet for this one (mostly)
   function removeDups(cardVals) {
     cardVals.sort()
@@ -111,9 +169,15 @@
       }
     }
 
+    var freqs = cardFreqs(cardVals);
+
     var flushDraw = isFlushDraw(cardSuits);
     var insideStraightDraw = isInsideStraightDraw(cardVals);
     var outsideStraightDraw = isOutsideStraightDraw(cardVals);
+    var set = hasSet(freqs);
+    var onePair = onePair(freqs);
+    var twoPair = twoPair(freqs);
+    var noPair = noPair(freqs);
     if (outsideStraightDraw && flushDraw) {
       return [15, " an outside straight draw and flush draw"];
     } else if (insideStraightDraw && flushDraw) {
@@ -123,14 +187,18 @@
     } else if (insideStraightDraw) {
       return [4, " an inside straight draw"];
     } else if (flushDraw){
-      return [9, " a flush draw"];
+      return [9, "a flush draw"];
+    } else if (hasSet) {
+      return [7, "a set"];
+    } else if (twoPair) {
+      return [4, "two pair"];
+    } else if (onePair) {
+      return [5, "one pair"];
+    } else if (noPair) {
+      return [6, "no pair"];
     } else {
       return [0, " nothing"];
     }
   };
-
-const testCount = function(nothig) {
-    return "1";
-};
 
 export default countOuts;
