@@ -22,9 +22,9 @@
 
   function onePair(cardFreqs) {
     var count = 0;
-    for (var key in freqs) {
+    for (var key in cardFreqs) {
       count++;
-      if (freqs[key] === 1 || freqs[key] === 4) {
+      if (cardFreqs[key] === 1 || cardFreqs[key] === 4) {
         return false;
       }
     }
@@ -32,8 +32,30 @@
   }
 
   function noPair(cardFreqs) {
-    for (var key in freqs) {
-      if (freqs[key] != 1) {
+    for (var key in cardFreqs) {
+      if (cardFreqs[key] != 1) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function twoPair(cardFreqs) {
+    var firstPair = false;
+    for (var key in cardFreqs) {
+      if (cardFreqs[key] == 2 && !firstPair) {
+        firstPair = true;
+      }
+      else if (cardFreqs[key] == 2 && firstPair) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  function hasSet(cardFreqs) {
+    for (var key in cardFreqs) {
+      if (cardFreqs[key] != 3 || cardFreqs[key] != 1) {
         return false;
       }
     }
@@ -146,13 +168,16 @@
         cardVals.push(Number(cardRank));
       }
     }
-    freqs = cardFreqs(cardVals);
+
+    var freqs = cardFreqs(cardVals);
 
     var flushDraw = isFlushDraw(cardSuits);
     var insideStraightDraw = isInsideStraightDraw(cardVals);
     var outsideStraightDraw = isOutsideStraightDraw(cardVals);
-    var onePair = onePair(cardFreqs);
-    var noPair = noPair(cardFreqs);
+    var set = hasSet(freqs);
+    var onePair = onePair(freqs);
+    var twoPair = twoPair(freqs);
+    var noPair = noPair(freqs);
     if (outsideStraightDraw && flushDraw) {
       return [15, "an outside straight draw and flush draw"];
     } else if (insideStraightDraw && flushDraw) {
@@ -163,6 +188,10 @@
       return [4, "an inside straight draw"];
     } else if (flushDraw){
       return [9, "a flush draw"];
+    } else if (hasSet) {
+      return [7, "a set"];
+    } else if (twoPair) {
+      return [4, "two pair"];
     } else if (onePair) {
       return [5, "one pair"];
     } else if (noPair) {
