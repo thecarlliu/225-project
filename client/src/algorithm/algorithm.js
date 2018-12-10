@@ -23,12 +23,11 @@
   function onePair(cardFreqs) {
     var count = 0;
     for (var key in cardFreqs) {
-      count++;
-      if (cardFreqs[key] === 3 || cardFreqs[key] === 4) {
-        return false;
+      if (cardFreqs[key] === 2) {
+        count++;
       }
     }
-    return count === 2;
+    return count === 1;
   }
 
   function noPair(cardFreqs) {
@@ -41,16 +40,13 @@
   }
 
   function twoPair(cardFreqs) {
-    var firstPair = false;
+    var count = 0;
     for (var key in cardFreqs) {
-      if (cardFreqs[key] == 2 && !firstPair) {
-        firstPair = true;
-      }
-      else if (cardFreqs[key] == 2 && firstPair) {
-        return true;
+      if (cardFreqs[key] === 2) {
+        count++;
       }
     }
-    return false;
+    return count === 2;
   }
 
   function hasSet(cardFreqs) {
