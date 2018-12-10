@@ -175,9 +175,9 @@
     var insideStraightDraw = isInsideStraightDraw(cardVals);
     var outsideStraightDraw = isOutsideStraightDraw(cardVals);
     var set = hasSet(freqs);
-    var onePair = onePair(freqs);
-    var twoPair = twoPair(freqs);
-    var noPair = noPair(freqs);
+    var hasOnePair = onePair(freqs);
+    var hasTwoPair = twoPair(freqs);
+    var hasNoPair = noPair(freqs);
     if (outsideStraightDraw && flushDraw) {
       return [15, " an outside straight draw and flush draw"];
     } else if (insideStraightDraw && flushDraw) {
@@ -188,13 +188,13 @@
       return [4, " an inside straight draw"];
     } else if (flushDraw){
       return [9, "a flush draw"];
-    } else if (hasSet) {
+    } else if (set) {
       return [7, "a set"];
-    } else if (twoPair) {
+    } else if (hasTwoPair) {
       return [4, "two pair"];
-    } else if (onePair) {
+    } else if (hasOnePair) {
       return [5, "one pair"];
-    } else if (noPair) {
+    } else if (hasNoPair) {
       return [6, "no pair"];
     } else {
       return [0, " nothing"];
