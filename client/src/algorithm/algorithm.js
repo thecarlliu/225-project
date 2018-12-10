@@ -24,7 +24,7 @@
     var count = 0;
     for (var key in cardFreqs) {
       count++;
-      if (cardFreqs[key] === 1 || cardFreqs[key] === 4) {
+      if (cardFreqs[key] === 3 || cardFreqs[key] === 4) {
         return false;
       }
     }
