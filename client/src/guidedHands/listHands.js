@@ -55,49 +55,49 @@ const listHands = [
     },
     {//double inside straight draws
       cards: ["CH", "5S", "3D", "6D", "4S"],
-      importantCards: [0, 1, 2, 4, 5],
+      importantCards: [0, 1, 2, 3, 4],
       drawName: "Double Inside Straight Draw",
       outs: "8"
   },
   {
       cards: ["7D", "9S", "5H", "8C", "JD"],
-      importantCards: [0, 1, 2, 4, 5],
+      importantCards: [0, 1, 2, 3, 4],
       drawName: "Double Inside Straight Draw",
       outs: "8"
   },
   {
-      cards: ["JC", "QD", "AH", "10C", "8D"],
-      importantCards: [0, 1, 2, 4, 5],
+      cards: ["JC", "QD", "CH", "10C", "8D"],
+      importantCards: [0, 1, 2, 3, 4],
       drawName: "Double Inside Straight Draw",
       outs: "8"
   },
     {//flush and inside draw
       cards: ["2C", "3C", "4D", "QC", "5C"],
-      importantCards: [0, 1, 2, 4, 5],
+      importantCards: [0, 1, 2, 3, 4],
       drawName: "Flush and Inside Straight Draw",
       outs: "12"
   },
   {
       cards: ["9S", "KH", "4H", "10H", "JH"],
-      importantCards: [0, 1, 2, 4, 5],
+      importantCards: [0, 1, 2, 3, 4],
       drawName: "Flush and Inside Straight Draw",
       outs: "12"
   },
   {
       cards: ["7H", "10D", "8D", "2D", "6D"],
-      importantCards: [0, 1, 2, 4, 5],
+      importantCards: [0, 1, 2, 3, 4],
       drawName: "Flush and Inside Straight Draw",
       outs: "12"
   },
     {//flush and outside draw
       cards: ["7H", "9D", "8D", "2D", "6D"],
-      importantCards: [0, 1, 2, 4, 5],
+      importantCards: [0, 1, 2, 3, 4],
       drawName: "Flush and Outside Straight Draw",
       outs: "15"
     },
     {
       cards: ["9S", "QH", "4H", "10H", "JH"],
-      importantCards: [0, 1, 2, 4, 5],
+      importantCards: [0, 1, 2, 3, 4],
       drawName: "Flush and Outside Straight Draw",
       outs: "15"
     },
