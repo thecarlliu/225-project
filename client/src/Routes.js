@@ -6,6 +6,7 @@ import Practice from "./pages/Practice";
 import About from "./pages/About";
 import Rules from "./pages/Rules";
 import NoMatch from "./pages/NoMatch";
+import ScoreBoard from "./pages/ScoreBoard";
 
 class Routes extends Component {
 
@@ -20,6 +21,7 @@ class Routes extends Component {
                 <Route exact path="/practice" component={Practice} />
                 <Route exact path="/about" component={About} />
                 <Route exact path="/rules" component={Rules} />
+                <Route exact path="/scoreboard" component={ScoreBoard}/>
                 <Route component={NoMatch} />
             </Switch>
         )

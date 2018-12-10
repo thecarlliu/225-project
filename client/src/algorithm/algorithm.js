@@ -154,7 +154,7 @@
     for (var i = 0; i < cards.length; i++) {
       var cardRank = cards[i].slice(0,cards[i].length - 1);
       cardSuits.push(cards[i].slice(cards[i].length - 1, cards[i].length));
-      if (cardRank === "A") {
+      if (cardRank === "C") {
         cardVals.push(14);
       } else if (cardRank === "K") {
         cardVals.push(13);
@@ -179,13 +179,13 @@
     var twoPair = twoPair(freqs);
     var noPair = noPair(freqs);
     if (outsideStraightDraw && flushDraw) {
-      return [15, "an outside straight draw and flush draw"];
+      return [15, " an outside straight draw and flush draw"];
     } else if (insideStraightDraw && flushDraw) {
-      return [12, "an inside straight draw and flush draw"];
+      return [12, " an inside straight draw and flush draw"];
     } else if (outsideStraightDraw) {
-      return [8, "an outside straight draw"];
+      return [8, " an outside straight draw"];
     } else if (insideStraightDraw) {
-      return [4, "an inside straight draw"];
+      return [4, " an inside straight draw"];
     } else if (flushDraw){
       return [9, "a flush draw"];
     } else if (hasSet) {
@@ -197,7 +197,7 @@
     } else if (noPair) {
       return [6, "no pair"];
     } else {
-      return [0, "nothing"];
+      return [0, " nothing"];
     }
   };
 

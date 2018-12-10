@@ -1,9 +1,12 @@
 import React, {Component} from "react";
 import NavBar from "../../components/NavBar";
 
-const header = {margin: "auto", textAlign:"center"};
-const para = {margin: "auto", textAlign:"left", width:"75%"};
+const header = {margin: "auto", textAlign:"center", fontFamily: "Georgia"};
+const para = {margin: "auto", textAlign:"left", width:"75%",fontFamily: "Georgia"};
 const divvy = {padding: "10px", display: "block", position:"absolute"};
+
+const primary = "#207CA8";
+const secondary = "#08415C";
 
 
 
@@ -13,54 +16,108 @@ class Rules extends Component {
       super(props);
       this.state = {
           flushShowing:"none",
+          flushFont: secondary,
+          flushButCol: primary,
+
           inStraightShowing:"none",
+          inFont: secondary,
+          inButCol: primary,
+
           outStraightShowing:"none",
-          flushFont: "#08415C",
-          inFont: "#08415C",
-          outFont: "#08415C",
+          outFont: secondary,
+          outButCol: primary
       }
   };
 
   flushButton=(e) =>{
       e.preventDefault();
       this.setState({flushShowing:'block'});
-      this.setState({inStraightShowing:'none'});
+      this.setState({flushButCol: secondary});
+      this.setState({flushFont: primary});
+
+
       this.setState({outStraightShowing:'none'});
+      this.setState({ outButCol: primary});
+      this.setState({outFont: secondary});
+
+      this.setState({inStraightShowing:'none'});
+      this.setState({inButCol: primary});
+      this.setState({inFont: secondary});
   };
 
   outsideButton=(e) =>{
       e.preventDefault();
       this.setState({flushShowing:'none'});
+      this.setState({flushButCol: primary});
+      this.setState({flushFont: secondary});
+
       this.setState({inStraightShowing:'none'});
+      this.setState({inButCol: primary});
+      this.setState({inFont: secondary});
+
       this.setState({outStraightShowing:'block'});
+      this.setState({ outButCol: secondary});
+      this.setState({outFont: primary});
   };
 
   insideButton=(e) =>{
       e.preventDefault();
       this.setState({flushShowing:'none'});
+      this.setState({flushButCol: primary});
+      this.setState({flushFont: secondary});
+
       this.setState({inStraightShowing:'block'});
+      this.setState({inButCol: secondary});
+      this.setState({inFont: primary});
+
       this.setState({outStraightShowing:'none'});
+      this.setState({ outButCol: primary});
+      this.setState({outFont: secondary});
   };
 
   setFlushFontWhite = () => {
+    if(this.state.flushButCol === primary){
       this.setState({flushFont: "white"});
+    }
   };
   setFlushFontBlue = () => {
-      this.setState({flushFont: "#08415C"});
+    if(this.state.flushButCol === primary){
+      this.setState({flushFont: secondary});
+    }
+    else{
+        this.setState({flushFont: primary});
+    }
+
   };
 
   setInFontWhite = () => {
+    if(this.state.inButCol === primary){
       this.setState({inFont: "white"});
+    }
   };
   setInFontBlue = () => {
-      this.setState({inFont: "#08415C"});
+    if(this.state.inButCol === primary){
+      this.setState({inFont: secondary});
+    }
+    else{
+        this.setState({inFont: primary});
+    }
   };
 
+
+
   setOutFontWhite = () => {
+    if(this.state.outButCol === primary){
       this.setState({outFont: "white"});
+    }
   };
   setOutFontBlue = () => {
-      this.setState({outFont: "#08415C"});
+    if(this.state.outButCol === primary){
+      this.setState({outFont: secondary});
+    }
+    else{
+        this.setState({outFont: primary});
+    }
   };
 
     render() {
@@ -69,7 +126,7 @@ class Rules extends Component {
 
                 <div style={{position: "absolute", top: "50px", color: "white"}}>
                     <div style={{padding:"15px"}}>
-                        <h1 style={header}>RULES</h1>
+                        <h1 style={header}>Rules</h1>
                         <p style={para}> You are dealt two cards and shown the flop. Based on the cards in your hand, count the number of outs
                             you have. Enter the number of outs into the input box. If you answered correctly, your score will
                             increase and you will be dealt another hand and shown a different flop. If not, the game ends. The
@@ -102,7 +159,7 @@ class Rules extends Component {
                         </p>
 
                         <div style={{position: "absolute", left: "50%", padding:"20px", marginLeft:"-230px"}}>
-                            <img src={"images/AH.png"} style={{width: "80px", height: "120px", padding:"5px"}}/>
+                            <img src={"images/CH.png"} style={{width: "80px", height: "120px", padding:"5px"}}/>
                             <img src={"images/10H.png"} style={{width: "80px", height: "120px", padding:"5px"}}/>
                             <img src={"images/3C.png"} style={{width: "80px", height: "120px", padding:"5px"}}/>
                             <img src={"images/5H.png"} style={{width: "80px", height: "120px", padding:"5px"}}/>
@@ -148,34 +205,33 @@ class Rules extends Component {
                     </div>
                 </div>
 
-
-                    <button className="primaryBg" style={{position: "absolute", display:"inline-block", left:"40%", top:"350px", width: "150px", height:"80px", lineHeight:"25px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", marginLeft:"-75px"}}>
-                        <div onClick={(e) => {this.flushButton(e)}}
-                            style={{fontFamily: "Georgia", fontSize: "xx-large", textAlign: "center"}}
+                <div style={{left:0, right:0, margin:"auto", position:"absolute", width:"75%", height:"50px"}}>
+                    <button style={{left:400, right:0, margin:"auto", position:"fixed", display:"block", top:"350px", width: "150px", height:"80px", lineHeight:"25px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", backgroundColor:this.state.flushButCol}}
+                            onClick={(e) => {this.flushButton(e)}}
                             onMouseEnter={this.setFlushFontWhite}
                             onMouseLeave={this.setFlushFontBlue}>
+                        <div style={{fontFamily: "Georgia", fontSize: "xx-large", textAlign: "center"}}>
                             <p style={{textDecoration: "none", color: this.state.flushFont}}><b>Flush</b></p>
                         </div>
                     </button>
 
-                    <button className="primaryBg" style={{position: "absolute", display:"inline-block", left:"50%", top:"350px", width: "150px", height:"80px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", marginLeft:"-75px"}}>
-                          <div onClick={(e) => {this.insideButton(e)}}
-                              style={{fontFamily: "Georgia", fontSize: "large", textAlign: "center"}}
-                              onMouseEnter={this.setInFontWhite}
-                              onMouseLeave={this.setInFontBlue}>
+                    <button style={{left:0, right:400, margin:"auto", position:"absolute", display:"block", top:"350px", width: "150px", height:"80px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", backgroundColor:this.state.inButCol}}
+                            onClick={(e) => {this.insideButton(e)}}
+                            onMouseEnter={this.setInFontWhite}
+                            onMouseLeave={this.setInFontBlue}>
+                          <div style={{fontFamily: "Georgia", fontSize: "large", textAlign: "center"}}>
                             <p style={{color: this.state.inFont}}><b>Inside Straight</b></p>
                         </div>
                     </button>
 
-                    <button className="primaryBg" style={{position: "absolute", display:"inline-block", left:"60%", top:"350px", width: "150px", height:"80px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", marginLeft:"-75px"}}>
-                        <div onClick={(e) => {this.outsideButton(e)}}
-                            style={{fontFamily: "Georgia", fontSize: "large", textAlign: "center"}}
-                            onMouseEnter={this.setOutFontWhite}
-                            onMouseLeave={this.setOutFontBlue}>
+                    <button onMouseEnter={this.setOutFontWhite}  onMouseLeave={this.setOutFontBlue}
+                            style={{left:0, right:0, margin:"auto", position:"absolute", display:"block", top:"350px", width: "150px", height:"80px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", backgroundColor:this.state.outButCol}}
+                            onClick={(e) => {this.outsideButton(e)}}>
+                        <div style={{fontFamily: "Georgia", fontSize: "large", textAlign: "center"}}>
                             <p style={{textDecoration: "none", color: this.state.outFont}}><b>Outside Straight</b></p>
                         </div>
                     </button>
-
+                </div>
                 <NavBar />
             </div>
         )

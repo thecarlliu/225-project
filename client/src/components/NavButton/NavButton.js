@@ -1,5 +1,15 @@
 import React, {Component} from "react";
 
+/**
+ * Navigates back to a page
+ * @param e event triggering page change
+ * @param route page going to
+ */
+export const changePage = (e, route) => {
+    e.preventDefault();
+    window.location.href = route;
+};
+
 class NavButton extends Component {
     constructor(props) {
         super(props);
@@ -7,11 +17,6 @@ class NavButton extends Component {
             fontColor: "#08415C"
         }
     };
-
-    changePage(e, route) {
-        e.preventDefault();
-        window.location.href = route;
-    }
 
     setFontWhite = () => {
         this.setState({fontColor: "white"});
@@ -23,7 +28,7 @@ class NavButton extends Component {
     render() {
         return(
             <div style={{fontFamily: "Georgia", fontSize: "xx-large", textAlign: "center"}}
-                 onClick={(e)=>{this.changePage(e, this.props.route)}}
+                 onClick={(e)=>{changePage(e, this.props.route)}}
                  onMouseEnter={this.setFontWhite}
                  onMouseLeave={this.setFontBlue}>
                 <a style={{textDecoration: "none", color: this.state.fontColor}}
