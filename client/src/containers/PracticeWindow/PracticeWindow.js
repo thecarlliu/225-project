@@ -5,9 +5,7 @@ import Input from "../../components/Input";
 import NavBar from "../../components/NavBar";
 import PlayButton from "../../components/PlayButton";
 import {changePage} from "../../components/NavButton/NavButton";
-import countOuts from "../../algorithm/algorithm.js";
-
-import hand from "../../handCreator/handCreator.js"
+import guidedHands from "../../guidedHands/guidedHands.js";
 import $ from "jquery";
 
 const deck = ["CH","2H","3H","4H","5H","6H","7H","8H","9H","10H","JH","QH","KH",
@@ -23,6 +21,9 @@ class GameWindow extends Component {
         this.state={
             userHand: ["",""],
             flop: ["","",""],
+            importantCards: [],
+            drawName: "",
+            drawReason: "",
             inputValue: "",
             currentScore: 0,
             outsValue: "",
@@ -39,21 +40,13 @@ class GameWindow extends Component {
     }
 
     getHand() {
-        let userHand = hand();
-        this.state.userHand = [userHand[0], userHand[1]];
-        this.state.flop = [userHand[2], userHand[3], userHand[4]];
-        this.outsCounter();
-    }
-
-    outsCounter() {
-        //get the values from the flop and user hand via this.state.flop and this.state.userHand
-        //computes outs after hand is dealt
-        var hand = [];
-        hand.push(this.state.userHand[0], this.state.userHand[1], this.state.flop[0], this.state.flop[1], this.state.flop[2]);
-        console.log(hand);
-        var result = countOuts(hand);
-        this.state.outsValue = result[0].toString();
-        this.state.rightAnswerInfo = result[1];
+        let hand = guidedHands();
+        this.state.userHand = [hand.cards[0],hand.cards[1]];
+        this.state.flop = [hand.cards[2],hand.cards[3],hand.cards[4]];
+        this.state.importantCards = hand.importantCards;
+        this.state.drawReason = hand.reason;
+        this.state.drawName = hand.drawName;
+        this.state.outsValue = hand.outs;
     }
 
     //Resets the score to 0
@@ -76,16 +69,15 @@ class GameWindow extends Component {
         if(this.state.isPressed) {
             if (this.state.inputValue!=="") {
                 if (this.state.outsValue === this.state.inputValue) {
-                    this.showPopUp("Correct!");
+                    this.showPopUp("Correct! The number of outs was "+this.state.outsValue+" and we had a "+this.state.drawName+". "+this.state.drawReason);
                     $("#input-box").attr("disabled", "true");
                     this.setState({currentScore: this.state.currentScore + 10});
                     this.setState({borderColor: "#0f0"});
                 }
                 else {
-                    this.showPopUp("Wrong! The correct answer is: " + this.state.outsValue + ". There was " + this.state.rightAnswerInfo + ".", "Continue", "Quit");
+                    this.showPopUp("Wrong! The correct answer is: " + this.state.outsValue + ". We had a " + this.state.drawName + " as you can see by the highlighted cards. "+this.state.drawReason, "Continue", "Quit");
                     $("#input-box").attr("disabled", "true");
                     this.setState({borderColor: "#f00"});
-                    // this.getHand();
                     this.resetScore();
                 }
             }
@@ -142,7 +134,7 @@ class GameWindow extends Component {
                 {/*//popup*/}
                 <div style = {{
                     position: "absolute",
-                    alignItems: "center",
+                    // alignItems: "center",
                     top: 135,
                     left: 0,
                     right: 0,
@@ -154,27 +146,47 @@ class GameWindow extends Component {
                     boxShadow: "1px 1px 1px 1px #08415C",
                     borderRadius: "10px",
                     textAlign: "center",
-                    fontSize: "large",
+                    fontSize: "small",
                     fontFamily: "Georgia",
                     color: "white",
                     padding: 20,
                     border: "5px solid" + this.state.borderColor,
                 }}
                      className="primaryBg">
-                    <b>{this.state.popUpText}</b>
+                    <b style={{zIndex:"6"}}>{this.state.popUpText}</b>
 
                     <div>
-                      <div class="trapezoidRight" style={{backgroundColor:this.state.borderColor}}></div>
-                      <div class="trapezoidLeft" style={{backgroundColor:this.state.borderColor}}></div>
+                      <div className="trapezoidRight" style={{backgroundColor:this.state.borderColor, zIndex: "4"}} />
+                      <div className="trapezoidLeft" style={{backgroundColor:this.state.borderColor, zIndex:"4"}} />
                     </div>
+                    <svg style={{
+                        zIndex:"5",
+                        position:"absolute",
+                        top: 100,
+                        left: 0,
+                        width: "100%",
+                        height: 70,
+                        display: "flex"
+                    }}>
+                        {
+                            this.state.importantCards.map((importantCard) => {
+                                return (
+                                    <rect style={{fill:"red", opacity:".8", position: "absolute", width: "47px", height:"65px", x: (importantCard*50)+46, y:3 }} />
+                                )
+                            })
 
+                            // ))
+                        }
+
+                    </svg>
                     <div style={{
-                      position: "absolute",
-                      alignItems: "center",
-                      top: 100,
-                      left: 0,
-                      right: 0,
-                      margin: "auto",
+                        position: "absolute",
+                        alignItems: "center",
+                        top: 100,
+                        left: 0,
+                        right: 0,
+                        margin: "auto",
+                        zIndex:"6"
                     }}>
                         <img src={"images/"+this.state.userHand[0]+".png"} style={{width: "40px", height: "60px", padding:"5px"}}/>
                         <img src={"images/"+this.state.userHand[1]+".png"} style={{width: "40px", height: "60px", padding:"5px"}}/>
