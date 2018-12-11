@@ -23,6 +23,7 @@ class GameWindow extends Component {
             flop: ["","",""],
             importantCards: [],
             drawName: "",
+            drawReason: "",
             inputValue: "",
             currentScore: 0,
             outsValue: "",
@@ -43,6 +44,7 @@ class GameWindow extends Component {
         this.state.userHand = [hand.cards[0],hand.cards[1]];
         this.state.flop = [hand.cards[2],hand.cards[3],hand.cards[4]];
         this.state.importantCards = hand.importantCards;
+        this.state.drawReason = hand.reason;
         this.state.drawName = hand.drawName;
         this.state.outsValue = hand.outs;
     }
@@ -67,13 +69,13 @@ class GameWindow extends Component {
         if(this.state.isPressed) {
             if (this.state.inputValue!=="") {
                 if (this.state.outsValue === this.state.inputValue) {
-                    this.showPopUp("Correct!");
+                    this.showPopUp("Correct! The number of outs was "+this.state.outsValue+" and we had a "+this.state.drawName+". "+this.state.drawReason);
                     $("#input-box").attr("disabled", "true");
                     this.setState({currentScore: this.state.currentScore + 10});
                     this.setState({borderColor: "#0f0"});
                 }
                 else {
-                    this.showPopUp("Wrong! The correct answer is: " + this.state.outsValue + ". There was " + this.state.rightAnswerInfo + ".", "Continue", "Quit");
+                    this.showPopUp("Wrong! The correct answer is: " + this.state.outsValue + ". We had a " + this.state.drawName + " as you can see by the highlighted cards. "+this.state.drawReason, "Continue", "Quit");
                     $("#input-box").attr("disabled", "true");
                     this.setState({borderColor: "#f00"});
                     this.resetScore();
@@ -144,7 +146,7 @@ class GameWindow extends Component {
                     boxShadow: "1px 1px 1px 1px #08415C",
                     borderRadius: "10px",
                     textAlign: "center",
-                    fontSize: "large",
+                    fontSize: "small",
                     fontFamily: "Georgia",
                     color: "white",
                     padding: 20,
@@ -169,7 +171,7 @@ class GameWindow extends Component {
                         {
                             this.state.importantCards.map((importantCard) => {
                                 return (
-                                    <rect style={{color:"GREEN", opacity:".8", position: "absolute", width: "47px", height:"65px", x: (importantCard*50)+46, y:3 }} />
+                                    <rect style={{fill:"red", opacity:".8", position: "absolute", width: "47px", height:"65px", x: (importantCard*50)+46, y:3 }} />
                                 )
                             })
 
