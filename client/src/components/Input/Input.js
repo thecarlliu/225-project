@@ -29,11 +29,11 @@ class Input extends Component {
     render() {
         return (
             <div className="primaryBg" style={{position: "absolute", width: this.props.width, boxShadow: this.props.shadow, display: "flex", left: 0, right: 0, margin: "auto", top: this.props.topPos, borderRadius: "10px", height:"80px", fontFamily: "Georgia", fontSize: "large", textAlign: "center", lineHeight: "40px"}}>
-                <form onSubmit={(e)=>{this.handleSubmit(e)}}>
+                <form onSubmit={(e)=>{this.handleSubmit(e)}} autoComplete="off">
                     <label>
                         <b>{this.props.label} </b><input id="input-box" type="text" value={this.state.value} onChange={(e)=>{this.handleChange(e)}} />
                     </label>
-                    <input type="submit" value="Submit" />
+                    <input autoComplete="false" type="submit" value="Submit" />
                 </form>
             </div>
         )
