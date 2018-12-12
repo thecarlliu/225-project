@@ -206,7 +206,7 @@ class Rules extends Component {
                 </div>
 
                 <div style={{left:0, right:0, margin:"auto", position:"absolute", width:"75%", height:"50px"}}>
-                    <button style={{left:400, right:0, margin:"auto", position:"fixed", display:"block", top:"350px", width: "150px", height:"80px", lineHeight:"25px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", backgroundColor:this.state.flushButCol}}
+                    <button style={{left:400, right:0, margin:"auto", position:"absolute", display:"block", top:"350px", width: "150px", height:"80px", lineHeight:"25px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", backgroundColor:this.state.flushButCol}}
                             onClick={(e) => {this.flushButton(e)}}
                             onMouseEnter={this.setFlushFontWhite}
                             onMouseLeave={this.setFlushFontBlue}>
