@@ -136,6 +136,98 @@ const listHands = [
             reason: "There are 4 hearts for a flush and the 9,10,J,Q make an outside straight draw.",
             outs: "15"
         }
+    ],
+    [
+        {//one to two pair/set
+            cards: ["CC", "QD", "CD", "10C", "3S"],
+            outs: "5",
+            importantCards: [0,2],
+            drawName: "One pair to a Two Pair/Set",
+            reason: "There are two Aces already for a pair, and you only need another Ace or Q for a two pair/set."
+        },
+        {
+            cards: ["KS", "10S", "10H", "7S", "2D"],
+            outs: "5",
+            importantCards: [1,2],
+            drawName: "One pair to a Two Pair/Set",
+            reason: "There are two 10s already for a pair, and you only need another K or 10 for a two pair/set."
+        },
+        {
+            cards: ["CH", "9S", "7H", "CD", "4C"],
+            outs: "5",
+            importantCards: [0,3],
+            drawName: "One pair to a Two Pair/Set",
+            reason: "There are two Aces already for a pair, and you only need another Ace or 9 for a two pair/set."
+        }
+    ],
+    [
+        {//two pair to full house
+            cards: ["KH", "QS", "KC", "QD", "5S"],
+            outs: "4",
+            importantCards: [0,2,1,3],
+            drawName: "Two pair to a Full House",
+            reason: "There are two pairs: Ks and Qs, and you only need one more K or Q for a full house."
+        },
+        {
+            cards: ["8H", "JD", "JH", "8S", "2C"],
+            outs: "4",
+            importantCards: [0,2,1,3],
+            drawName: "Two pair to a Full House",
+            reason: "There are two pairs: Js and 8s, and you only need one more J or 8 for a full house."
+        },
+        {
+            cards: ["7H", "KD", "7C", "KH", "3C"],
+            outs: "4",
+            importantCards: [0,2,1,3],
+            drawName: "Two pair to a Full House",
+            reason: "There are two pairs: Ks and 7s, and you only need one more K or 7 for a full house."
+        }
+    ],
+    [
+        {//set to fullhouse/quads
+            cards: ["6C", "6D", "6S", "7H", "JC"],
+            outs: "7",
+            importantCards: [0,1,2],
+            drawName: "Set to a Full House/Quads",
+            reason: "We have a set of 6s, and you only need a 6, 7, or J for a full house/quad."
+        },
+        {
+            cards: ["8H", "8D", "8S", "9C", "KC"],
+            outs: "7",
+            importantCards: [0,1,2],
+            drawName: "Set to a Full House/Quads",
+            reason: "We have a set of 8s, and you only need a 8, 9, or K for a full house/quad."
+        },
+        {
+            cards: ["CC", "CH", "CD", "5H", "QS"],
+            outs: "7",
+            importantCards: [0,1,2],
+            drawName: "Set to a Full House/Quads",
+            reason: "We have a set of Aces, and you only need a 5, Q, or an Ace for a full house/quad."
+        }
+    ],
+    [
+        {//no pair to pair
+            cards: ["9C", "7D", "2S", "3D", "JC"],
+            outs: "6",
+            importantCards: [0,1],
+            drawName: "No pair to a Pair",
+            reason: "We consider the cards in our hand and count the outs for a pair, looking for a 9 or 7."
+        },
+        {
+            cards: ["CD", "8S", "5H", "2D", "6C"],
+            outs: "6",
+            importantCards: [0,1],
+            drawName: "No pair to a Pair",
+            reason: "We consider the cards in our hand and count the outs for a pair, looking for an Ace or 8."
+        },
+        {
+            cards: ["JC", "9S", "2H", "5D", "7S"],
+            outs: "6",
+            importantCards: [0,1],
+            drawName: "No pair to a Pair",
+            reason: "We consider the cards in our hand and count the outs for a pair, looking for a J or 9."
+        }
     ]
 ];
 
