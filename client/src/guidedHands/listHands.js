@@ -182,21 +182,21 @@ const listHands = [
             outs: "7",
             importantCards: [0,1,2],
             drawName: "Set to a Full House/Quads",
-            reason: "We have a set of 6s, and you only need a 6, 7, or J for a full house/quad."
+            reason: "You have a set of sixes, and you need a jack or seven for a full house or a six for quads."
         },
         {
             cards: ["8H", "8D", "8S", "9C", "KC"],
             outs: "7",
             importantCards: [0,1,2],
             drawName: "Set to a Full House/Quads",
-            reason: "We have a set of 8s, and you only need a 8, 9, or K for a full house/quad."
+            reason: "You have a set of eights, and you need a king or nine for a full house or an eight for quads."
         },
         {
             cards: ["CC", "CH", "CD", "5H", "QS"],
             outs: "7",
             importantCards: [0,1,2],
             drawName: "Set to a Full House/Quads",
-            reason: "We have a set of Aces, and you only need a 5, Q, or an Ace for a full house/quad."
+            reason: "You have a set of aces, and you need a queen or five for a full hosue or an ace for quads."
         }
     ],
     [
@@ -205,21 +205,21 @@ const listHands = [
             outs: "6",
             importantCards: [0,1],
             drawName: "No pair to a Pair",
-            reason: "We consider the cards in our hand and count the outs for a pair, looking for a 9 or 7."
+            reason: "We consider the cards in our hand and count the outs for a pair, looking for a nine or seven."
         },
         {
             cards: ["CD", "8S", "5H", "2D", "6C"],
             outs: "6",
             importantCards: [0,1],
             drawName: "No pair to a Pair",
-            reason: "We consider the cards in our hand and count the outs for a pair, looking for an Ace or 8."
+            reason: "We consider the cards in our hand and count the outs for a pair, looking for an ace or eight."
         },
         {
             cards: ["JC", "9S", "2H", "5D", "7S"],
             outs: "6",
             importantCards: [0,1],
             drawName: "No pair to a Pair",
-            reason: "We consider the cards in our hand and count the outs for a pair, looking for a J or 9."
+            reason: "We consider the cards in our hand and count the outs for a pair, looking for a jack or nine."
         }
     ]
 ];
