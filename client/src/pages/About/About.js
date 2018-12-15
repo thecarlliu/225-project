@@ -14,7 +14,7 @@ class About extends Component {
                     <p>Welcome to Texas Goat'em!</p>
                     <p style={placement}>In this fun game, become a better poker player by learning how to count cards.</p>
                     <br/>
-                    <p style={placement}>For our class, Software Design and Development (COMP 221) at Macalester College, we were assigned to work on a single app idea as a semester-long project.</p>
+                    <p style={placement}>For our class, Software Design and Development (COMP 225) at Macalester College, we were assigned to work on a single app idea as a semester-long project.</p>
                     <p style={placement}>Our interest in board game and card game mechanics inspired us to come up with Texas Goat'em, a fun and educational way to enhance a casual Texas Hold'em player's knowledge of the game.</p>
                     <br/>
                     <div style={placement}>Development team: (click on name for respective Github)</div>
