@@ -399,7 +399,7 @@ class Rules extends Component {
 
                     <br/><br/>
 
-                    <div  style={{position: "absolute", top: "400px", width:"100%", display:this.state.flushShowing}}>
+                    <div  style={{position: "absolute", top: "470px", width:"100%", display:this.state.flushShowing}}>
                         <p style={para}>
                             <h3><i><b>Flush Draw:</b></i></h3> A flush draw
                             is a hand with four cards of the same suit that may improve
@@ -417,7 +417,7 @@ class Rules extends Component {
                         </div>
                     </div>
 
-                    <div style={{position: "absolute", top: "400px", width:"100%", display:this.state.inStraightShowing}}>
+                    <div style={{position: "absolute", top: "470px", width:"100%", display:this.state.inStraightShowing}}>
                         <p style={para}>
                           <h3><i><b>Inside Straight Draw:</b></i></h3> An inside straight draw inspect
                             a hand with four of the five cards needed for a straight,
@@ -435,7 +435,7 @@ class Rules extends Component {
                         </div>
                     </div>
 
-                    <div style={{position: "absolute", top: "400px", width: "100%", display:this.state.outStraightShowing}}>
+                    <div style={{position: "absolute", top: "470px", width: "100%", display:this.state.outStraightShowing}}>
                         <p style={para}>
                             <h3><i><b>Outside Straight Draw:</b></i></h3> An outside straight draw
                             is a hand with four of the five needed cards in sequence
@@ -454,7 +454,7 @@ class Rules extends Component {
                         </div>
                     </div>
 
-                    <div style={{position: "absolute", top: "400px", width: "100%", display:this.state.setShowing}}>
+                    <div style={{position: "absolute", top: "470px", width: "100%", display:this.state.setShowing}}>
                         <p style={para}>
                             <h3><i><b>Set:</b></i></h3>
                             If a player has 3-of-a-kind, there will be possibilities to get either a full house or a four-of-a-kind
@@ -471,7 +471,7 @@ class Rules extends Component {
                         </div>
                     </div>
 
-                    <div style={{position: "absolute", top: "400px", width: "100%", display:this.state.twoPairShowing}}>
+                    <div style={{position: "absolute", top: "470px", width: "100%", display:this.state.twoPairShowing}}>
                         <p style={para}>
                             <h3><i><b>Two Pair:</b></i></h3>
                             If a player has 2 pair, there will be possibilities to get a full house
@@ -488,7 +488,7 @@ class Rules extends Component {
                         </div>
                     </div>
 
-                    <div style={{position: "absolute", top: "400px", width: "100%", display:this.state.onePairShowing}}>
+                    <div style={{position: "absolute", top: "470px", width: "100%", display:this.state.onePairShowing}}>
                         <p style={para}>
                             <h3><i><b>One Pair:</b></i></h3>
                             If a player has one pair, there will be possibilities to get two pairs
@@ -505,7 +505,7 @@ class Rules extends Component {
                         </div>
                     </div>
 
-                    <div style={{position: "absolute", top: "400px", width: "100%", display:this.state.noPairShowing}}>
+                    <div style={{position: "absolute", top: "470px", width: "100%", display:this.state.noPairShowing}}>
                         <p style={para}>
                             <h3><i><b>No Pair:</b></i></h3>
                             If a player has no pair, there will be possibilities to get one pair
@@ -555,7 +555,7 @@ class Rules extends Component {
 
                     //set draw button
                     <button onMouseEnter={this.setSetFontWhite}  onMouseLeave={this.setSetFontBlue}
-                            style={{left:800, right:0, margin:"auto", position:"absolute", display:"block", top:"350px", width: "150px", height:"80px", lineHeight:"25px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", backgroundColor:this.state.setButCol}}
+                            style={{left:200, right:0, margin:"auto", position:"absolute", display:"block", top:"450px", width: "150px", height:"80px", lineHeight:"25px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", backgroundColor:this.state.setButCol}}
                             onClick={(e) => {this.setButton(e)}}>
                         <div style={{fontFamily: "Georgia", fontSize: "xx-large", textAlign: "center"}}>
                             <p style={{textDecoration: "none", color: this.state.setFont}}><b>Set</b></p>
@@ -564,7 +564,7 @@ class Rules extends Component {
 
                     //two pair button
                     <button onMouseEnter={this.setTwoPairFontWhite}  onMouseLeave={this.setTwoPairFontBlue}
-                            style={{left:0, right:800, margin:"auto", position:"absolute", display:"block", top:"350px", width: "150px", height:"80px", lineHeight:"25px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", backgroundColor:this.state.twoPairButCol}}
+                            style={{left:0, right:200, margin:"auto", position:"absolute", display:"block", top:"450px", width: "150px", height:"80px", lineHeight:"25px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", backgroundColor:this.state.twoPairButCol}}
                             onClick={(e) => {this.twoPairButton(e)}}>
                         <div style={{fontFamily: "Georgia", fontSize: "x-large", textAlign: "center"}}>
                             <p style={{textDecoration: "none", color: this.state.twoPairFont}}><b>Two Pair</b></p>
@@ -573,7 +573,7 @@ class Rules extends Component {
 
                     //one pair button
                     <button onMouseEnter={this.setOnePairFontWhite}  onMouseLeave={this.setOnePairFontBlue}
-                            style={{left:1200, right:0, margin:"auto", position:"absolute", display:"block", top:"350px", width: "150px", height:"80px", lineHeight:"25px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", backgroundColor:this.state.onePairButCol}}
+                            style={{left:600, right:0, margin:"auto", position:"absolute", display:"block", top:"450px", width: "150px", height:"80px", lineHeight:"25px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", backgroundColor:this.state.onePairButCol}}
                             onClick={(e) => {this.onePairButton(e)}}>
                         <div style={{fontFamily: "Georgia", fontSize: "x-large", textAlign: "center"}}>
                             <p style={{textDecoration: "none", color: this.state.onePairFont}}><b>One Pair</b></p>
@@ -582,7 +582,7 @@ class Rules extends Component {
 
                     //no pair button
                     <button onMouseEnter={this.setNoPairFontWhite}  onMouseLeave={this.setNoPairFontBlue}
-                            style={{left:0, right:1200, margin:"auto", position:"absolute", display:"block", top:"350px", width: "150px", height:"80px", lineHeight:"25px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", backgroundColor:this.state.noPairButCol}}
+                            style={{left:0, right:600, margin:"auto", position:"absolute", display:"block", top:"450px", width: "150px", height:"80px", lineHeight:"25px", boxShadow: "1px 1px 1px 1px #08415C", borderRadius: "10px", backgroundColor:this.state.noPairButCol}}
                             onClick={(e) => {this.noPairButton(e)}}>
                         <div style={{fontFamily: "Georgia", fontSize: "x-large", textAlign: "center"}}>
                             <p style={{textDecoration: "none", color: this.state.noPairFont}}><b>No Pair</b></p>
