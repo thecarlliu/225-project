@@ -1,4 +1,6 @@
-
+  /**
+   * Checks to see if there is a flush draw in a list of cards
+   */
   function isFlushDraw(cardSuits) {
     cardSuits.sort();
     var maxCount = 1;
@@ -11,6 +13,9 @@
     return false;
   }
 
+  /**
+   * Returns a dict of frequencies of card values
+   */
   function cardFreqs(cardVals) {
     var counts = {};
     for (var i = 0; i < cardVals.length; i++) {
@@ -20,6 +25,9 @@
     return counts;
   }
 
+  /**
+   * Reads a dict of cards to see if there's exactly one pair in a hand
+   */
   function onePair(cardFreqs) {
     var count = 0;
     for (var key in cardFreqs) {
@@ -30,6 +38,9 @@
     return count === 1;
   }
 
+  /**
+   * Reads a dict of cards to see if there is no pair in a hand
+   */
   function noPair(cardFreqs) {
     for (var key in cardFreqs) {
       if (cardFreqs[key] != 1) {
@@ -39,6 +50,9 @@
     return true;
   }
 
+  /**
+   * Reads a dict of cards to see if there's exactly two pairs in a hand
+   */
   function twoPair(cardFreqs) {
     var count = 0;
     for (var key in cardFreqs) {
@@ -49,6 +63,9 @@
     return count === 2;
   }
 
+  /**
+   * Reads a dict of cards to see if there's a three of a kind in a hand (but not a full house)
+   */
   function hasSet(cardFreqs) {
     for (var key in cardFreqs) {
       if (cardFreqs[key] != 3 || cardFreqs[key] != 1) {
@@ -77,6 +94,9 @@
     return Object.keys(unique);
   }
 
+  /**
+   * Helper function for straight draw methods; turns an ace high into an ace low
+   */
   function aceHandler(cardVals) {
     var cardVals2 = [];
     if (cardVals.includes(14)) {
@@ -87,6 +107,9 @@
     return cardVals2;
   }
 
+  /**
+   * Determines whether a list of card values has an outside straight draw (or double inside straight draw)
+   */
   function isOutsideStraightDraw(cardVals) {
     cardVals.sort(function(a, b){return a - b});
     var hasAce = false;
@@ -116,6 +139,9 @@
   ((val4 === 4 && val5 === 4) || (val4 === 4 && val6 === 4) || (val5 === 4 && val6 === 4)));
   }
 
+  /**
+   * Determines whether a list of card values has an in straight draw
+   */
   function isInsideStraightDraw(cardVals) {
     cardVals.sort(function(a, b){return a - b});
     var hasAce = false;
@@ -144,6 +170,9 @@
     return (val1 === 4 || val2 === 4 || val3 === 4 || val4 === 4 || val5 === 4 || val6 === 4 || (val2 === 3 && hasAce) || (val3 === 3 && hasAce) || (val4 === 3 && hasAce) || (val5 === 3 && hasAce));
   }
 
+  /**
+   * Returns number of outs for a given hand
+   */
   const countOuts = function(cards) {
     var cardVals = [];
     var cardSuits = [];
@@ -175,19 +204,19 @@
     } else if (insideStraightDraw && flushDraw) {
       return [12, " an inside straight draw and flush draw"];
     } else if (outsideStraightDraw) {
-      return [8, " an outside straight draw"];
+      return [8, " an outside straight draw (or a double inside straight draw)"];
     } else if (insideStraightDraw) {
       return [4, " an inside straight draw"];
     } else if (flushDraw){
       return [9, "a flush draw"];
     } else if (hasSet(freqs)) {
-      return [7, "a set"]; //set to full house of 4 of a kind
+      return [7, "a set"]; //set to full house or quads
     } else if (twoPair(freqs)) {
       return [4, "two pair"]; //two pair to full house
     } else if (onePair(freqs)) {
       return [5, "one pair"]; //one pair to top two pair or set
     } else if (noPair(freqs)) {
-      return [6, "no pair"];//no pair to pair (for top 2 cards)
+      return [6, "no pair"]; //no pair to pair
     } else {
       return [0, " nothing"];
     }
