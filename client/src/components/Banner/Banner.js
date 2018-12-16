@@ -1,6 +1,9 @@
 import React, {Component} from "react";
 import NavButton from "../../components/NavButton";
 
+/**
+ * Sets up home page with logo and buttons to practice or play the regular game
+ */
 class Banner extends Component {
     render() {
         return (
