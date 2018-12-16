@@ -16,6 +16,10 @@ const deck = ["CH","2H","3H","4H","5H","6H","7H","8H","9H","10H","JH","QH","KH",
 //The GameWindow keeps track of the state of the game.
 class GameWindow extends Component {
 
+    /**
+     * Initializes and sets the state of each component
+     * @param props
+     */
     constructor(props){
         super(props);
         this.state={
@@ -39,6 +43,10 @@ class GameWindow extends Component {
     componentWillMount() {
     }
 
+    /**
+     * Gets a random two-card hand and three-card flop from the pre-set list and stores them in another list
+     * Computes the outs and type of hand
+     */
     getHand() {
         let hand = guidedHands();
         this.state.userHand = [hand.cards[0],hand.cards[1]];
@@ -65,6 +73,10 @@ class GameWindow extends Component {
         this.setState({popUpOptionTwo: "Quit"});
     }
 
+    /**
+     * Gives feedback on the user input in the popup
+     * Increments score by 10 if user inputs correct answer
+     */
     updateScores() {
         if(this.state.isPressed) {
             if (this.state.inputValue!=="") {
@@ -84,16 +96,29 @@ class GameWindow extends Component {
         }
     }
 
+    /**
+     * Updates the score using the user's answer
+     * Resets the the input field
+     * @param event
+     */
     handleInputSubmit = (event) => {
         event.preventDefault();
         this.updateScores();
         this.setState({inputValue:""});
     };
 
+    /**
+     * Sets the input value to what the user has typed
+     * @param value
+     */
     handleInputChange = (value) => {
         this.setState({inputValue: value});
     };
 
+    /**
+     * Checks if the user has clicked the play button
+     * Gets a random hand
+     */
     buttonPressed = () => {
         this.setState({isPressed:true});
         this.getHand();
@@ -156,6 +181,7 @@ class GameWindow extends Component {
                     <b style={{zIndex:"6"}}>{this.state.popUpText}</b>
 
                     <div>
+                      {/*Highlights the popup red if the user's answer is wrong, green if it's correct*/}
                       <div className="trapezoidRight" style={{backgroundColor:this.state.borderColor, zIndex: "4"}} />
                       <div className="trapezoidLeft" style={{backgroundColor:this.state.borderColor, zIndex:"4"}} />
                     </div>
@@ -188,6 +214,7 @@ class GameWindow extends Component {
                         margin: "auto",
                         zIndex:"6"
                     }}>
+                        {/*Displays the hand and the flop*/}
                         <img src={"images/"+this.state.userHand[0]+".png"} style={{width: "40px", height: "60px", padding:"5px"}}/>
                         <img src={"images/"+this.state.userHand[1]+".png"} style={{width: "40px", height: "60px", padding:"5px"}}/>
                         <img src={"images/"+this.state.flop[0]+".png"} style={{width: "40px", height: "60px", padding:"5px"}}/>
