@@ -1,5 +1,8 @@
 var assert = require('assert');
 
+/**
+ * Checks to see if there is a flush draw in a list of cards
+ */
 function isFlushDraw(cardSuits) {
   cardSuits.sort();
   var maxCount = 1;
@@ -12,6 +15,9 @@ function isFlushDraw(cardSuits) {
   return false;
 }
 
+/**
+ * Returns a dict of frequencies of card values
+ */
 function cardFreqs(cardVals) {
   var counts = {};
   for (var i = 0; i < cardVals.length; i++) {
@@ -21,26 +27,68 @@ function cardFreqs(cardVals) {
   return counts;
 }
 
+/**
+ * Reads a dict of cards to see if there's exactly one pair in a hand
+ */
 function onePair(cardFreqs) {
   var count = 0;
-  for (var key in freqs) {
-    count++;
-    if (freqs[key] === 1 || freqs[key] === 4) {
-      return false;
+  for (var key in cardFreqs) {
+    if (cardFreqs[key] === 2) {
+      count++;
     }
   }
-  return count === 2;
+  return count === 1;
 }
 
+/**
+ * Reads a dict of cards to see if there is no pair in a hand
+ */
 function noPair(cardFreqs) {
-  for (var key in freqs) {
-    if (freqs[key] != 1) {
+  for (var key in cardFreqs) {
+    if (cardFreqs[key] != 1) {
       return false;
     }
   }
   return true;
 }
 
+/**
+ * Reads a dict of cards to see if there's exactly two pairs in a hand
+ */
+function twoPair(cardFreqs) {
+  var count = 0;
+  for (var key in cardFreqs) {
+    if (cardFreqs[key] === 2) {
+      count++;
+    }
+  }
+  return count === 2;
+}
+
+/**
+ * Reads a dict of cards to see if there's a three of a kind in a hand (but not a full house)
+ */
+function hasSet(cardFreqs) {
+  var foundSet = false;
+  for (var key in cardFreqs) {
+    if (cardFreqs[key] != 3 && cardFreqs[key] != 1) {
+      return false;
+    }
+    if (cardFreqs[key] == 3) {
+      foundSet = true;
+    }
+  }
+  return foundSet;
+}
+
+//4, 1
+//3, 2
+//3, 1, 1
+//2, 2, 1
+//2, 1, 1, 1
+//1, 1, 1, 1, 1
+
+//thanks internet for this one (mostly)
 function removeDups(cardVals) {
   cardVals.sort()
   var unique = {};
@@ -52,10 +100,12 @@ function removeDups(cardVals) {
   return Object.keys(unique);
 }
 
+/**
+ * Helper function for straight draw methods; turns an ace high into an ace low
+ */
 function aceHandler(cardVals) {
   var cardVals2 = [];
   if (cardVals.includes(14)) {
-    hasAce = true;
     cardVals2 = cardVals.slice(0);
     cardVals2.unshift(1);
     cardVals2.splice(cardVals2.length - 1);
@@ -63,12 +113,15 @@ function aceHandler(cardVals) {
   return cardVals2;
 }
 
+/**
+ * Determines whether a list of card values has an outside straight draw (or double inside straight draw)
+ */
 function isOutsideStraightDraw(cardVals) {
   cardVals.sort(function(a, b){return a - b});
   var hasAce = false;
   var cardVals2 = aceHandler(cardVals);
 
-  if (cardVals2.length != 0) {
+  if (cardVals2.length !== 0) {
     hasAce = true;
   }
 
@@ -92,12 +145,15 @@ function isOutsideStraightDraw(cardVals) {
 ((val4 === 4 && val5 === 4) || (val4 === 4 && val6 === 4) || (val5 === 4 && val6 === 4)));
 }
 
+/**
+ * Determines whether a list of card values has an in straight draw
+ */
 function isInsideStraightDraw(cardVals) {
   cardVals.sort(function(a, b){return a - b});
   var hasAce = false;
   var cardVals2 = aceHandler(cardVals);
 
-  if (cardVals2.length != 0) {
+  if (cardVals2.length !== 0) {
     hasAce = true;
   }
 
@@ -117,17 +173,19 @@ function isInsideStraightDraw(cardVals) {
   var val4 = cardVals2[4] - cardVals2[0];
   var val5 = cardVals2[3] - cardVals2[0];
   var val6 = cardVals2[4] - cardVals2[1];
-
   return (val1 === 4 || val2 === 4 || val3 === 4 || val4 === 4 || val5 === 4 || val6 === 4 || (val2 === 3 && hasAce) || (val3 === 3 && hasAce) || (val4 === 3 && hasAce) || (val5 === 3 && hasAce));
 }
 
-function countOuts(cards) {
+/**
+ * Returns number of outs for a given hand
+ */
+const countOuts = function(cards) {
   var cardVals = [];
   var cardSuits = [];
   for (var i = 0; i < cards.length; i++) {
     var cardRank = cards[i].slice(0,cards[i].length - 1);
     cardSuits.push(cards[i].slice(cards[i].length - 1, cards[i].length));
-    if (cardRank === "A") {
+    if (cardRank === "C") {
       cardVals.push(14);
     } else if (cardRank === "K") {
       cardVals.push(13);
@@ -142,23 +200,33 @@ function countOuts(cards) {
     }
   }
 
+  var freqs = cardFreqs(cardVals);
+
   var flushDraw = isFlushDraw(cardSuits);
   var insideStraightDraw = isInsideStraightDraw(cardVals);
   var outsideStraightDraw = isOutsideStraightDraw(cardVals);
   if (outsideStraightDraw && flushDraw) {
-    return 15;
+    return [15, " an outside straight draw (or a double inside straight draw) and flush draw"];
   } else if (insideStraightDraw && flushDraw) {
-    return 12;
+    return [12, " an inside straight draw and flush draw"];
   } else if (outsideStraightDraw) {
-    return 8;
+    return [8, " an outside straight draw (or a double inside straight draw)"];
   } else if (insideStraightDraw) {
-    return 4;
+    return [4, " an inside straight draw"];
   } else if (flushDraw){
-    return 9;
+    return [9, "a flush draw"];
+  } else if (hasSet(freqs)) {
+    return [7, "a set"]; //set to full house or quads
+  } else if (twoPair(freqs)) {
+    return [4, "two pair"]; //two pair to full house
+  } else if (onePair(freqs)) {
+    return [5, "one pair"]; //one pair to top two pair or set
+  } else if (noPair(freqs)) {
+    return [6, "no pair"]; //no pair to pair
   } else {
-    return 0;
+    return [0, " nothing"];
   }
-}
+};
 
 describe('isFlushDraw()', function() {
   it('should return true if flush draw', function() {
@@ -201,19 +269,49 @@ describe('isInsideStraightDraw()', function() {
 
 describe('countOuts()', function() {
   it('should return correct number of outs', function() {
-    assert.equal(countOuts(['AH','2C','3D','4S','9S']), 4);
-    assert.equal(countOuts(['9H','2S','3S','4S','5C']), 8);
-    assert.equal(countOuts(['4H','AS','7S','10S','2S']), 9);
-    assert.equal(countOuts(['AH','2S','3S','4S','9S']), 12);
-    assert.equal(countOuts(['9H','2S','3S','4S','5S']), 15);
-    assert.equal(countOuts(['AH','2S','3D','7C','11S']), 0);
+    assert.equal(countOuts(['CH','2C','3D','4S','9S'])[0], 4);
+    assert.equal(countOuts(['9H','2S','3S','4S','5C'])[0], 8);
+    assert.equal(countOuts(['4H','CS','7S','10S','2S'])[0], 9);
+    assert.equal(countOuts(['CH','2S','3S','4S','9S'])[0], 12);
+    assert.equal(countOuts(['9H','2S','3S','4S','5S'])[0], 15);
+    assert.equal(countOuts(['CH','2S','3D','7C','11S'])[0], 6);
+    assert.equal(countOuts(['CH','CS','CD','7C','11S'])[0], 7);
   });
 });
 
 describe('noPair()', function() {
-  it('should return correct number of outs', function() {
-    assert.equal(noPair([1,2,3,4,5]), true);
-    assert.equal(noPair([1,2,3,3,5]), false);
-    assert.equal(noPair([3,3,3,4,5]), false);
+  it('should return true if there\'s no pair', function() {
+    assert.equal(noPair(cardFreqs([1,2,3,4,5])), true);
+    assert.equal(noPair(cardFreqs([1,2,3,3,5])), false);
+    assert.equal(noPair(cardFreqs([3,3,3,4,5])), false);
+  });
+});
+
+describe('twoPair()', function() {
+  it('should return true if there\'s two pairs', function() {
+    assert.equal(twoPair(cardFreqs([1,2,3,4,5])), false);
+    assert.equal(twoPair(cardFreqs([1,2,3,3,5])), false);
+    assert.equal(twoPair(cardFreqs([3,3,3,4,5])), false);
+    assert.equal(twoPair(cardFreqs([3,3,3,4,4])), false);
+    assert.equal(twoPair(cardFreqs([3,3,4,4,5])), true);
+  });
+});
+
+describe('onePair()', function() {
+  it('should return true if there\'s just one pair', function() {
+    assert.equal(onePair(cardFreqs([1,2,3,4,5])), false);
+    assert.equal(onePair(cardFreqs([1,2,3,3,5])), true);
+    assert.equal(onePair(cardFreqs([3,3,3,4,5])), false);
+    assert.equal(onePair(cardFreqs([3,3,3,4,4])), true);
+    assert.equal(onePair(cardFreqs([3,3,4,4,5])), false);
+  });
+});
+
+describe('hasSet()', function() {
+  it('should return true if there\'s a set', function() {
+    assert.equal(hasSet(cardFreqs([3,3,3,4,5])), true);
+    assert.equal(hasSet(cardFreqs([1,2,3,3,5])), false);
+    assert.equal(hasSet(cardFreqs([3,3,3,4,4])), false);
+    assert.equal(hasSet(cardFreqs([14,2,3,7,11])), false);
   });
 });
