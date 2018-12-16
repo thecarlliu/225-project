@@ -19,7 +19,7 @@ a package handler. Follow these instructions:
 
 If you have a PC, you might need to install bash to run yarn.
 
-Otherwise, go to [insert link here] to run it online.
+Otherwise, go to https://texas-goat-em.firebaseapp.com/home to run it online.
 
 Have fun!
 
