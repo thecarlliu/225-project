@@ -235,7 +235,8 @@ class GameWindow extends Component {
     };
 
     /**
-     * Navigates back to the home page when popup option two is clicked
+     * Navigates back to the home or scoreboard page when popup option two is clicked
+     * Stores the current score so that user can save to scoreboard
      * @param e
      */
     handleOptionTwo = (e) => {
@@ -293,6 +294,7 @@ class GameWindow extends Component {
                     <b>{this.state.popUpText}</b>
 
                     <div>
+                      {/*Highlights the popup red if the user's answer is wrong, green if it's correct*/}
                       <div class="trapezoidRight" style={{backgroundColor:this.state.borderColor}}></div>
                       <div class="trapezoidLeft" style={{backgroundColor:this.state.borderColor}}></div>
                     </div>
@@ -307,6 +309,7 @@ class GameWindow extends Component {
                       display: this.state.popUpCardsShowing
                     }}>
                         <div>
+                            {/*Displays the hand and the flop*/}
                           <img src={"images/"+this.state.flop[0]+".png"} style={{width: "30px", height: "45px", padding:"5px"}}/>
                           <img src={"images/"+this.state.flop[1]+".png"} style={{width: "30px", height: "45px", padding:"5px"}}/>
                           <img src={"images/"+this.state.flop[2]+".png"} style={{width: "30px", height: "45px", padding:"5px"}}/>
