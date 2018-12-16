@@ -19,7 +19,7 @@ class About extends Component {
                     <br/>
                     <div style={placement}>Development team: (click on name for respective Github)</div>
                     <li style={liPlacement}><a style={{textDecoration:"none", color: "white"}} target="_blank" href={"https://github.com/michelleas"}>Michelle Armstrong-Spielberg</a></li>
-                    <li style={liPlacement}><a style={{textDecoration:"none", color: "white"}} target="_blank" href={"https://github.com/winstongergill"}>George Claire Kennedy</a></li>
+                    <li style={liPlacement}><a style={{textDecoration:"none", color: "white"}} target="_blank" href={"https://github.com/winstongergill"}>George Clare Kennedy</a></li>
                     <li style={liPlacement}><a style={{textDecoration:"none", color: "white"}} target="_blank" href={"https://github.com/thecarlliu"}>Carl Liu</a></li>
                     <li style={liPlacement}><a style={{textDecoration:"none", color: "white"}} target="_blank" href={"https://github.com/arifzamil"}>Arif Zamil</a></li>
                     <br/>
