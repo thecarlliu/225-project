@@ -1,6 +1,9 @@
 import React, {Component} from "react";
 import NavButton from "../NavButton";
 
+/**
+ * Renders the navigation bar with options to go to the about page, home page, and rules page
+ */
 class NavBar extends Component {
 
     render() {
