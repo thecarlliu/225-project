@@ -200,7 +200,7 @@
     var insideStraightDraw = isInsideStraightDraw(cardVals);
     var outsideStraightDraw = isOutsideStraightDraw(cardVals);
     if (outsideStraightDraw && flushDraw) {
-      return [15, " an outside straight draw and flush draw"];
+      return [15, " an outside straight draw (or a double inside straight draw) and flush draw"];
     } else if (insideStraightDraw && flushDraw) {
       return [12, " an inside straight draw and flush draw"];
     } else if (outsideStraightDraw) {
