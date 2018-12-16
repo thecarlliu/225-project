@@ -5,6 +5,10 @@ import Scoreboard from "../../components/Scoreboard";
 
 class ScoreBoard extends Component {
 
+    /**
+     * Displays the list of highscores and two buttons with options to try again or navigate back home
+     * @returns {*}
+     */
     render () {
         return (
             <div>

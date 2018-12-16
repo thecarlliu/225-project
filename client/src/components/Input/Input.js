@@ -1,5 +1,8 @@
 import React, {Component} from "react";
 
+/**
+ * Renders input box
+ */
 class Input extends Component {
     constructor(props) {
         super(props);
@@ -14,6 +17,11 @@ class Input extends Component {
         }
     }
 
+    /**
+     * Calls specific submit handler when user has entered a value
+     * Resets the input value
+     * @param event
+     */
     handleSubmit = (event) => {
         event.preventDefault();
         this.state.submitHandler(event);
@@ -21,6 +29,11 @@ class Input extends Component {
 
     };
 
+    /**
+     * Sets the input value to what the user has entered
+     * Calls specific change handler
+     * @param event
+     */
     handleChange = (event) => {
         this.setState({value: event.target.value});
         this.state.changeHandler(event.target.value);

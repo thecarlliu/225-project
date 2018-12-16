@@ -21,6 +21,10 @@ let tickingFunction = 0;
 //The GameWindow keeps track of the state of the game.
 class GameWindow extends Component {
 
+    /**
+     * Initializes and sets the state of each component
+     * @param props
+     */
     constructor(props){
         super(props);
         this.state={
@@ -45,10 +49,16 @@ class GameWindow extends Component {
         };
     }
 
+    /**
+     * Loads the database
+     */
     componentWillMount() {
         getDatabase();
     }
 
+    /**
+     * Gets a random two-card hand and three-card flop and stores them in a list
+     */
     getHand() {
       let thisHand = hand();
       this.setState({userHand:[thisHand[0], thisHand[1]]});
@@ -69,10 +79,17 @@ class GameWindow extends Component {
 
     }*/
 
+    /**
+     * Starts the timer
+     */
     startTimer() {
         tickingFunction = setInterval(this.tick, 1000);
     }
 
+    /**
+     * Makes the timer count down one second at a time
+     * Shows a popup if the player has run out of time
+     */
     tick = () => {
         if (this.state.time <= 0) {
           this.showPopUp("You ran out of time!", "Try again", "Quit");
@@ -129,7 +146,7 @@ class GameWindow extends Component {
     }
 
     /**
-     * Gives feedback on the user input (displays popup)
+     * Gives feedback on the user input in the popup
      * Increments score by 10 if user inputs correct answer and updates highscore accordingly
      */
     updateScores() {
@@ -157,16 +174,29 @@ class GameWindow extends Component {
         }
     }
 
+    /**
+     * Updates the score using the user's answer
+     * Resets the the input field
+     * @param event
+     */
     handleInputSubmit = (event) => {
         event.preventDefault();
         this.updateScores();
         this.setState({inputValue:""});
     };
 
+    /**
+     * Sets the input value to what the user has typed
+     * @param value
+     */
     handleInputChange = (value) => {
         this.setState({inputValue: value});
     };
 
+    /**
+     * Checks if the user has clicked the play button
+     * Starts the game
+     */
     buttonPressed = () => {
         this.setState({isPressed:true});
         this.getHand();
@@ -205,7 +235,8 @@ class GameWindow extends Component {
     };
 
     /**
-     * Navigates back to the home page when popup option two is clicked
+     * Navigates back to the home or scoreboard page when popup option two is clicked
+     * Stores the current score so that user can save to scoreboard
      * @param e
      */
     handleOptionTwo = (e) => {
@@ -221,6 +252,11 @@ class GameWindow extends Component {
     };
 
 
+    /**
+     * Initializes all of the components
+     * Sets up the style of the popup with buttons
+     * @returns {*}
+     */
     render () {
         return (
             <div style={{width:"100%", height:"100%", color:"white"}}>
@@ -258,6 +294,7 @@ class GameWindow extends Component {
                     <b>{this.state.popUpText}</b>
 
                     <div>
+                      {/*Highlights the popup red if the user's answer is wrong, green if it's correct*/}
                       <div class="trapezoidRight" style={{backgroundColor:this.state.borderColor}}></div>
                       <div class="trapezoidLeft" style={{backgroundColor:this.state.borderColor}}></div>
                     </div>
@@ -272,6 +309,7 @@ class GameWindow extends Component {
                       display: this.state.popUpCardsShowing
                     }}>
                         <div>
+                            {/*Displays the hand and the flop*/}
                           <img src={"images/"+this.state.flop[0]+".png"} style={{width: "30px", height: "45px", padding:"5px"}}/>
                           <img src={"images/"+this.state.flop[1]+".png"} style={{width: "30px", height: "45px", padding:"5px"}}/>
                           <img src={"images/"+this.state.flop[2]+".png"} style={{width: "30px", height: "45px", padding:"5px"}}/>
