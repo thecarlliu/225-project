@@ -146,10 +146,10 @@ class GameWindow extends Component {
                         }
                         else {
                             this.decrementLives();
-                            this.showPopUp("Wrong! The correct answer is: " + this.state.rightAnswerInfo.toString(), "Continue", "Quit");
+                            this.showPopUp("Wrong! The correct answer is " + this.state.rightAnswerInfo.toString(), "Continue", "Quit");
                             $("#input-box").attr("disabled", "true");
                             if (!this.stillLives()) {
-                                this.showPopUp("Wrong! The correct answer is: " + this.state.rightAnswerInfo.toString()+". You lost! Do you want to try again?", "Yes", "No");
+                                this.showPopUp("Wrong! The correct answer is " + this.state.rightAnswerInfo.toString()+". You lost! Do you want to try again?", "Yes", "No");
                             }
                             this.setState({borderColor: "#f00"});
                         }

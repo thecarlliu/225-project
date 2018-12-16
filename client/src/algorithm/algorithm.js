@@ -98,6 +98,19 @@ function removeDups(cardVals) {
   return Object.keys(unique);
 }
 
+function isStraight(cardVals) {
+  cardVals.sort(function(a, b){return a - b});
+  if (cardVals == [14,2,3,4,5]) {
+    return true;
+  }
+  for (var i = 1; i < cardVals.length; i++) {
+    if (cardVals[i] - cardVals[i-1] != 1) {
+      return false;
+    }
+  }
+  return true;
+}
+
 /**
  * Helper function for straight draw methods; turns an ace high into an ace low
  */
@@ -201,28 +214,29 @@ const countOuts = function(cards) {
   var freqs = cardFreqs(cardVals);
 
   var flushDraw = isFlushDraw(cardSuits);
-  var insideStraightDraw = isInsideStraightDraw(cardVals);
-  var outsideStraightDraw = isOutsideStraightDraw(cardVals);
+  var straight = isStraight(cardVals);
+  var insideStraightDraw = isInsideStraightDraw(cardVals) && !straight;
+  var outsideStraightDraw = isOutsideStraightDraw(cardVals) && !straight;
   if (outsideStraightDraw && flushDraw) {
-    return [15, " an outside straight draw (or a double inside straight draw) and flush draw"];
+    return [15, " you had an outside straight draw (or a double inside straight draw) and a flush draw."];
   } else if (insideStraightDraw && flushDraw) {
-    return [12, " an inside straight draw and flush draw"];
+    return [12, " you had an inside straight draw and a flush draw."];
   } else if (outsideStraightDraw) {
-    return [8, " an outside straight draw (or a double inside straight draw)"];
+    return [8, " you had an outside straight draw (or a double inside straight draw)."];
   } else if (insideStraightDraw) {
-    return [4, " an inside straight draw"];
+    return [4, " you had an inside straight draw."];
   } else if (flushDraw){
-    return [9, "a flush draw"];
+    return [9, " you had a flush draw."];
   } else if (hasSet(freqs)) {
-    return [7, "a set"]; //set to full house or quads
+    return [7, " you had a set."]; //set to full house or quads
   } else if (twoPair(freqs)) {
-    return [4, "two pair"]; //two pair to full house
+    return [4, " you had two pair."]; //two pair to full house
   } else if (onePair(freqs)) {
-    return [5, "one pair"]; //one pair to top two pair or set
-  } else if (noPair(freqs)) {
-    return [6, "no pair"]; //no pair to pair
+    return [5, " you had one pair."]; //one pair to top two pair or set
+  } else if (noPair(freqs) && !straight) {
+    return [6, " you had no pair."]; //no pair to pair
   } else {
-    return [0, " nothing"];
+    return [0, " you had the best hand!"];
   }
 };
 

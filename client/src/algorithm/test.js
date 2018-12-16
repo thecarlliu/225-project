@@ -15,6 +15,16 @@ function isFlushDraw(cardSuits) {
   return false;
 }
 
+function isStraight(cardVals) {
+  cardVals.sort();
+  for (var i = 1; i < cardVals.length; i++) {
+    if (cardVals[i] - cardVals[i -1] != 1) {
+      return false;
+    }
+  }
+  return true;
+}
+
 /**
  * Returns a dict of frequencies of card values
  */
@@ -313,5 +323,14 @@ describe('hasSet()', function() {
     assert.equal(hasSet(cardFreqs([1,2,3,3,5])), false);
     assert.equal(hasSet(cardFreqs([3,3,3,4,4])), false);
     assert.equal(hasSet(cardFreqs([14,2,3,7,11])), false);
+  });
+});
+
+describe('isStraight()', function() {
+  it('should return true if there\'s a straight', function() {
+    assert.equal(isStraight([3,3,3,4,5]), false);
+    assert.equal(isStraight([1,2,3,4,5]), true);
+    assert.equal(isStraight([3,3,3,4,5]), false);
+    assert.equal(isStraight([3,6,7,4,5]), true);
   });
 });
