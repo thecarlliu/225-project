@@ -225,13 +225,7 @@ import countOuts from "../algorithm/algorithm.js";
         used[x] = --len in used ? used[len] : len; //https://stackoverflow.com/questions/19269545/how-to-get-n-no-elements-randomly-from-an-array
         handIndex++;
     }
-
-    if(countOuts(hand)[0] === 0){
-      return hand;
-    }
-    else{
-      return getRandomHand();
-    }
+    return hand;
   }
 
 
