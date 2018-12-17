@@ -284,7 +284,7 @@ class GameWindow extends Component {
                     boxShadow: "1px 1px 1px 1px #08415C",
                     borderRadius: "10px",
                     textAlign: "center",
-                    fontSize: "large",
+                    fontSize: "medium",
                     fontFamily: "Georgia",
                     color: "white",
                     padding: 20,
