@@ -35,19 +35,21 @@ import countOuts from "../algorithm/algorithm.js";
 
     let pairIndex = getRandomIndex(0, nums.length),
         suitIndexOne = getRandomIndex(0, suits.length),
-        suitsIndexTwo = getDifferentIndex(suitIndexOne, 0, suits.length);
+        suitsIndexTwo = getDifferentIndex(suitIndexOne, 0, suits.length),
+        suitsIndexThree = getDifferentIndex(suitsIndexTwo, 0, suits.length);
 
     handNums[0] = nums[pairIndex] + suits[suitIndexOne];
     handNums[1] = nums[pairIndex] + suits[suitsIndexTwo];
+    handNums[2] = nums[pairIndex] + suits[suitsIndexThree];
 
     nums.splice(pairIndex, 1);
 
-    for(var i = 2; i < 5; i++){
+    for(var i = 3; i < 5; i++){
       let numIndex = getRandomIndex(0, nums.length);
       handNums[i] = nums[numIndex] + getRandomItem(suits);
       nums.splice(numIndex, 1);
     }
-
+    console.log(handNums);
     return handNums;
 
   }
@@ -272,6 +274,7 @@ import countOuts from "../algorithm/algorithm.js";
 
   const hand = function(){
     let handTypeIndex = getRandomIndex(0, 8);
+    console.log(handTypeIndex);
     let userHand = [];
     switch(handTypeIndex) {
       case 0:
