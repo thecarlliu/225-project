@@ -49,7 +49,6 @@ import countOuts from "../algorithm/algorithm.js";
       handNums[i] = nums[numIndex] + getRandomItem(suits);
       nums.splice(numIndex, 1);
     }
-    console.log(handNums);
     return handNums;
 
   }
