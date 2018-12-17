@@ -81,13 +81,13 @@ class GameWindow extends Component {
         if(this.state.isPressed) {
             if (this.state.inputValue!=="") {
                 if (this.state.outsValue === this.state.inputValue) {
-                    this.showPopUp("Correct! The number of outs was "+this.state.outsValue+" and we had "+this.state.drawName+". "+this.state.drawReason);
+                    this.showPopUp("Correct! " + this.state.drawReason);
                     $("#input-box").attr("disabled", "true");
                     this.setState({currentScore: this.state.currentScore + 10});
                     this.setState({borderColor: "#0f0"});
                 }
                 else {
-                    this.showPopUp("Incorrect. The correct answer is: " + this.state.outsValue + ". We had " + this.state.drawName +this.state.drawReason, "Continue", "Quit");
+                    this.showPopUp("Incorrect. The right answer is " + this.state.outsValue + ". " + this.state.drawReason, "Continue", "Quit");
                     $("#input-box").attr("disabled", "true");
                     this.setState({borderColor: "#f00"});
                     this.resetScore();
