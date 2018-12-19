@@ -216,25 +216,25 @@ const countOuts = function(cards) {
   var insideStraightDraw = isInsideStraightDraw(cardVals);
   var outsideStraightDraw = isOutsideStraightDraw(cardVals);
   if (outsideStraightDraw && flushDraw) {
-    return [15, " an outside straight draw (or a double inside straight draw) and flush draw"];
+    return 15;
   } else if (insideStraightDraw && flushDraw) {
-    return [12, " an inside straight draw and flush draw"];
+    return 12;
   } else if (outsideStraightDraw) {
-    return [8, " an outside straight draw (or a double inside straight draw)"];
+    return 8;
   } else if (insideStraightDraw) {
-    return [4, " an inside straight draw"];
+    return 4;
   } else if (flushDraw){
-    return [9, "a flush draw"];
+    return 9;
   } else if (hasSet(freqs)) {
-    return [7, "a set"]; //set to full house or quads
+    return 7; //set to full house or quads
   } else if (twoPair(freqs)) {
-    return [4, "two pair"]; //two pair to full house
+    return 4; //two pair to full house
   } else if (onePair(freqs)) {
-    return [5, "one pair"]; //one pair to top two pair or set
+    return 5; //one pair to top two pair or set
   } else if (noPair(freqs)) {
-    return [6, "no pair"]; //no pair to pair
+    return 6; //no pair to pair
   } else {
-    return [0, " nothing"];
+    return 0;
   }
 };
 
@@ -279,13 +279,13 @@ describe('isInsideStraightDraw()', function() {
 
 describe('countOuts()', function() {
   it('should return correct number of outs', function() {
-    assert.equal(countOuts(['CH','2C','3D','4S','9S'])[0], 4);
-    assert.equal(countOuts(['9H','2S','3S','4S','5C'])[0], 8);
-    assert.equal(countOuts(['4H','CS','7S','10S','2S'])[0], 9);
-    assert.equal(countOuts(['CH','2S','3S','4S','9S'])[0], 12);
-    assert.equal(countOuts(['9H','2S','3S','4S','5S'])[0], 15);
-    assert.equal(countOuts(['CH','2S','3D','7C','11S'])[0], 6);
-    assert.equal(countOuts(['CH','CS','CD','7C','11S'])[0], 7);
+    assert.equal(countOuts(['CH','2C','3D','4S','9S']), 4);
+    assert.equal(countOuts(['9H','2S','3S','4S','5C']), 8);
+    assert.equal(countOuts(['4H','CS','7S','10S','2S']), 9);
+    assert.equal(countOuts(['CH','2S','3S','4S','9S']), 12);
+    assert.equal(countOuts(['9H','2S','3S','4S','5S']), 15);
+    assert.equal(countOuts(['CH','2S','3D','7C','11S']), 6);
+    assert.equal(countOuts(['CH','CS','CD','7C','11S']), 7);
   });
 });
 

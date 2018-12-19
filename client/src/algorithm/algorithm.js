@@ -1,5 +1,8 @@
 /**
- * Checks to see if there is a flush draw in a list of cards
+ * Takes a list of suits and checks to see if four of them match
+ * @param {object} cardSuits an array of suits of a hand of cards
+ *
+ * @returns {boolean} true if there are four of the same type, else false
  */
 function isFlushDraw(cardSuits) {
   cardSuits.sort();
@@ -14,7 +17,10 @@ function isFlushDraw(cardSuits) {
 }
 
 /**
- * Returns a dict of frequencies of card values
+ * Takes a list of cards and returns a dict with their frequencies
+ * @param {object} cardVals an array of card values
+ *
+ * @returns {object} a dict of the frequencies of the input cards
  */
 function cardFreqs(cardVals) {
   var counts = {};
@@ -26,7 +32,10 @@ function cardFreqs(cardVals) {
 }
 
 /**
- * Reads a dict of cards to see if there's exactly one pair in a hand
+ * Reads a dict of card frequencies to see if exactly one pair is present
+ * @param {object} cardFreqs a dict of card frequencies
+ *
+ * @returns {boolean} true if there is a pair in the represented hand, else false
  */
 function onePair(cardFreqs) {
   var count = 0;
@@ -39,7 +48,10 @@ function onePair(cardFreqs) {
 }
 
 /**
- * Reads a dict of cards to see if there is no pair in a hand
+ * Reads a dict of card frequencies to see if no pair is present
+ * @param {object} cardFreqs a dict of card frequencies
+ *
+ * @returns {boolean} true if there is no pair in the represented hand, else false
  */
 function noPair(cardFreqs) {
   for (var key in cardFreqs) {
@@ -51,7 +63,10 @@ function noPair(cardFreqs) {
 }
 
 /**
- * Reads a dict of cards to see if there's exactly two pairs in a hand
+ * Reads a dict of card frequencies to see if two pairs are present
+ * @param {object} cardFreqs a dict of card frequencies
+ *
+ * @returns {boolean} true if there are two pairs in the represented hand, else false
  */
 function twoPair(cardFreqs) {
   var count = 0;
@@ -64,7 +79,10 @@ function twoPair(cardFreqs) {
 }
 
 /**
- * Reads a dict of cards to see if there's a three of a kind in a hand (but not a full house)
+ * Reads a dict of card frequencies to see if a set is present
+ * @param {object} cardFreqs a dict of card frequencies
+ *
+ * @returns {boolean} true if there is a set in the represented hand, else false
  */
 function hasSet(cardFreqs) {
   var foundSet = false;
@@ -79,16 +97,13 @@ function hasSet(cardFreqs) {
   return foundSet;
 }
 
-//4, 1
-//3, 2
-//3, 1, 1
-//2, 2, 1
-//2, 1, 1, 1
-//1, 1, 1, 1, 1
-
-//thanks internet for this one (mostly)
+/**
+ * Removes duplicates from an array - {@link https://wsvincent.com/javascript-remove-duplicates-array|Source}
+ * @param {object} cardVals an array of card values
+ *
+ * @returns {object} the array stripped of duplicates
+ */
 function removeDups(cardVals) {
-  cardVals.sort()
   var unique = {};
   cardVals.forEach(function(i) {
     if(!unique[i]) {
@@ -98,8 +113,13 @@ function removeDups(cardVals) {
   return Object.keys(unique);
 }
 
+/**
+ * Checks if a hand contains a straight (consecutive values)
+ * @param {object} cardVals an array of card values
+ *
+ * @returns {boolean} true if the cards form a straight, else false
+ */
 function isStraight(cardVals) {
-  cardVals.sort(function(a, b){return a - b});
   if (cardVals == [14,2,3,4,5]) {
     return true;
   }
@@ -112,7 +132,10 @@ function isStraight(cardVals) {
 }
 
 /**
- * Helper function for straight draw methods; turns an ace high into an ace low
+ * Takes a list of cards and changes any ace high to an ace low
+ * @param {object} cardVals an array of cards
+ *
+ * @returns {object} an array of cards with a shifted ace, or empty
  */
 function aceHandler(cardVals) {
   var cardVals2 = [];
@@ -125,12 +148,13 @@ function aceHandler(cardVals) {
 }
 
 /**
- * Determines whether a list of card values has an outside straight draw (or double inside straight draw)
+ * Checks if a hand contains an outside straight draw
+ * @param {object} cardVals an array of card values
+ *
+ * @returns {boolean} true if the cards have an outside straight draw, else false
  */
-function isOutsideStraightDraw(cardVals) {
-  cardVals.sort(function(a, b){return a - b});
+function isOutsideStraightDraw(cardVals, cardVals2) {
   var hasAce = false;
-  var cardVals2 = aceHandler(cardVals);
 
   if (cardVals2.length !== 0) {
     hasAce = true;
@@ -157,12 +181,13 @@ function isOutsideStraightDraw(cardVals) {
 }
 
 /**
- * Determines whether a list of card values has an in straight draw
+ * Checks if a hand contains an inside straight draw
+ * @param {object} cardVals an array of card values
+ *
+ * @returns {boolean} true if the cards have an inside straight draw, else false
  */
-function isInsideStraightDraw(cardVals) {
-  cardVals.sort(function(a, b){return a - b});
+function isInsideStraightDraw(cardVals, cardVals2) {
   var hasAce = false;
-  var cardVals2 = aceHandler(cardVals);
 
   if (cardVals2.length !== 0) {
     hasAce = true;
@@ -188,9 +213,12 @@ function isInsideStraightDraw(cardVals) {
 }
 
 /**
- * Returns number of outs for a given hand
+ * Gets lists of the values and suits of a hand of cards
+ * @param {object} cards an array of cards
+ *
+ * @returns {object} an array of cards values and an array of card suits
  */
-const countOuts = function(cards) {
+function getValSuits(cards) {
   var cardVals = [];
   var cardSuits = [];
   for (var i = 0; i < cards.length; i++) {
@@ -210,13 +238,29 @@ const countOuts = function(cards) {
       cardVals.push(Number(cardRank));
     }
   }
+  return [cardVals, cardSuits];
+}
+
+/**
+ * Counts the outs for a hand of cards
+ * @param {object} cards an array of cards
+ *
+ * @returns {object} the number of outs and some flavor text
+ */
+const countOuts = function(cards) {
+
+  var valSuits = getValSuits(cards);
+  var cardVals = valSuits[0];
+  var cardSuits = valSuits[1];
 
   var freqs = cardFreqs(cardVals);
+  cardVals.sort(function(a, b){return a - b});
+  var cardVals2 = aceHandler(cardVals);
 
   var flushDraw = isFlushDraw(cardSuits);
   var straight = isStraight(cardVals);
-  var insideStraightDraw = isInsideStraightDraw(cardVals) && !straight;
-  var outsideStraightDraw = isOutsideStraightDraw(cardVals) && !straight;
+  var insideStraightDraw = isInsideStraightDraw(cardVals, cardVals2) && !straight;
+  var outsideStraightDraw = isOutsideStraightDraw(cardVals, cardVals2) && !straight;
   if (outsideStraightDraw && flushDraw) {
     return [15, " you had an outside straight draw (or a double inside straight draw) and a flush draw."];
   } else if (insideStraightDraw && flushDraw) {
