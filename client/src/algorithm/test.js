@@ -25,26 +25,26 @@ describe('Tools', function() {
 describe('Draws', function() {
   describe('isFlushDraw()', function() {
     it('should return true if flush draw', function() {
-      assert.equal(handHandler.isFlushDraw(['H','C','S','S','S']), false); //not a flush draw
-      assert.equal(handHandler.isFlushDraw(['H','S','S','S','S']), true); //flush draw
+      assert.equal(handHandler.isFlushDraw(['H','C','S','S','S']), false);
+      assert.equal(handHandler.isFlushDraw(['H','S','S','S','S']), true);
       assert.equal(handHandler.isFlushDraw(['S','H','H','H','H']), true);
       assert.equal(handHandler.isFlushDraw(['H','D','D','D','D']), true);
       assert.equal(handHandler.isFlushDraw(['H','C','C','C','C']), true);
-      assert.equal(handHandler.isFlushDraw(['A','B','B','B','B']), true); //flush draw
-      assert.equal(handHandler.isFlushDraw(['B','A','A','A','A']), true); //flush draw
+      assert.equal(handHandler.isFlushDraw(['A','B','B','B','B']), true);
+      assert.equal(handHandler.isFlushDraw(['B','A','A','A','A']), true);
     });
   });
 
   describe('isOutsideStraightDraw()', function() {
     it('should return true if outside straight', function() {
-      assert.equal(handHandler.isOutsideStraightDraw([2,3,4,5,9], []), true); //standard outside straight
-      assert.equal(handHandler.isOutsideStraightDraw([2,4,7,10,13], []), false); //clearly not an outside straight
-      assert.equal(handHandler.isOutsideStraightDraw([14,2,3,4,10], [1,2,3,4,10]), false); //ace at the low end
-      assert.equal(handHandler.isOutsideStraightDraw([2,11,12,13,14], [1,2,11,12,13]), false); //ace at the high end
-      assert.equal(handHandler.isOutsideStraightDraw([2,3,5,9], []), false); //has a pair
-      assert.equal(handHandler.isOutsideStraightDraw([2,3,4,5], []), true); //has a pair
-      assert.equal(handHandler.isOutsideStraightDraw([14,2,3,4], [1,2,3,4,14]), false); //pair of aces at the low end
-      assert.equal(handHandler.isOutsideStraightDraw([14,11,12,13], [1,11,12,13]), false); //pair of aces at the high end
+      assert.equal(handHandler.isOutsideStraightDraw([2,3,4,5,9], []), true);
+      assert.equal(handHandler.isOutsideStraightDraw([2,4,7,10,13], []), false);
+      assert.equal(handHandler.isOutsideStraightDraw([14,2,3,4,10], [1,2,3,4,10]), false);
+      assert.equal(handHandler.isOutsideStraightDraw([2,11,12,13,14], [1,2,11,12,13]), false);
+      assert.equal(handHandler.isOutsideStraightDraw([2,3,5,9], []), false);
+      assert.equal(handHandler.isOutsideStraightDraw([2,3,4,5], []), true);
+      assert.equal(handHandler.isOutsideStraightDraw([14,2,3,4], [1,2,3,4,14]), false);
+      assert.equal(handHandler.isOutsideStraightDraw([14,11,12,13], [1,11,12,13]), false);
       assert.equal(handHandler.isOutsideStraightDraw([3,5,6,7,9], []), true);
     });
   });
