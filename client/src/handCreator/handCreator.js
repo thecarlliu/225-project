@@ -2,7 +2,9 @@ import countOuts from "../algorithm/algorithm.js";
 
 
 
-  //Returns an array of five cards that contains a flush draw
+  /**
+   * Returns an array of five cards that contains a flush draw
+   */
   function getFlushDraw(){
     let suits = ['S', 'H', 'D', 'C'],
       nums = ['C', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'],
@@ -29,7 +31,10 @@ import countOuts from "../algorithm/algorithm.js";
     }
   }
 
-  //Returns an array of five cards that contains a set (3oK)
+
+  /**
+   * Returns an array of five cards that contains a set (3oK)
+   */
   function getSetDraw(){
     let suits = ['S', 'H', 'D', 'C'],
       nums = ['C', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'],
@@ -56,7 +61,9 @@ import countOuts from "../algorithm/algorithm.js";
   }
 
 
-  //Returns an array of five cards that contains an outside straight draw
+  /**
+   * Returns an array of five cards that contains an outside straight draw
+   */
   function getOutsideStraightDraw(){
     let suits = ['S', 'H', 'D', 'C'],
       nums = ['C', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'C'],
@@ -87,7 +94,9 @@ import countOuts from "../algorithm/algorithm.js";
   }
 
 
-  //Returns an array of five cards that contains an inside straight draw
+  /**
+   * Returns an array of five cards that contains an inside straight draw
+   */
   function getInsideStraightDraw(){
     let suits = ['S', 'H', 'D', 'C'],
         nums = ['C', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'C'],
@@ -122,7 +131,9 @@ import countOuts from "../algorithm/algorithm.js";
   }
 
 
-  //Returns an array of five cards that contains a double inside straight draw
+  /**
+   * Returns an array of five cards that contains a double inside straight draw
+   */
   function getDoubleInsideStraightDraw(){
     let suits = ['S', 'H', 'D', 'C'],
         nums = ['C', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'C'],
@@ -146,7 +157,10 @@ import countOuts from "../algorithm/algorithm.js";
 
   }
 
-  //Returns an array of five cards that contains both a flush draw and an inside straight draw
+
+  /**
+   * Returns an array of five cards that contains both a flush draw and an inside straight draw
+   */
   function getFlushAndInsideDraw(){
     let suits = ['S', 'H', 'D', 'C'],
         nums = ['C', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'C'],
@@ -181,7 +195,9 @@ import countOuts from "../algorithm/algorithm.js";
   }
 
 
-  //Returns an array of five cards that contains both a flush draw and an outside straight draw
+  /**
+   * Returns an array of five cards that contains both a flush draw and an outside straight draw
+   */
   function getFlushAndOutsideDraw(){
     let suits = ['S', 'H', 'D', 'C'],
         nums = ['C', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'C'],
@@ -216,7 +232,9 @@ import countOuts from "../algorithm/algorithm.js";
   }
 
 
-  //gets a random hand of five cards
+  /**
+   * gets a random hand of five cards
+   */
   function getRandomHand(){
     const deck = ["CH","2H","3H","4H","5H","6H","7H","8H","9H","10H","JH","QH","KH",
         "CS","2S","3S","4S","5S","6S","7S","8S","9S","10S","JS","QS","KS",
@@ -240,12 +258,16 @@ import countOuts from "../algorithm/algorithm.js";
 
 
 
-  //returns a random number from the min index extended to how many choices there are
+  /**
+   * returns a random number from the min index extended to how many choices there are
+   */
   function getRandomIndex(minIndex, numChoices){
     return Math.floor(Math.random() * numChoices) + minIndex;
   }
 
-  //a random index that is not the index already input into the function
+  /**
+   * a random index that is not the index already input into the function
+   */
   function getDifferentIndex(usedIndex, min, choices){
     let index = getRandomIndex(min, choices);
     if(index === usedIndex){
@@ -256,12 +278,16 @@ import countOuts from "../algorithm/algorithm.js";
     }
   }
 
-  //returns a random item from the input array
+  /**
+   * returns a random item from the input array
+   */
   function getRandomItem(array){
     return array[getRandomIndex(0, array.length)];
   }
 
-  //randomizes array of cards
+  /**
+   * returns randomized array of 5 cards
+   */
   function randomizeCards(cards){
     let indecies = [0, 1, 2, 3, 4],
         hand = ['', '', null, '', ''];
@@ -283,7 +309,9 @@ import countOuts from "../algorithm/algorithm.js";
 
 
 
-  //returns a random draw of five cards to go to the GameWindow
+  /**
+   * returns a random draw of five cards to go to the GameWindow
+   */
   const hand = function(){
     let handTypeIndex = getRandomIndex(0, 8);
     console.log(handTypeIndex);
