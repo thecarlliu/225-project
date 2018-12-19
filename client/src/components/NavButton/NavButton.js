@@ -10,6 +10,9 @@ export const changePage = (e, route) => {
     window.location.href = route;
 };
 
+/**
+* This class controls the properties and functionality of the buttons on the navigation bar
+*/
 class NavButton extends Component {
     constructor(props) {
         super(props);
