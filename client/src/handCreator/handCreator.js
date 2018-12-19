@@ -1,6 +1,5 @@
-import countOuts from "../algorithm/algorithm.js";
-
-
+let HandTools = require("../algorithm/algorithm.js");
+let outsCounter = HandTools.outsCounter;
 
   /**
    * Returns an array of five cards that contains a flush draw
@@ -23,14 +22,13 @@ import countOuts from "../algorithm/algorithm.js";
 
     handNums[4] = getRandomItem(nums) + getRandomItem(suits);
 
-    if(countOuts(handNums)[0] === 9){
+    if(outsCounter.countOuts(handNums)[0] === 9){
       return handNums;
     }
     else{
       return getFlushDraw();
     }
   }
-
 
   /**
    * Returns an array of five cards that contains a set (3oK)
@@ -60,7 +58,6 @@ import countOuts from "../algorithm/algorithm.js";
 
   }
 
-
   /**
    * Returns an array of five cards that contains an outside straight draw
    */
@@ -85,14 +82,13 @@ import countOuts from "../algorithm/algorithm.js";
 
     handNums[4] = extraCard;
 
-    if(countOuts(handNums)[0] === 8){
+    if(outsCounter.countOuts(handNums)[0] === 8){
       return handNums;
     }
     else{
       return getOutsideStraightDraw();
     }
   }
-
 
   /**
    * Returns an array of five cards that contains an inside straight draw
@@ -122,14 +118,13 @@ import countOuts from "../algorithm/algorithm.js";
         }
       }
     }
-    if(countOuts(handNums)[0] === 4){
+    if(outsCounter.countOuts(handNums)[0] === 4){
       return handNums;
     }
     else{
       return getInsideStraightDraw();
     }
   }
-
 
   /**
    * Returns an array of five cards that contains a double inside straight draw
@@ -148,7 +143,7 @@ import countOuts from "../algorithm/algorithm.js";
       handNums[i] = nums[cardIndex + i] + getRandomItem(suits);
     }
 
-    if(countOuts(handNums)[0] === 8){
+    if(outsCounter.countOuts(handNums)[0] === 8){
       return handNums;
     }
     else{
@@ -156,7 +151,6 @@ import countOuts from "../algorithm/algorithm.js";
     }
 
   }
-
 
   /**
    * Returns an array of five cards that contains both a flush draw and an inside straight draw
@@ -186,14 +180,13 @@ import countOuts from "../algorithm/algorithm.js";
     nums.splice(cardIndex, 5);
     handNums[cardRemovedIndex] = getRandomItem(nums) + suit;
 
-    if(countOuts(handNums)[0] === 12){
+    if(outsCounter.countOuts(handNums)[0] === 12){
       return handNums;
     }
     else{
       return getFlushAndInsideDraw();
     }
   }
-
 
   /**
    * Returns an array of five cards that contains both a flush draw and an outside straight draw
@@ -223,14 +216,13 @@ import countOuts from "../algorithm/algorithm.js";
     nums.splice(cardIndex - 1, 6);
     handNums[4] = getRandomItem(nums) + suit;
 
-    if(countOuts(handNums)[0] === 15){
+    if(outsCounter.countOuts(handNums)[0] === 15){
       return handNums;
     }
     else{
       return getFlushAndOutsideDraw();
     }
   }
-
 
   /**
    * gets a random hand of five cards
@@ -254,9 +246,6 @@ import countOuts from "../algorithm/algorithm.js";
     }
     return hand;
   }
-
-
-
 
   /**
    * returns a random number from the min index extended to how many choices there are
@@ -286,7 +275,7 @@ import countOuts from "../algorithm/algorithm.js";
   }
 
   /**
-   * returns randomized array of 5 cards
+   * randomizes array of cards
    */
   function randomizeCards(cards){
     let indecies = [0, 1, 2, 3, 4],
@@ -305,9 +294,6 @@ import countOuts from "../algorithm/algorithm.js";
 
     return hand;
   }
-
-
-
 
   /**
    * returns a random draw of five cards to go to the GameWindow

@@ -6,13 +6,15 @@ import Input from "../../components/Input";
 import HighScore from "../../components/HighScore";
 import NavBar from "../../components/NavBar";
 import PlayButton from "../../components/PlayButton";
-import countOuts from "../../algorithm/algorithm.js";
 import { getDatabase } from "../../database/database";
 import { changePage } from "../../components/NavButton/NavButton";
 import Lives from "../../components/Lives";
 import $ from "jquery";
 
 import hand from "../../handCreator/handCreator.js"
+
+let HandTools = require("../../algorithm/algorithm.js");
+let outsCounter = HandTools.outsCounter;
 
 // Variable so timer can be paused
 let tickingFunction = 0;
@@ -63,8 +65,8 @@ class GameWindow extends Component {
       let thisHand = hand();
       this.setState({userHand:[thisHand[0], thisHand[1]]});
       this.setState({flop:[thisHand[2], thisHand[3], thisHand[4]]});
-      this.setState({outsValue:countOuts(thisHand)[0].toString()});
-      this.setState({rightAnswerInfo:countOuts(thisHand)});
+      this.setState({outsValue:outsCounter.countOuts(thisHand)[0].toString()});
+      this.setState({rightAnswerInfo:outsCounter.countOuts(thisHand)});
     }
 
     //Obsolete function now
